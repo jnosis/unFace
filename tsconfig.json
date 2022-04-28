@@ -7,7 +7,7 @@
       "DOM.Iterable",
       "ESNext"
     ] /* Specify a set of bundled library declaration files that describe the target runtime environment. */,
-    "jsx": "react-jsx" /* Specify what JSX code is generated. */,
+    "jsx": "react" /* Specify what JSX code is generated. */,
 
     /* Modules */
     "module": "ESNext" /* Specify what module code is generated. */,
