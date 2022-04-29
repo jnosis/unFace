@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './nav-item.module.css';
+import styles from './nav_item.module.css';
 
 type NavItemProps = {
   name: MenuItem;
