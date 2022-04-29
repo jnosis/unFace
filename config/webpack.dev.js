@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
+const getCSSModuleLocalIdent = require('./getLocalCSSModuleLocalIdent');
 
 module.exports = merge(common, {
   mode: 'development',
@@ -19,7 +20,19 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
+                getLocalIdent: getCSSModuleLocalIdent,
+              },
+            },
+          },
+          'postcss-loader',
+        ],
       },
     ],
   },

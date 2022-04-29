@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge');
 const path = require('path');
 const common = require('./webpack.common');
+const getCSSModuleLocalIdent = require('./getLocalCSSModuleLocalIdent');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -17,15 +18,27 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
+                getLocalIdent: getCSSModuleLocalIdent,
+              },
+            },
+          },
+          'postcss-loader',
+        ],
       },
     ],
   },
   plugins: [new MiniCssExtractPlugin()],
   optimization: {
     usedExports: true,
-    minmize: true,
-    minmizer: [
+    minimize: true,
+    minimizer: [
       new TerserPlugin({
         terserOptions: {
           compress: {
