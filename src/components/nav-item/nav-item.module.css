@@ -1,0 +1,12 @@
+.item {
+  border: 1px solid transparent;
+}
+
+.item:hover {
+  background-color: wheat;
+  cursor: pointer;
+}
+
+.item.active {
+  border-color: aquamarine;
+}
