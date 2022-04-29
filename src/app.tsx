@@ -23,6 +23,9 @@ const App = (props: AppProps) => {
     scrollTo(name);
     setActive(name);
   };
+  const onWorkClick = (work: WorkData) => {
+    console.log(work);
+  };
 
   return (
     <div className={styles.container}>
@@ -32,7 +35,7 @@ const App = (props: AppProps) => {
         onLogoClick={onLogoClick}
         onMenuClick={onMenuClick}
       />
-      <Main />
+      <Main onWorkClick={onWorkClick} />
       <Footer />
     </div>
   );
