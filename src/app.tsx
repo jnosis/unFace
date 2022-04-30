@@ -3,6 +3,7 @@ import styles from './app.module.css';
 import Footer from './components/footer/footer';
 import Header from './components/header/header';
 import Main from './components/main/main';
+import WorkDetail from './components/work_detail/work_detail';
 
 type AppProps = {};
 
@@ -11,6 +12,8 @@ const App = (props: AppProps) => {
 
   const menus: MenuItem[] = ['home', 'works', 'contact'];
   const [active, setActive] = useState<MenuItem>('home');
+  const [isWorkDetail, setIsWorkDetail] = useState<boolean>(false);
+  const [work, setWork] = useState<WorkData | null>(null);
 
   const scrollTo = (name: MenuItem) => {
     console.log(name);
@@ -25,6 +28,15 @@ const App = (props: AppProps) => {
   };
   const onWorkClick = (work: WorkData) => {
     console.log(work);
+    if (!work) {
+      return;
+    }
+    setWork(work);
+    setIsWorkDetail(true);
+  };
+  const onWorkDetailClose = () => {
+    setWork(null);
+    setIsWorkDetail(false);
   };
 
   return (
@@ -35,7 +47,10 @@ const App = (props: AppProps) => {
         onLogoClick={onLogoClick}
         onMenuClick={onMenuClick}
       />
-      <Main onWorkClick={onWorkClick} />
+      {isWorkDetail || <Main onWorkClick={onWorkClick} />}
+      {isWorkDetail && !!work && (
+        <WorkDetail work={work} onClose={onWorkDetailClose} />
+      )}
       <Footer />
     </div>
   );
