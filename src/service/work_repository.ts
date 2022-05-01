@@ -8,25 +8,20 @@ class WorkRepository {
     this.database = FirebaseDB.getDatabase(app);
   }
 
-  syncWorks(userId: string, onUpdate: Function) {
-    const query = FirebaseDB.ref(this.database, `${userId}/works`);
+  syncWorks(onUpdate: (works: WorksDatabase) => void) {
+    const query = FirebaseDB.ref(this.database, `works`);
     FirebaseDB.onValue(query, (snapshot) => {
       const value = snapshot.val();
       value && onUpdate(value);
     });
   }
 
-  saveWork(userId: string, work: WorkData) {
-    FirebaseDB.set(
-      FirebaseDB.ref(this.database, `${userId}/works/${work.id}`),
-      work
-    );
+  saveWork(work: WorkData) {
+    FirebaseDB.set(FirebaseDB.ref(this.database, `works/${work.id}`), work);
   }
 
-  deleteWork(userId: string, work: WorkData) {
-    FirebaseDB.remove(
-      FirebaseDB.ref(this.database, `${userId}/works/${work.id}`)
-    );
+  deleteWork(work: WorkData) {
+    FirebaseDB.remove(FirebaseDB.ref(this.database, `works/${work.id}`));
   }
 }
 

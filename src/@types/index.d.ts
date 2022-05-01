@@ -12,6 +12,8 @@ declare type WorkData = {
   thumbnail: string | null;
 };
 
+type WorksDatabase = { [id: string]: WorkData };
+
 declare type FileData = {
   fileName: string | null;
   fileURL: string | null;
