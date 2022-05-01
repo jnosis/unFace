@@ -1,11 +1,12 @@
-import FirebaseAuth from 'firebase/auth';
+import { FirebaseApp } from 'firebase/app';
+import * as FirebaseAuth from 'firebase/auth';
 
 class AuthService {
   firebaseAuth: FirebaseAuth.Auth;
   googleProvider: FirebaseAuth.GoogleAuthProvider;
   githubProvider: FirebaseAuth.GithubAuthProvider;
 
-  constructor() {
+  constructor(_app: FirebaseApp) {
     this.firebaseAuth = FirebaseAuth.getAuth();
     this.googleProvider = new FirebaseAuth.GoogleAuthProvider();
     this.githubProvider = new FirebaseAuth.GithubAuthProvider();
@@ -20,7 +21,7 @@ class AuthService {
     this.firebaseAuth.signOut();
   }
 
-  onAuthChange(onUserChanged: Function) {
+  onAuthChange(onUserChanged: (user: FirebaseAuth.User | null) => {}) {
     this.firebaseAuth.onAuthStateChanged((user) => {
       onUserChanged(user);
     });

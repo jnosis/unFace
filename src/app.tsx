@@ -4,12 +4,18 @@ import Footer from './components/footer/footer';
 import Header from './components/header/header';
 import Main from './components/main/main';
 import WorkDetail from './components/work_detail/work_detail';
+import AuthService from './service/auth_service';
+import WorkRepository from './service/work_repository';
 
-type AppProps = {};
+type AppProps = {
+  authService: AuthService;
+  workRepository: WorkRepository;
+};
 
-const App = (props: AppProps) => {
-  console.log(props);
-
+const App = ({
+  authService: _authService,
+  workRepository: _workRepository,
+}: AppProps) => {
   const menus: MenuItem[] = ['home', 'works', 'contact'];
   const [active, setActive] = useState<MenuItem>('home');
   const [isWorkDetail, setIsWorkDetail] = useState<boolean>(false);

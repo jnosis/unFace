@@ -1,5 +1,5 @@
 import { FirebaseApp } from 'firebase/app';
-import FirebaseDB from 'firebase/database';
+import * as FirebaseDB from 'firebase/database';
 
 class WorkRepository {
   private readonly database: FirebaseDB.Database;
