@@ -11,3 +11,13 @@ declare type WorkData = {
   description: string;
   thumbnail: string | null;
 };
+
+declare type FileData = {
+  fileName: string | null;
+  fileURL: string | null;
+};
+
+declare type CloudinaryData = {
+  original_filename: string;
+  url: string;
+};

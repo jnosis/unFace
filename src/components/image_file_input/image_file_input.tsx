@@ -4,8 +4,8 @@ import styles from './image_file_input.module.css';
 
 type ImageFileInputProps = {
   imageUploader: ImageUploader;
-  name: string;
-  onFileChange(file: any): void;
+  name: string | null;
+  onFileChange(file: FileData): void;
 };
 
 const ImageFileInput = memo(
@@ -23,8 +23,8 @@ const ImageFileInput = memo(
       if (event.target.files !== null) {
         const uploaded = await imageUploader.upload(event.target.files[0]);
         onFileChange({
-          name: uploaded.original_filename,
-          url: uploaded.url,
+          fileName: uploaded.original_filename,
+          fileURL: uploaded.url,
         });
       }
       setLoading(false);

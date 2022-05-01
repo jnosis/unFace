@@ -1,7 +1,7 @@
 import { env } from '../../config/env';
 
 class ImageUploader {
-  async upload(file: File) {
+  async upload(file: File): Promise<CloudinaryData> {
     const data = new FormData();
     data.append('file', file);
     data.append('upload_preset', env.cloudinary.uploadPreset);
@@ -13,7 +13,8 @@ class ImageUploader {
       }
     );
 
-    return await res.json();
+    const imageData = await res.json();
+    return imageData;
   }
 }
 
