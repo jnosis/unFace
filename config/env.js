@@ -13,4 +13,8 @@ export const env = {
     databaseURL: required('FIREBASE_DATABASE_URL'),
     projectId: required('FIREBASE_PROJECT_ID'),
   },
+  cloudinary: {
+    uploadPreset: required('CLOUDINARY_UPLOAD_PRESET'),
+    cloudId: required('CLOUDINARY_CLOUD_ID'),
+  },
 };
