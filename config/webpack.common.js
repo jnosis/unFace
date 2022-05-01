@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const dotenv = require('dotenv').config();
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const srcDir = path.join(__dirname, '../', 'src');
 
@@ -15,6 +16,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      ENV: JSON.stringify(dotenv.parsed),
+    }),
     new HtmlWebpackPlugin({
       template: path.join(srcDir, '..', 'public', 'index.html'),
       favicon: path.join(srcDir, '..', 'public', 'favicon.ico'),
