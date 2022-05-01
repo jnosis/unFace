@@ -24,7 +24,7 @@ const AddWorkForm = memo(({ FileInput, onAdd }: AddWorkFormProps) => {
       title: titleRef.current?.value || '',
       url: urlRef.current?.value || '',
       description: descriptionRef.current?.value || '',
-      thumbnail: file?.fileURL || '',
+      thumbnail: file || null,
     };
     formRef.current?.reset();
     setFile(null);

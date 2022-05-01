@@ -9,7 +9,7 @@ declare type WorkData = {
   url: string;
   title: string;
   description: string;
-  thumbnail: string | null;
+  thumbnail: FileData | null;
 };
 
 type WorksDatabase = { [id: string]: WorkData };

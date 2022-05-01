@@ -8,10 +8,16 @@ type WorkProps = {
 };
 
 const Work = ({ work, onWorkClick, onDelete }: WorkProps) => {
+  const { thumbnail } = work;
+  const fileURL = thumbnail?.fileURL;
   return (
     <li className={styles.work}>
       <div onClick={() => onWorkClick(work)}>
-        <img className={styles.thumbnail} src='' alt='work thumbnail' />
+        <img
+          className={styles.thumbnail}
+          src={fileURL ? fileURL : ''}
+          alt='work thumbnail'
+        />
         <h1 className={styles.title}>{work.title}</h1>
         <p className={styles.description}>{work.description}</p>
       </div>
