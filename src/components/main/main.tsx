@@ -6,22 +6,35 @@ import Contact from '../contact/contact';
 import Works from '../works/works';
 import styles from './main.module.css';
 
+type ScrollRef = {
+  aboutRef: React.RefObject<HTMLElement>;
+  worksRef: React.RefObject<HTMLElement>;
+  contactRef: React.RefObject<HTMLElement>;
+};
+
 type MainProps = {
+  scrollRef: ScrollRef;
   FileInput: typeof IFileInput;
   onWorkClick(work: WorkData): void;
   workRepository: WorkRepository;
 };
 
-const Main = ({ FileInput, onWorkClick, workRepository }: MainProps) => {
+const Main = ({
+  scrollRef,
+  FileInput,
+  onWorkClick,
+  workRepository,
+}: MainProps) => {
   return (
     <div className={styles.container}>
-      <About />
+      <About ref={scrollRef.aboutRef} />
       <Works
+        ref={scrollRef.worksRef}
         FileInput={FileInput}
         onWorkClick={onWorkClick}
         workRepository={workRepository}
       />
-      <Contact />
+      <Contact ref={scrollRef.contactRef} />
     </div>
   );
 };
