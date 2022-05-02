@@ -10,6 +10,7 @@ const AddWorkForm = memo(({ FileInput, onAdd }: AddWorkFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
+  const branchRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const [file, setFile] = useState<FileData | null>(null);
 
@@ -23,7 +24,7 @@ const AddWorkForm = memo(({ FileInput, onAdd }: AddWorkFormProps) => {
       id: Date.now(),
       title: titleRef.current?.value || '',
       url: urlRef.current?.value || '',
-      branch: 'master',
+      branch: branchRef.current?.value || 'master',
       description: descriptionRef.current?.value || '',
       thumbnail: file || null,
     };
@@ -36,6 +37,7 @@ const AddWorkForm = memo(({ FileInput, onAdd }: AddWorkFormProps) => {
     <form ref={formRef}>
       <input ref={titleRef} type='text' name='title' placeholder='title' />
       <input ref={urlRef} type='text' name='url' placeholder='url' />
+      <input ref={branchRef} type='text' name='branch' placeholder='master' />
       <textarea
         ref={descriptionRef}
         name='description'
