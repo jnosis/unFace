@@ -23,6 +23,7 @@ const AddWorkForm = memo(({ FileInput, onAdd }: AddWorkFormProps) => {
       id: Date.now(),
       title: titleRef.current?.value || '',
       url: urlRef.current?.value || '',
+      branch: 'master',
       description: descriptionRef.current?.value || '',
       thumbnail: file || null,
     };

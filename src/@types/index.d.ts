@@ -7,6 +7,7 @@ declare type MenuItem = 'home' | 'works' | 'contact';
 declare type WorkData = {
   id: number;
   url: string;
+  branch: string;
   title: string;
   description: string;
   thumbnail: FileData | null;
