@@ -1,7 +1,11 @@
-export function convertURL(url: string): string {
-  return url.replaceAll('github.com', 'raw.githubusercontent.com');
+export function convertToRawContentURL(url: string, branch: string): string {
+  return `${url.replace('github.com', 'raw.githubusercontent.com')}/${branch}`;
 }
 
-export function convertReadme(readme: string, url: string, branch: string) {
-  return readme.replaceAll('./', `${url}/${branch}/`);
+export function convertToRepoURL(url: string, branch: string): string {
+  return `${url}/tree/${branch}`;
+}
+
+export function convertToRepoContentURL(url: string, branch: string): string {
+  return `${url}/blob/${branch}`;
 }
