@@ -4,6 +4,7 @@ import rehypeRaw from 'rehype-raw';
 import {
   convertToRawContentURL,
   convertToRepoContentURL,
+  convertToRepoURL,
 } from '../../util/url_converter';
 import styles from './work_detail.module.css';
 
@@ -14,6 +15,7 @@ type WorkDetailProps = {
 
 const WorkDetail = ({ work, onClose }: WorkDetailProps) => {
   const [readme, setReadme] = useState<string>('');
+  const repoURL = convertToRepoURL(work.url, work.branch);
   const repoContentURL = convertToRepoContentURL(work.url, work.branch);
   const contentURL = convertToRawContentURL(work.url, work.branch);
 
@@ -27,7 +29,13 @@ const WorkDetail = ({ work, onClose }: WorkDetailProps) => {
 
   return (
     <div className={styles.work}>
-      <button onClick={onClose}>X</button>
+      <header>
+        <h2>{work.title}</h2>
+        <a href={repoURL} target='_blank'>
+          Github
+        </a>
+        <button onClick={onClose}>X</button>
+      </header>
       <ReactMarkdown
         children={readme}
         rehypePlugins={[rehypeRaw]}
