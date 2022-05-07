@@ -14,6 +14,7 @@ type ScrollRef = {
 
 type MainProps = {
   scrollRef: ScrollRef;
+  isLogin: boolean;
   FileInput: typeof IFileInput;
   onWorkClick(work: WorkData): void;
   workRepository: WorkRepository;
@@ -21,6 +22,7 @@ type MainProps = {
 
 const Main = ({
   scrollRef,
+  isLogin,
   FileInput,
   onWorkClick,
   workRepository,
@@ -30,6 +32,7 @@ const Main = ({
       <About ref={scrollRef.aboutRef} />
       <Works
         ref={scrollRef.worksRef}
+        isLogin={isLogin}
         FileInput={FileInput}
         onWorkClick={onWorkClick}
         workRepository={workRepository}

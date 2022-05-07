@@ -12,16 +12,16 @@ class AuthService {
     this.githubProvider = new FirebaseAuth.GithubAuthProvider();
   }
 
-  login(providerName: AuthProvider) {
+  login(providerName: AuthProvider): Promise<FirebaseAuth.UserCredential> {
     const authProvider = this.getProvider(providerName);
     return FirebaseAuth.signInWithPopup(this.firebaseAuth, authProvider);
   }
 
   logout() {
-    this.firebaseAuth.signOut();
+    return this.firebaseAuth.signOut();
   }
 
-  onAuthChange(onUserChanged: (user: FirebaseAuth.User | null) => {}) {
+  onAuthChange(onUserChanged: (user: FirebaseAuth.User | null) => void) {
     this.firebaseAuth.onAuthStateChanged((user) => {
       onUserChanged(user);
     });

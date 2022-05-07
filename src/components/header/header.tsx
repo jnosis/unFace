@@ -5,14 +5,23 @@ import styles from './header.module.css';
 type HeaderProps = {
   active: string;
   menus: MenuItem[];
+  isLogin: boolean;
+  onSignClick(): Promise<boolean>;
   onLogoClick(): void;
   onMenuClick(name: MenuItem): void;
 };
 
-const Header = ({ active, menus, onMenuClick }: HeaderProps) => {
+const Header = ({
+  active,
+  menus,
+  isLogin,
+  onSignClick,
+  onLogoClick,
+  onMenuClick,
+}: HeaderProps) => {
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>
+      <div className={styles.logo} onClick={onLogoClick}>
         <img className={styles.img} src='/images/logo.png' alt='logo' />
         <h1 className={styles.title}>unFace</h1>
       </div>
@@ -26,6 +35,11 @@ const Header = ({ active, menus, onMenuClick }: HeaderProps) => {
           />
         ))}
       </ul>
+      {false && (
+        <button onClick={onSignClick}>
+          {isLogin ? 'sign out' : 'sign in'}
+        </button>
+      )}
     </header>
   );
 };

@@ -18,15 +18,12 @@ const scrollOption: ScrollIntoViewOptions = {
   behavior: 'smooth',
 };
 
-const App = ({
-  FileInput,
-  authService: _authService,
-  workRepository,
-}: AppProps) => {
+const App = ({ FileInput, authService, workRepository }: AppProps) => {
   const menus: MenuItem[] = ['home', 'works', 'contact'];
   const [active, setActive] = useState<MenuItem>('home');
   const [isWorkDetail, setIsWorkDetail] = useState<boolean>(false);
   const [work, setWork] = useState<WorkData | null>(null);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   const aboutRef = useRef<HTMLElement>(null);
   const worksRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
@@ -50,6 +47,18 @@ const App = ({
 
       default:
         throw new Error(`MenuItem(${name}) is undefined`);
+    }
+  };
+
+  const onSignClick = async (): Promise<boolean> => {
+    if (isLogin) {
+      await authService.logout();
+      setIsLogin(false);
+      return isLogin;
+    } else {
+      await authService.login('Google');
+      setIsLogin(true);
+      return isLogin;
     }
   };
 
@@ -132,11 +141,19 @@ const App = ({
     contactRef.current && observer.observe(contactRef.current);
   }, []);
 
+  useEffect(() => {
+    authService.onAuthChange((user) => {
+      user && setIsLogin(true);
+    });
+  }, [authService]);
+
   return (
     <div className={styles.container}>
       <Header
         active={active}
         menus={menus}
+        isLogin={isLogin}
+        onSignClick={onSignClick}
         onLogoClick={onLogoClick}
         onMenuClick={onMenuClick}
       />
@@ -144,6 +161,7 @@ const App = ({
         {isWorkDetail || (
           <Main
             scrollRef={scrollRef}
+            isLogin={isLogin}
             FileInput={FileInput}
             onWorkClick={onWorkClick}
             workRepository={workRepository}
