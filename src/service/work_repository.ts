@@ -8,6 +8,12 @@ class WorkRepository {
     this.database = FirebaseDB.getDatabase(app);
   }
 
+  async getAdmins(): Promise<{ [uid: string]: boolean } | null> {
+    const query = FirebaseDB.ref(this.database, `admins`);
+    const value = (await FirebaseDB.get(query)).val();
+    return value;
+  }
+
   syncWorks(onUpdate: (works: WorksDatabase) => void) {
     const query = FirebaseDB.ref(this.database, `works`);
     FirebaseDB.onValue(query, (snapshot) => {

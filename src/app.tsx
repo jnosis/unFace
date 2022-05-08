@@ -24,6 +24,7 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
   const [isWorkDetail, setIsWorkDetail] = useState<boolean>(false);
   const [work, setWork] = useState<WorkData | null>(null);
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const aboutRef = useRef<HTMLElement>(null);
   const worksRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
@@ -50,13 +51,24 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
     }
   };
 
+  const checkAdmin = async (uid: string): Promise<boolean> => {
+    const uids = await workRepository.getAdmins();
+    if (uids) {
+      const admin = uids[uid];
+      return admin;
+    }
+    return false;
+  };
+
   const onSignClick = async (): Promise<boolean> => {
     if (isLogin) {
       await authService.logout();
       setIsLogin(false);
+      isAdmin && setIsAdmin(false);
       return isLogin;
     } else {
-      await authService.login('Google');
+      const user = (await authService.login('Google')).user;
+      setIsAdmin(await checkAdmin(user.uid));
       setIsLogin(true);
       return isLogin;
     }
@@ -143,7 +155,10 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
 
   useEffect(() => {
     authService.onAuthChange((user) => {
-      user && setIsLogin(true);
+      if (user) {
+        setIsLogin(true);
+        checkAdmin(user.uid).then(setIsAdmin);
+      }
     });
   }, [authService]);
 
@@ -161,7 +176,7 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
         {isWorkDetail || (
           <Main
             scrollRef={scrollRef}
-            isLogin={isLogin}
+            isAdmin={isAdmin}
             FileInput={FileInput}
             onWorkClick={onWorkClick}
             workRepository={workRepository}

@@ -6,14 +6,14 @@ import Work from '../work/work';
 import styles from './works.module.css';
 
 type WorksProps = {
-  isLogin: boolean;
+  isAdmin: boolean;
   FileInput: typeof IFileInput;
   onWorkClick(work: WorkData): void;
   workRepository: WorkRepository;
 };
 
 const Works = forwardRef<HTMLElement, WorksProps>(
-  ({ isLogin, FileInput, onWorkClick, workRepository }, scrollRef) => {
+  ({ isAdmin, FileInput, onWorkClick, workRepository }, scrollRef) => {
     const [works, setWorks] = useState<WorksDatabase>({});
     const [isAdd, setIsAdd] = useState<boolean>(false);
 
@@ -56,7 +56,7 @@ const Works = forwardRef<HTMLElement, WorksProps>(
               onDelete={deleteWork}
             />
           ))}
-          {isLogin && (
+          {isAdmin && (
             <li>
               {isAdd || <button onClick={() => setIsAdd(!isAdd)}>+</button>}
               {isAdd && <AddWorkForm FileInput={FileInput} onAdd={addWork} />}
