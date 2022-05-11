@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { useParams } from 'react-router-dom';
 import rehypeRaw from 'rehype-raw';
+import WorkRepository from '../../service/work_repository';
 import {
   convertToRawContentURL,
   convertToRepoContentURL,
@@ -9,39 +11,63 @@ import {
 import styles from './work_detail.module.css';
 
 type WorkDetailProps = {
-  work: WorkData;
+  workRepository: WorkRepository;
   onClose(): void;
 };
 
-const WorkDetail = ({ work, onClose }: WorkDetailProps) => {
+const WorkDetail = ({ workRepository, onClose }: WorkDetailProps) => {
+  const { workTitle } = useParams<string>();
+  const [work, setWork] = useState<WorkData | null>(null);
   const [readme, setReadme] = useState<string>('');
-  const repoURL = convertToRepoURL(work.url, work.branch);
-  const repoContentURL = convertToRepoContentURL(work.url, work.branch);
-  const contentURL = convertToRawContentURL(work.url, work.branch);
+  const [repoURL, setRepoURL] = useState<string>('');
+  const [repoContentURL, setRepoContentURL] = useState<string>('');
+  const [contentURL, setContentURL] = useState<string>('');
 
   useEffect(() => {
-    fetch(`${contentURL}/README.md`, {
-      method: 'GET',
-    })
-      .then((res) => res.text())
-      .then(setReadme);
-  });
+    workRepository.getWorkByTitle(workTitle ? workTitle : '').then((work) => {
+      setWork(work);
+    });
+  }, [workRepository]);
+
+  useEffect(() => {
+    if (work == null) {
+      return;
+    }
+
+    setRepoURL(convertToRepoURL(work.url, work.branch));
+    setRepoContentURL(convertToRepoContentURL(work.url, work.branch));
+    setContentURL(convertToRawContentURL(work.url, work.branch));
+  }, [work]);
+
+  useEffect(() => {
+    if (contentURL !== '') {
+      fetch(`${contentURL}/README.md`, {
+        method: 'GET',
+      })
+        .then((res) => res.text())
+        .then(setReadme);
+    }
+  }, [contentURL]);
 
   return (
     <div className={styles.work}>
-      <header>
-        <h2>{work.title}</h2>
-        <a href={repoURL} target='_blank'>
-          Github
-        </a>
-        <button onClick={onClose}>X</button>
-      </header>
-      <ReactMarkdown
-        children={readme}
-        rehypePlugins={[rehypeRaw]}
-        transformLinkUri={(uri) => `${repoContentURL}/${uri}`}
-        transformImageUri={(uri) => `${contentURL}/${uri}`}
-      />
+      {!!work && !!contentURL && (
+        <>
+          <header>
+            <h2>{work.title}</h2>
+            <a href={repoURL} target='_blank'>
+              Github
+            </a>
+            <button onClick={onClose}>X</button>
+          </header>
+          <ReactMarkdown
+            children={readme}
+            rehypePlugins={[rehypeRaw]}
+            transformLinkUri={(uri) => `${repoContentURL}/${uri}`}
+            transformImageUri={(uri) => `${contentURL}/${uri}`}
+          />
+        </>
+      )}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import './index.module.css';
 import App from './app';
 import { firebaseApp } from './service/firebase';
@@ -27,10 +28,12 @@ const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <App
-      FileInput={FileInput}
-      authService={authService}
-      workRepository={workRepository}
-    />
+    <BrowserRouter>
+      <App
+        FileInput={FileInput}
+        authService={authService}
+        workRepository={workRepository}
+      />
+    </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,5 +1,6 @@
 import { FirebaseApp } from 'firebase/app';
 import * as FirebaseDB from 'firebase/database';
+import { isWorkDataBase } from '../util/checker';
 
 class WorkRepository {
   private readonly database: FirebaseDB.Database;
@@ -20,6 +21,16 @@ class WorkRepository {
       const value = snapshot.val();
       value && onUpdate(value);
     });
+  }
+
+  async getWorkByTitle(title: string): Promise<WorkData | null> {
+    const query = FirebaseDB.ref(this.database, `works`);
+    const works = (await FirebaseDB.get(query)).val();
+    if (!isWorkDataBase(works)) return null;
+
+    const id = Object.keys(works).find((id) => works[id].title === title);
+    const work = id ? works[id] : null;
+    return work;
   }
 
   saveWork(work: WorkData) {

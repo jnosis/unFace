@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { IFileInput } from '.';
 import styles from './app.module.css';
 import Footer from './components/footer/footer';
@@ -22,13 +23,14 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
   const menus: MenuItem[] = ['home', 'works', 'contact'];
   const [active, setActive] = useState<MenuItem>('home');
   const [isWorkDetail, setIsWorkDetail] = useState<boolean>(false);
-  const [work, setWork] = useState<WorkData | null>(null);
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const aboutRef = useRef<HTMLElement>(null);
   const worksRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
   const scrollRef = { aboutRef, worksRef, contactRef };
+
+  const navigate = useNavigate();
 
   const scrollTo = (name: MenuItem) => {
     if (isWorkDetail) {
@@ -88,14 +90,14 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
     if (!work) {
       return;
     }
-    setWork(work);
-    setActive('works');
     setIsWorkDetail(true);
+    setActive('works');
+    navigate(`/works/${work.title}`);
   };
 
   const onWorkDetailClose = () => {
-    setWork(null);
     setIsWorkDetail(false);
+    navigate('/');
   };
 
   const observerOption: IntersectionObserverInit = {
@@ -173,18 +175,29 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
         onMenuClick={onMenuClick}
       />
       <div className={styles.content}>
-        {isWorkDetail || (
-          <Main
-            scrollRef={scrollRef}
-            isAdmin={isAdmin}
-            FileInput={FileInput}
-            onWorkClick={onWorkClick}
-            workRepository={workRepository}
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <Main
+                scrollRef={scrollRef}
+                isAdmin={isAdmin}
+                FileInput={FileInput}
+                onWorkClick={onWorkClick}
+                workRepository={workRepository}
+              />
+            }
           />
-        )}
-        {isWorkDetail && !!work && (
-          <WorkDetail work={work} onClose={onWorkDetailClose} />
-        )}
+          <Route
+            path='/works/:workTitle'
+            element={
+              <WorkDetail
+                workRepository={workRepository}
+                onClose={onWorkDetailClose}
+              />
+            }
+          />
+        </Routes>
       </div>
       <Footer />
     </div>
