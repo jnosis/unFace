@@ -1,4 +1,5 @@
 @value appSecondaryContainerLight, appOnSecondaryContainerLight, appSurfaceLight, appOnSurfaceLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
+@value appSecondaryContainerDark, appOnSecondaryContainerDark, appSurfaceDark, appOnSurfaceDark, appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
 
 .item {
   cursor: pointer;
@@ -17,4 +18,20 @@
 .item.inactive:hover {
   background-color: appSurfaceVariantLight;
   color: appOnSurfaceVariantLight;
+}
+
+@media (prefers-color-scheme: dark) {
+  .item {
+    color: appOnSurfaceVariantDark;
+  }
+
+  .item.active {
+    background-color: appSecondaryContainerDark;
+    color: appOnSecondaryContainerDark;
+  }
+
+  .item.inactive:hover {
+    background-color: appSurfaceVariantDark;
+    color: appOnSurfaceVariantDark;
+  }
 }
