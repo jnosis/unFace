@@ -1,16 +1,37 @@
+@value appPrimaryLight, appSurfaceLight, appOnSurfaceLight from '../../common/colors.css';
+
 .header {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1;
+  width: 100%;
+  height: 5em;
+  background-color: appSurfaceLight;
+  color: appOnSurfaceLight;
+  padding: 1em;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5em;
+  background-color: appPrimaryLight;
+  opacity: 0.08;
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 5em;
-  background-color: wheat;
-  padding: 1em;
 }
 
 .logo {
@@ -32,5 +53,5 @@
 .menu {
   list-style: none;
   display: flex;
-  gap: 1em;
+  gap: 0.5em;
 }

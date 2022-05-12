@@ -12,7 +12,9 @@ const NavItem = ({ name, activated, onMenuClick }: NavItemProps) => {
     onMenuClick(name);
   };
 
-  const className = activated ? `${styles.item} ${styles.active}` : styles.item;
+  const className = activated
+    ? `${styles.item} ${styles.active}`
+    : `${styles.item} ${styles.inactive}`;
   return (
     <li className={className} onClick={onClick}>
       {name.toUpperCase()}

@@ -1,12 +1,20 @@
-.item {
-  border: 1px solid transparent;
-}
+@value appSecondaryContainerLight, appOnSecondaryContainerLight, appSurfaceLight, appOnSurfaceLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
 
-.item:hover {
-  background-color: wheat;
+.item {
   cursor: pointer;
+  padding: 1rem;
+  transition: 300ms ease-in;
+  border-radius: 1em;
+  text-align: center;
+  color: appOnSurfaceVariantLight;
 }
 
 .item.active {
-  border-color: aquamarine;
+  background-color: appSecondaryContainerLight;
+  color: appOnSecondaryContainerLight;
+}
+
+.item.inactive:hover {
+  background-color: appSurfaceVariantLight;
+  color: appOnSurfaceVariantLight;
 }

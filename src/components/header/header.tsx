@@ -21,25 +21,28 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <header className={styles.header}>
-      <div className={styles.logo} onClick={onLogoClick}>
-        <img className={styles.img} src='/images/logo.png' alt='logo' />
-        <h1 className={styles.title}>unFace</h1>
+      <div className={styles.overlay} />
+      <div className={styles.content}>
+        <div className={styles.logo} onClick={onLogoClick}>
+          <img className={styles.img} src='/images/logo.png' alt='logo' />
+          <h1 className={styles.title}>unFace</h1>
+        </div>
+        <ul className={styles.menu}>
+          {menus.map((menu) => (
+            <NavItem
+              key={menu}
+              name={menu}
+              activated={menu === active}
+              onMenuClick={onMenuClick}
+            />
+          ))}
+        </ul>
+        {false && (
+          <button onClick={onSignClick}>
+            {isLogin ? 'sign out' : 'sign in'}
+          </button>
+        )}
       </div>
-      <ul className={styles.menu}>
-        {menus.map((menu) => (
-          <NavItem
-            key={menu}
-            name={menu}
-            activated={menu === active}
-            onMenuClick={onMenuClick}
-          />
-        ))}
-      </ul>
-      {false && (
-        <button onClick={onSignClick}>
-          {isLogin ? 'sign out' : 'sign in'}
-        </button>
-      )}
     </header>
   );
 };
