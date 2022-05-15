@@ -79,6 +79,7 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
   const onLogoClick = () => {
     scrollTo('home');
     setActive('home');
+    navigate('/');
   };
 
   const onMenuClick = (name: MenuItem) => {
