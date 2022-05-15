@@ -8,6 +8,7 @@ import Main from './components/main/main';
 import WorkDetail from './components/work_detail/work_detail';
 import AuthService from './service/auth_service';
 import WorkRepository from './service/work_repository';
+import { isMenuItem } from './util/checker';
 
 type AppProps = {
   FileInput: typeof IFileInput;
@@ -34,7 +35,7 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
 
   const scrollTo = (name: MenuItem) => {
     if (isWorkDetail) {
-      onWorkDetailClose();
+      onWorkDetailClose(false);
     }
 
     switch (name) {
@@ -96,9 +97,15 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
     navigate(`/works/${work.title}`);
   };
 
-  const onWorkDetailClose = () => {
+  const onWorkDetailClose = (byClose = true) => {
     setIsWorkDetail(false);
     navigate('/');
+    if (byClose) {
+      setTimeout(() => {
+        setActive('works');
+        scrollTo('works');
+      }, 0);
+    }
   };
 
   const observerOption: IntersectionObserverInit = {
@@ -138,8 +145,9 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
   const observerCallback = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting && entry.intersectionRatio > 0) {
-        const menuItem = entry.target.id as MenuItem;
+        const menuItem = entry.target.id;
 
+        if (!isMenuItem(menuItem)) return;
         if (entry.boundingClientRect.y < 0) {
           switchActive(menuItem, false);
         } else {

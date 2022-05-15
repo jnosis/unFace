@@ -14,3 +14,7 @@ export function isWorkDataBase(works: unknown): works is WorksDatabase {
 
   return check;
 }
+
+export function isMenuItem(menu: unknown): menu is MenuItem {
+  return menu === 'home' || menu === 'works' || menu === 'contact';
+}
