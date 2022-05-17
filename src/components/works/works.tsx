@@ -33,6 +33,7 @@ const Works = forwardRef<HTMLElement, WorksProps>(
         return { ...works, [work.id]: work };
       });
       workRepository.saveWork(work);
+      setIsAdd(false);
     };
 
     const deleteWork = (work: WorkData) => {
@@ -45,24 +46,26 @@ const Works = forwardRef<HTMLElement, WorksProps>(
     };
 
     return (
-      <section ref={scrollRef} className={styles.section} id='works'>
-        <h1 className={styles.title}>Works</h1>
-        <ul className={styles.list}>
-          {Object.keys(works).map((key) => (
-            <Work
-              key={key}
-              work={works[key]}
-              onWorkClick={onWorkClick}
-              onDelete={deleteWork}
-            />
-          ))}
-          {isAdmin && (
-            <li>
-              {isAdd || <button onClick={() => setIsAdd(!isAdd)}>+</button>}
-              {isAdd && <AddWorkForm FileInput={FileInput} onAdd={addWork} />}
-            </li>
-          )}
-        </ul>
+      <section ref={scrollRef} className={styles.container} id='works'>
+        <div className={styles.content}>
+          <h1 className={styles.title}>Works</h1>
+          <ul className={styles.list}>
+            {Object.keys(works).map((key) => (
+              <Work
+                key={key}
+                work={works[key]}
+                onWorkClick={onWorkClick}
+                onDelete={deleteWork}
+              />
+            ))}
+            {isAdmin && (
+              <li>
+                {isAdd || <button onClick={() => setIsAdd(!isAdd)}>+</button>}
+                {isAdd && <AddWorkForm FileInput={FileInput} onAdd={addWork} />}
+              </li>
+            )}
+          </ul>
+        </div>
       </section>
     );
   }

@@ -11,8 +11,8 @@ const Work = ({ work, onWorkClick, onDelete }: WorkProps) => {
   const { thumbnail } = work;
   const fileURL = thumbnail?.fileURL;
   return (
-    <li className={styles.work} onClick={() => onWorkClick(work)}>
-      <div>
+    <li className={styles.work}>
+      <div onClick={() => onWorkClick(work)}>
         <img
           className={styles.thumbnail}
           src={fileURL ? fileURL : ''}
