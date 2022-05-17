@@ -11,7 +11,7 @@ const Work = ({ work, onWorkClick, onDelete }: WorkProps) => {
   const { thumbnail } = work;
   const fileURL = thumbnail?.fileURL;
   return (
-    <li className={styles.work}>
+    <>
       <div onClick={() => onWorkClick(work)}>
         <img
           className={styles.thumbnail}
@@ -21,8 +21,10 @@ const Work = ({ work, onWorkClick, onDelete }: WorkProps) => {
         <h1 className={styles.title}>{work.title}</h1>
         <p className={styles.description}>{work.description}</p>
       </div>
-      <button onClick={() => onDelete(work)}>X</button>
-    </li>
+      <button className={styles.delete} onClick={() => onDelete(work)}>
+        X
+      </button>
+    </>
   );
 };
 

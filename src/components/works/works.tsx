@@ -51,19 +51,31 @@ const Works = forwardRef<HTMLElement, WorksProps>(
           <h1 className={styles.title}>Works</h1>
           <ul className={styles.list}>
             {Object.keys(works).map((key) => (
-              <Work
-                key={key}
-                work={works[key]}
-                onWorkClick={onWorkClick}
-                onDelete={deleteWork}
-              />
+              <li className={styles.card}>
+                <Work
+                  key={key}
+                  work={works[key]}
+                  onWorkClick={onWorkClick}
+                  onDelete={deleteWork}
+                />
+              </li>
             ))}
             {isAdmin && (
-              <li>
+              <li className={styles.card}>
                 {!isAdd ? (
-                  <button onClick={() => setIsAdd(true)}>+</button>
+                  <button //
+                    className={styles.add}
+                    onClick={() => setIsAdd(true)}
+                  >
+                    +
+                  </button>
                 ) : (
-                  <button onClick={() => setIsAdd(false)}>x</button>
+                  <button
+                    className={styles.close}
+                    onClick={() => setIsAdd(false)}
+                  >
+                    x
+                  </button>
                 )}
                 {isAdd && <AddWorkForm FileInput={FileInput} onAdd={addWork} />}
               </li>
