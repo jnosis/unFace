@@ -3,7 +3,7 @@ export function isWorkData(work: unknown): work is WorkData {
     (work as WorkData).id !== undefined &&
     (work as WorkData).title !== undefined &&
     (work as WorkData).description !== undefined &&
-    (work as WorkData).url !== undefined &&
+    (work as WorkData).repo !== undefined &&
     (work as WorkData).thumbnail !== undefined
   );
 }

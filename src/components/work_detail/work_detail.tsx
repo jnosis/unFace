@@ -34,9 +34,9 @@ const WorkDetail = ({ workRepository, onClose }: WorkDetailProps) => {
       return;
     }
 
-    setRepoURL(convertToRepoURL(work.url, work.branch));
-    setRepoContentURL(convertToRepoContentURL(work.url, work.branch));
-    setContentURL(convertToRawContentURL(work.url, work.branch));
+    setRepoURL(convertToRepoURL(work.repo, work.branch));
+    setRepoContentURL(convertToRepoContentURL(work.repo, work.branch));
+    setContentURL(convertToRawContentURL(work.repo, work.branch));
   }, [work]);
 
   useEffect(() => {

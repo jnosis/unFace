@@ -6,7 +6,7 @@ declare type MenuItem = 'home' | 'works' | 'contact';
 
 declare type WorkData = {
   id: number;
-  url: string;
+  repo: string;
   branch: string;
   title: string;
   description: string;
