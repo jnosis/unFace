@@ -60,7 +60,11 @@ const Works = forwardRef<HTMLElement, WorksProps>(
             ))}
             {isAdmin && (
               <li>
-                {isAdd || <button onClick={() => setIsAdd(!isAdd)}>+</button>}
+                {!isAdd ? (
+                  <button onClick={() => setIsAdd(true)}>+</button>
+                ) : (
+                  <button onClick={() => setIsAdd(false)}>x</button>
+                )}
                 {isAdd && <AddWorkForm FileInput={FileInput} onAdd={addWork} />}
               </li>
             )}
