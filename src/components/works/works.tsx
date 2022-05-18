@@ -51,9 +51,8 @@ const Works = forwardRef<HTMLElement, WorksProps>(
           <h1 className={styles.title}>Works</h1>
           <ul className={styles.list}>
             {Object.keys(works).map((key) => (
-              <li className={styles.card}>
+              <li key={key} className={styles.card}>
                 <Work
-                  key={key}
                   work={works[key]}
                   onWorkClick={onWorkClick}
                   onDelete={deleteWork}
