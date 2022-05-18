@@ -54,6 +54,7 @@ const Works = forwardRef<HTMLElement, WorksProps>(
               <li key={key} className={styles.card}>
                 <Work
                   work={works[key]}
+                  isAdmin={isAdmin}
                   onWorkClick={onWorkClick}
                   onDelete={deleteWork}
                 />
