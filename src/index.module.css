@@ -3,4 +3,5 @@
   margin: 0;
   padding: 0;
   scroll-margin: 5em 0;
+  transition-duration: 0.5s;
 }
