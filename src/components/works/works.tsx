@@ -45,6 +45,10 @@ const Works = forwardRef<HTMLElement, WorksProps>(
       workRepository.deleteWork(work);
     };
 
+    const onCancel = () => {
+      setIsAdd(false);
+    };
+
     return (
       <section ref={scrollRef} className={styles.container} id='works'>
         <div className={styles.content}>
@@ -61,23 +65,26 @@ const Works = forwardRef<HTMLElement, WorksProps>(
               </li>
             ))}
             {isAdmin && (
-              <li className={styles.card}>
-                {!isAdd ? (
+              <li
+                className={
+                  isAdd ? `${styles.card} ${styles.form}` : styles.card
+                }
+              >
+                {!isAdd && (
                   <button //
                     className={styles.add}
                     onClick={() => setIsAdd(true)}
                   >
                     +
                   </button>
-                ) : (
-                  <button
-                    className={styles.close}
-                    onClick={() => setIsAdd(false)}
-                  >
-                    x
-                  </button>
                 )}
-                {isAdd && <AddWorkForm FileInput={FileInput} onAdd={addWork} />}
+                {isAdd && (
+                  <AddWorkForm
+                    FileInput={FileInput}
+                    onAdd={addWork}
+                    onCancel={onCancel}
+                  />
+                )}
               </li>
             )}
           </ul>

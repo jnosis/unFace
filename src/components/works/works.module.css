@@ -32,8 +32,19 @@
   cursor: pointer;
 }
 
-.card:hover {
+.card.form {
+  cursor: initial;
+}
+
+.card:not(.form):hover {
   transform: scale(1.01);
+}
+
+.add {
+  width: 100%;
+  height: 100%;
+  font-size: 10rem;
+  color: appOnSurfaceVariantLight;
 }
 
 @media screen and (max-width: 600px) {
@@ -45,6 +56,10 @@
 @media (prefers-color-scheme: dark) {
   .card {
     background-color: appSurfaceVariantDark;
+    color: appOnSurfaceVariantDark;
+  }
+
+  .add {
     color: appOnSurfaceVariantDark;
   }
 }
