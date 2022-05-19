@@ -1,11 +1,53 @@
-.title {
-}
+@value appPrimaryLight, appButtonHoverLight from '../../common/colors.css';
+@value appPrimaryDark, appButtonHoverDark from '../../common/colors.css';
 
-.description {
+.container {
+  position: relative;
 }
 
 .thumbnail {
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.content {
+  padding: 0.25rem 1rem 1rem;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.description {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.commands {
+  height: 1.5rem;
 }
 
 .delete {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1.25rem;
+  color: appPrimaryLight;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.delete:hover {
+  background-color: appButtonHoverLight;
+}
+
+@media (prefers-color-scheme: dark) {
+  .delete {
+    color: appPrimaryDark;
+  }
+
+  .delete:hover {
+    background-color: appButtonHoverDark;
+  }
 }

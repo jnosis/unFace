@@ -55,8 +55,8 @@ const Works = forwardRef<HTMLElement, WorksProps>(
                 <Work
                   work={works[key]}
                   isAdmin={isAdmin}
+                  deleteWork={deleteWork}
                   onWorkClick={onWorkClick}
-                  onDelete={deleteWork}
                 />
               </li>
             ))}
