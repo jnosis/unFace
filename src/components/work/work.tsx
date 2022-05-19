@@ -21,7 +21,7 @@ const Work = ({ work, isAdmin, deleteWork, onWorkClick }: WorkProps) => {
     <div className={styles.container} onClick={() => onWorkClick(work)}>
       <img
         className={styles.thumbnail}
-        src={fileURL ? fileURL : './images/profile.jpg'}
+        src={fileURL ? fileURL : './images/default.jpg'}
         alt='work thumbnail'
       />
       <div className={styles.content}>
