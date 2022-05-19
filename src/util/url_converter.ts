@@ -1,3 +1,7 @@
+export function addHttpsOnURL(url: string) {
+  return /^(https?\:\/\/)/.test(url) ? url : `https://${url}`;
+}
+
 export function convertToRawContentURL(url: string, branch: string): string {
   return `${url.replace('github.com', 'raw.githubusercontent.com')}/${branch}`;
 }

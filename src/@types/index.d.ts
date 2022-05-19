@@ -10,14 +10,14 @@ declare type WorkData = {
   branch: string;
   title: string;
   description: string;
-  thumbnail: FileData | null;
+  thumbnail: FileData;
 };
 
 type WorksDatabase = { [id: string]: WorkData };
 
 declare type FileData = {
-  fileName: string | null;
-  fileURL: string | null;
+  fileName: string;
+  fileURL: string;
 };
 
 declare type CloudinaryData = {

@@ -2,6 +2,7 @@ import React, { memo, useRef, useState } from 'react';
 import styles from './add_work_form.module.css';
 import { IFileInput } from '../..';
 import { validateRepo, validateTitle } from '../../util/validator';
+import { addHttpsOnURL } from '../../util/url_converter';
 
 type AddWorkFormProps = {
   FileInput: typeof IFileInput;
@@ -24,10 +25,10 @@ const AddWorkForm = memo(({ FileInput, onAdd }: AddWorkFormProps) => {
     event.preventDefault();
     const id = Date.now();
     const title = titleRef.current?.value || '';
-    const repo = repoRef.current?.value || '';
+    const repo = addHttpsOnURL(repoRef.current?.value || '');
     const branch = branchRef.current?.value || 'master';
     const description = descriptionRef.current?.value || '';
-    const thumbnail = file || null;
+    const thumbnail = file || { fileName: '', fileURL: '' };
 
     if (validateTitle(title) && validateRepo(repo)) {
       const work: WorkData = {
