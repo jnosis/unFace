@@ -1,0 +1,58 @@
+@value appPrimaryLight, appSecondaryLight, appOnSecondaryLight, appOutlineLight, appButtonHoverLight from '../../common/colors.css';
+@value appPrimaryDark, appSecondaryDark, appOnSecondaryDark, appOutlineDark, appButtonHoverDark from '../../common/colors.css';
+
+.container {
+}
+
+.input {
+  display: none;
+}
+
+.button {
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 1.25rem;
+  padding: 0.25rem 0.75rem;
+  outline: appOutlineLight solid 0.02rem;
+  font-size: 0.8rem;
+  color: appPrimaryLight;
+}
+
+.button:hover {
+  background-color: appButtonHoverLight;
+}
+
+.loading {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  border: 0.1rem solid appSecondaryLight;
+  border-top: 0.1rem solid appOnSecondaryLight;
+  animation: spin 2s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button {
+    outline: appOutlineDark solid 0.02rem;
+    color: appPrimaryDark;
+  }
+
+  .button:hover {
+    background-color: appButtonHoverDark;
+  }
+
+  .loading {
+    border: 0.1rem solid appSecondaryDark;
+    border-top: 0.1rem solid appOnSecondaryDark;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
