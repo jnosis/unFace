@@ -109,7 +109,7 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
           />
         </div>
       </label>
-      <div className={styles.commands}>
+      <div className={styles.actions}>
         <button type='button' className={styles.cancel} onClick={onCancel}>
           Cancel
         </button>

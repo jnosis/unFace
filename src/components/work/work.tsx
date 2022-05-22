@@ -26,10 +26,17 @@ const Work = ({ work, isAdmin, deleteWork, onWorkClick }: WorkProps) => {
       />
       <div className={styles.content}>
         <h1 className={styles.title}>{work.title}</h1>
-        <p className={styles.description}>{work.description}</p>
+        <p
+          className={`
+            ${styles.description}
+            ${isAdmin ? ` ${styles.admin}` : ''}
+          `}
+        >
+          {work.description}
+        </p>
       </div>
       {isAdmin && (
-        <div className={styles.commands}>
+        <div className={styles.actions}>
           <button className={styles.delete} onClick={onDelete}>
             Delete
           </button>

@@ -24,14 +24,17 @@
   margin-top: 0.5rem;
 }
 
-.commands {
-  height: 1.5rem;
+.description.admin {
+  margin-bottom: 1.5rem;
 }
 
-.delete {
+.actions {
   position: absolute;
   bottom: 0.5rem;
   right: 0.75rem;
+}
+
+.delete {
   padding: 0.25rem 0.75rem;
   border-radius: 1.25rem;
   color: appPrimaryLight;
