@@ -38,6 +38,7 @@
 
 .card:not(.form):hover {
   transform: scale(1.01);
+  transition-duration: 0.5s;
 }
 
 .add {
