@@ -24,3 +24,10 @@ declare type CloudinaryData = {
   original_filename: string;
   url: string;
 };
+
+declare type Action = {
+  type: 'button' | 'submit' | 'reset';
+  title: string;
+  isDisable: boolean;
+  onClick(event: any): void;
+};

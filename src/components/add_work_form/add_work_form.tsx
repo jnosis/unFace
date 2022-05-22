@@ -3,6 +3,7 @@ import styles from './add_work_form.module.css';
 import { IFileInput } from '../..';
 import { validateRepo, validateTitle } from '../../util/validator';
 import { addHttpsOnURL } from '../../util/url_converter';
+import Actions from '../actions/actions';
 
 type AddWorkFormProps = {
   FileInput: typeof IFileInput;
@@ -109,17 +110,22 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
           />
         </div>
       </label>
-      <div className={styles.actions}>
-        <button type='button' className={styles.cancel} onClick={onCancel}>
-          Cancel
-        </button>
-        <button
-          className={isValid ? styles.add : `${styles.add} ${styles.disable}`}
-          onClick={onSubmit}
-        >
-          Add
-        </button>
-      </div>
+      <Actions
+        actions={[
+          {
+            type: 'button',
+            title: 'Cancel',
+            isDisable: false,
+            onClick: onCancel,
+          },
+          {
+            type: 'submit',
+            title: 'Add',
+            isDisable: !isValid,
+            onClick: onSubmit,
+          },
+        ]}
+      />
     </form>
   );
 });

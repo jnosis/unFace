@@ -1,4 +1,5 @@
 import React from 'react';
+import Actions from '../actions/actions';
 import styles from './work.module.css';
 
 type WorkProps = {
@@ -36,11 +37,16 @@ const Work = ({ work, isAdmin, deleteWork, onWorkClick }: WorkProps) => {
         </p>
       </div>
       {isAdmin && (
-        <div className={styles.actions}>
-          <button className={styles.delete} onClick={onDelete}>
-            Delete
-          </button>
-        </div>
+        <Actions
+          actions={[
+            {
+              type: 'button',
+              title: 'Delete',
+              isDisable: false,
+              onClick: onDelete,
+            },
+          ]}
+        />
       )}
     </div>
   );

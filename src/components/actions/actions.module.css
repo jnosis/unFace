@@ -1,0 +1,40 @@
+@value appPrimaryLight, appOnsurfaceLight, appButtonHoverLight from '../../common/colors.css';
+@value appPrimaryDark, appOnsurfaceDark, appButtonHoverDark from '../../common/colors.css';
+
+.actions {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+}
+
+.button {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1.25rem;
+  color: appPrimaryLight;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.button.disable {
+  cursor: initial;
+  color: appOnSurfaceLight;
+  opacity: 0.38;
+}
+
+.button:not(.disable):hover {
+  background-color: appButtonHoverLight;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button {
+    color: appPrimaryDark;
+  }
+
+  .button.disable {
+    color: appOnSurfaceDark;
+  }
+
+  .button:not(.disable):hover {
+    background-color: appButtonHoverDark;
+  }
+}
