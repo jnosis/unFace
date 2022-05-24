@@ -2,7 +2,7 @@
 @value appBarDark, appBackgroundDark, appPrimaryDark, appOnSurfaceDark from '../../common/colors.css';
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -10,7 +10,6 @@
   height: 5em;
   background-color: appBarLight;
   color: appOnSurfaceLight;
-  padding: 1em;
 }
 
 .content {
@@ -19,6 +18,7 @@
   left: 0;
   width: 100%;
   height: 5em;
+  padding: 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,9 +58,14 @@
     background-color: appBackgroundLight;
   }
 
+  .header.scrolled {
+    background-color: appBarLight;
+  }
+
   .menu {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     height: 5em;
     justify-content: center;
@@ -72,6 +77,10 @@
 @media screen and (max-width: 600px) and (prefers-color-scheme: dark) {
   .header {
     background-color: appBackgroundDark;
+  }
+
+  .header.scrolled {
+    background-color: appBarDark;
   }
 
   .menu {

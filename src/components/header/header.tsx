@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavItem from '../nav_item/nav_item';
 import styles from './header.module.css';
 
@@ -19,8 +19,22 @@ const Header = ({
   onLogoClick,
   onMenuClick,
 }: HeaderProps) => {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    });
+  }, []);
+
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header}${isScrolled ? ` ${styles.scrolled}` : ''}`}
+    >
       <div className={styles.content}>
         <div className={styles.logo} onClick={onLogoClick}>
           <img className={styles.img} src='/images/logo.png' alt='logo' />
