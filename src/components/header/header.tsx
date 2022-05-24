@@ -21,7 +21,6 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <header className={styles.header}>
-      <div className={styles.overlay} />
       <div className={styles.content}>
         <div className={styles.logo} onClick={onLogoClick}>
           <img className={styles.img} src='/images/logo.png' alt='logo' />

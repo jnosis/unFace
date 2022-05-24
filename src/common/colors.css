@@ -54,6 +54,9 @@
 @value appInversePrimaryDark: #2b5da7;
 @value appShadowDark: #000000;
 
+@value appBarLight: #eceef8;
+@value appBarDark: #252931;
+
 @value appButtonHoverLight: #2b5da714;
 @value appButtonHoverDark: #a9c7ff14;
 

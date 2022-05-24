@@ -1,27 +1,16 @@
-@value appPrimaryLight, appSurfaceLight, appOnSurfaceLight from '../../common/colors.css';
-@value appPrimaryDark, appSurfaceDark, appOnSurfaceDark from '../../common/colors.css';
+@value appBarLight, appBackgroundLight, appPrimaryLight, appOnSurfaceLight from '../../common/colors.css';
+@value appBarDark, appBackgroundDark, appPrimaryDark, appOnSurfaceDark from '../../common/colors.css';
 
 .header {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
   width: 100%;
   height: 5em;
-  background-color: appSurfaceLight;
+  background-color: appBarLight;
   color: appOnSurfaceLight;
   padding: 1em;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5em;
-  background-color: appPrimaryLight;
-  opacity: 0.08;
 }
 
 .content {
@@ -59,11 +48,33 @@
 
 @media (prefers-color-scheme: dark) {
   .header {
-    background-color: appSurfaceDark;
+    background-color: appBarDark;
     color: appOnSurfaceDark;
   }
+}
 
-  .overlay {
-    background-color: appPrimaryDark;
+@media screen and (max-width: 600px) {
+  .header {
+    background-color: appBackgroundLight;
+  }
+
+  .menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 5em;
+    justify-content: center;
+    align-items: center;
+    background-color: appBarLight;
+  }
+}
+
+@media screen and (max-width: 600px) and (prefers-color-scheme: dark) {
+  .header {
+    background-color: appBackgroundDark;
+  }
+
+  .menu {
+    background-color: appBarDark;
   }
 }
