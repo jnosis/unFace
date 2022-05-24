@@ -7,8 +7,9 @@ type Props = {
 
 const Actions = ({ actions }: Props) => (
   <div className={styles.actions}>
-    {actions.map(({ type, title, isDisable, onClick }) => (
+    {actions.map(({ type, title, isDisable, onClick }, index) => (
       <button
+        key={index}
         type={type}
         className={`${styles.button}${isDisable ? ` ${styles.disable}` : ''}`}
         onClick={onClick}
