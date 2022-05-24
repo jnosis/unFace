@@ -2,7 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  scroll-margin: 5em 0;
   transition-duration: 0.1s;
 }
 
@@ -11,5 +10,13 @@ button {
   border: 0;
   outline: 0;
   cursor: pointer;
+  transition-duration: 0.5s;
+}
+
+input,
+textarea {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
   transition-duration: 0.5s;
 }

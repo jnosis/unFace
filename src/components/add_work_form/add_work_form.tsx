@@ -17,7 +17,8 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
   const repoRef = useRef<HTMLInputElement>(null);
   const branchRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const [isValid, setIsValid] = useState<boolean>(false);
+  const [isValidTitle, setIsValidTitle] = useState<boolean>(false);
+  const [isValidRepo, setIsValidRepo] = useState<boolean>(false);
   const [file, setFile] = useState<FileData | null>(null);
 
   const onFileChange = (file: FileData) => {
@@ -26,21 +27,15 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
 
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    const id = Date.now();
-    const title = titleRef.current?.value || '';
-    const repo = addHttpsOnURL(repoRef.current?.value || '');
-    const branch = branchRef.current?.value || 'master';
-    const description = descriptionRef.current?.value || '';
-    const thumbnail = file || { fileName: '', fileURL: '' };
 
-    if (validateTitle(title) && validateRepo(repo)) {
+    if (isValidTitle && isValidRepo) {
       const work: WorkData = {
-        id,
-        title,
-        repo,
-        branch,
-        description,
-        thumbnail,
+        id: Date.now(),
+        title: titleRef.current?.value || '',
+        repo: addHttpsOnURL(repoRef.current?.value || ''),
+        branch: branchRef.current?.value || 'master',
+        description: descriptionRef.current?.value || '',
+        thumbnail: file || { fileName: '', fileURL: '' },
       };
       formRef.current?.reset();
       setFile(null);
@@ -51,57 +46,59 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
   const onChange = () => {
     const title = titleRef.current?.value || '';
     const repo = addHttpsOnURL(repoRef.current?.value || '');
-    if (validateTitle(title) && validateRepo(repo)) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
+
+    setIsValidTitle(validateTitle(title));
+    setIsValidRepo(validateRepo(repo));
   };
 
   return (
     <form ref={formRef} className={styles.container} onChange={onChange}>
-      <label className={styles.label}>
+      <label className={`${styles.field} ${styles.title}`}>
         Title
         <input
           ref={titleRef}
-          className={styles.title}
+          className={`${styles.input}${
+            isValidTitle ? '' : ` ${styles.invalid}`
+          }`}
           type='text'
           name='title'
           placeholder='title'
-          required
         />
       </label>
-      <label className={styles.label}>
-        Repository URL
-        <input
-          ref={repoRef}
-          className={styles.repo}
-          type='text'
-          name='repo'
-          placeholder='repository url'
-          required
-        />
-      </label>
-      <label className={styles.label}>
-        Branch
-        <input
-          ref={branchRef}
-          className={styles.branch}
-          type='text'
-          name='branch'
-          placeholder='master'
-        />
-      </label>
-      <label className={styles.label}>
+      <div className={styles.repo}>
+        <label className={`${styles.field} ${styles.url}`}>
+          Repository URL
+          <input
+            ref={repoRef}
+            className={`${styles.input}${
+              isValidRepo ? '' : ` ${styles.invalid}`
+            }`}
+            type='text'
+            name='repo'
+            placeholder='repository url'
+          />
+        </label>
+        <label className={`${styles.field} ${styles.branch}`}>
+          Branch
+          <input
+            ref={branchRef}
+            className={styles.input}
+            type='text'
+            name='branch'
+            placeholder='master'
+          />
+        </label>
+      </div>
+      <label className={`${styles.field} ${styles.description}`}>
         Description
         <textarea
           ref={descriptionRef}
-          className={styles.description}
+          className={styles.textarea}
           name='description'
           placeholder='description'
         />
       </label>
-      <label className={styles.label}>
+      <div className={`${styles.field} ${styles.thumbnail}`}>
         Thumbnail
         <div>
           <FileInput
@@ -109,7 +106,7 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
             onFileChange={onFileChange}
           />
         </div>
-      </label>
+      </div>
       <Actions
         actions={[
           {
@@ -121,7 +118,7 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
           {
             type: 'submit',
             title: 'Add',
-            isDisable: !isValid,
+            isDisable: !(isValidTitle && isValidRepo),
             onClick: onSubmit,
           },
         ]}
