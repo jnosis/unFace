@@ -1,9 +1,15 @@
+export function isRepo(repo: unknown): repo is Repo {
+  return (
+    (repo as Repo).url !== undefined && (repo as Repo).branch !== undefined
+  );
+}
+
 export function isWorkData(work: unknown): work is WorkData {
   return (
     (work as WorkData).id !== undefined &&
     (work as WorkData).title !== undefined &&
     (work as WorkData).description !== undefined &&
-    (work as WorkData).repo !== undefined &&
+    isRepo((work as WorkData).repo) &&
     (work as WorkData).thumbnail !== undefined
   );
 }

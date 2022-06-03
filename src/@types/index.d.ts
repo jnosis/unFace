@@ -4,10 +4,14 @@ declare type AuthProvider = 'Google' | 'Github';
 
 declare type MenuItem = 'home' | 'works' | 'contact';
 
+declare type Repo = {
+  url: string;
+  branch: string;
+};
+
 declare type WorkData = {
   id: number;
-  repo: string;
-  branch: string;
+  repo: Repo;
   title: string;
   description: string;
   thumbnail: FileData;

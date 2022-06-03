@@ -34,9 +34,10 @@ const WorkDetail = ({ workRepository, onClose }: WorkDetailProps) => {
       return;
     }
 
-    setRepoURL(convertToRepoURL(work.repo, work.branch));
-    setRepoContentURL(convertToRepoContentURL(work.repo, work.branch));
-    setContentURL(convertToRawContentURL(work.repo, work.branch));
+    const { url, branch } = work.repo;
+    setRepoURL(convertToRepoURL(url, branch));
+    setRepoContentURL(convertToRepoContentURL(url, branch));
+    setContentURL(convertToRawContentURL(url, branch));
   }, [work]);
 
   useEffect(() => {
@@ -52,21 +53,24 @@ const WorkDetail = ({ workRepository, onClose }: WorkDetailProps) => {
   return (
     <div className={styles.work}>
       {!!work && !!contentURL && (
-        <>
-          <header>
-            <h2>{work.title}</h2>
-            <a href={repoURL} target='_blank'>
-              Github
+        <div className={styles.container}>
+          <header className={styles.header}>
+            <a className={styles.title} href={repoURL} target='_blank'>
+              <h2>{work.title}</h2>
             </a>
-            <button onClick={onClose}>X</button>
+            <button className={styles.close} onClick={onClose}>
+              X
+            </button>
           </header>
-          <ReactMarkdown
-            children={readme}
-            rehypePlugins={[rehypeRaw]}
-            transformLinkUri={(uri) => `${repoContentURL}/${uri}`}
-            transformImageUri={(uri) => `${contentURL}/${uri}`}
-          />
-        </>
+          <div className={styles.readme}>
+            <ReactMarkdown
+              children={readme}
+              rehypePlugins={[rehypeRaw]}
+              transformLinkUri={(uri) => `${repoContentURL}/${uri}`}
+              transformImageUri={(uri) => `${contentURL}/${uri}`}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

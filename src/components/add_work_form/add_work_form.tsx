@@ -32,8 +32,10 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
       const work: WorkData = {
         id: Date.now(),
         title: titleRef.current?.value || '',
-        repo: addHttpsOnURL(repoRef.current?.value || ''),
-        branch: branchRef.current?.value || 'master',
+        repo: {
+          url: addHttpsOnURL(repoRef.current?.value || ''),
+          branch: branchRef.current?.value || 'master',
+        },
         description: descriptionRef.current?.value || '',
         thumbnail: file || { fileName: '', fileURL: '' },
       };
