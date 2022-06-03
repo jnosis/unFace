@@ -10,6 +10,7 @@
   height: 5em;
   background-color: appBarLight;
   color: appOnSurfaceLight;
+  z-index: 1;
 }
 
 .content {
