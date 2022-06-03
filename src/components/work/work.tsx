@@ -1,5 +1,6 @@
 import React from 'react';
 import Actions from '../actions/actions';
+import Tech from '../tech/tech';
 import styles from './work.module.css';
 
 type WorkProps = {
@@ -27,14 +28,19 @@ const Work = ({ work, isAdmin, deleteWork, onWorkClick }: WorkProps) => {
       />
       <div className={styles.content}>
         <h1 className={styles.title}>{work.title}</h1>
-        <p
+        <p className={styles.description}>{work.description}</p>
+        <ul
           className={`
-            ${styles.description}
+            ${styles.techs}
             ${isAdmin ? ` ${styles.admin}` : ''}
           `}
         >
-          {work.description}
-        </p>
+          {Object.keys(work.techs).map((key) => (
+            <li key={key}>
+              <Tech tech={work.techs[key]} />
+            </li>
+          ))}
+        </ul>
       </div>
       {isAdmin && (
         <Actions

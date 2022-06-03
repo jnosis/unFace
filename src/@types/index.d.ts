@@ -9,11 +9,14 @@ declare type Repo = {
   branch: string;
 };
 
+declare type Techs = { [index: string]: string };
+
 declare type WorkData = {
   id: number;
-  repo: Repo;
   title: string;
   description: string;
+  techs: Techs;
+  repo: Repo;
   thumbnail: FileData;
 };
 

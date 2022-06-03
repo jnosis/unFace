@@ -4,6 +4,7 @@ import { IFileInput } from '../..';
 import { validateRepo, validateTitle } from '../../util/validator';
 import { addHttpsOnURL } from '../../util/url_converter';
 import Actions from '../actions/actions';
+import { convertTechs } from '../../util/tech_converter';
 
 type AddWorkFormProps = {
   FileInput: typeof IFileInput;
@@ -17,6 +18,7 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
   const repoRef = useRef<HTMLInputElement>(null);
   const branchRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const techsRef = useRef<HTMLInputElement>(null);
   const [isValidTitle, setIsValidTitle] = useState<boolean>(false);
   const [isValidRepo, setIsValidRepo] = useState<boolean>(false);
   const [file, setFile] = useState<FileData | null>(null);
@@ -36,6 +38,7 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
           url: addHttpsOnURL(repoRef.current?.value || ''),
           branch: branchRef.current?.value || 'master',
         },
+        techs: convertTechs(techsRef.current?.value || ''),
         description: descriptionRef.current?.value || '',
         thumbnail: file || { fileName: '', fileURL: '' },
       };
@@ -98,6 +101,16 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
           className={styles.textarea}
           name='description'
           placeholder='description'
+        />
+      </label>
+      <label className={`${styles.field} ${styles.techs}`}>
+        Techs
+        <input
+          ref={techsRef}
+          className={styles.input}
+          type='text'
+          name='techs'
+          placeholder='techs'
         />
       </label>
       <div className={`${styles.field} ${styles.thumbnail}`}>

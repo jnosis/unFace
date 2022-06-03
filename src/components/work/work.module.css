@@ -21,6 +21,12 @@
   margin-top: 0.5rem;
 }
 
-.description.admin {
+.techs {
+  margin-top: 0.25rem;
+  display: flex;
+  list-style: none;
+}
+
+.techs.admin {
   margin-bottom: 1.5rem;
 }
