@@ -2,10 +2,12 @@
 @value appOutlineDark, appSecondaryContainerDark, appOnSurfaceVariantDark from '../../common/colors.css';
 
 .chip {
-  padding: 0.1rem 1rem;
+  padding: 0 1rem;
   outline: 0.05rem solid appOutlineLight;
   color: appOnSurfaceVariantLight;
   border-radius: 0.5rem;
+  height: 2rem;
+  line-height: 2rem;
 }
 
 .chip.clickable {
