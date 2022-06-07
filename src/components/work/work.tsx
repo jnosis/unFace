@@ -37,7 +37,7 @@ const Work = ({ work, isAdmin, deleteWork, onWorkClick }: WorkProps) => {
         >
           {Object.keys(work.techs).map((key) => (
             <li key={key}>
-              <Tech tech={work.techs[key]} />
+              <Tech tech={work.techs[key]} selected={false} />
             </li>
           ))}
         </ul>

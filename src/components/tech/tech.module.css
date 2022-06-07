@@ -1,5 +1,29 @@
+@value appOutlineLight, appSecondaryContainerLight, appOnSurfaceVariantLight from '../../common/colors.css';
+@value appOutlineDark, appSecondaryContainerDark, appOnSurfaceVariantDark from '../../common/colors.css';
+
 .chip {
-  background-color: aquamarine;
-  margin: 0.1rem;
-  padding: 0.1rem;
+  padding: 0.1rem 1rem;
+  outline: 0.05rem solid appOutlineLight;
+  color: appOnSurfaceVariantLight;
+  border-radius: 0.5rem;
+}
+
+.chip.clickable {
+  cursor: pointer;
+}
+
+.chip.selected {
+  background-color: appSecondaryContainerLight;
+  outline-style: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .chip {
+    outline-color: appOutlineDark;
+    color: appOnSurfaceVariantDark;
+  }
+
+  .chip.selected {
+    background-color: appSecondaryContainerDark;
+  }
 }

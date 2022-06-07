@@ -25,6 +25,7 @@
   margin-top: 0.25rem;
   display: flex;
   list-style: none;
+  gap: 0.5rem;
 }
 
 .techs.admin {
