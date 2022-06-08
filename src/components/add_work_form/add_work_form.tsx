@@ -15,6 +15,7 @@ type AddWorkFormProps = {
 const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
+  const projectRef = useRef<HTMLInputElement>(null);
   const repoRef = useRef<HTMLInputElement>(null);
   const branchRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
@@ -34,6 +35,7 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
       const work: WorkData = {
         id: Date.now(),
         title: titleRef.current?.value || '',
+        projectURL: projectRef.current?.value,
         repo: {
           url: addHttpsOnURL(repoRef.current?.value || ''),
           branch: branchRef.current?.value || 'master',
@@ -68,6 +70,16 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
           type='text'
           name='title'
           placeholder='title'
+        />
+      </label>
+      <label className={`${styles.field} ${styles.project}`}>
+        Project URL
+        <input
+          ref={projectRef}
+          className={styles.input}
+          type='text'
+          name='project'
+          placeholder='project url'
         />
       </label>
       <div className={styles.repo}>

@@ -17,6 +17,7 @@ declare type WorkData = {
   description: string;
   techs: Techs;
   repo: Repo;
+  projectURL?: string;
   thumbnail: FileData;
 };
 

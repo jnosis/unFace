@@ -22,6 +22,7 @@ const WorkDetail = ({ workRepository, onClose }: WorkDetailProps) => {
   const [repoURL, setRepoURL] = useState<string>('');
   const [repoContentURL, setRepoContentURL] = useState<string>('');
   const [contentURL, setContentURL] = useState<string>('');
+  const [projectURL, setProjectURL] = useState<string>('');
 
   useEffect(() => {
     workRepository.getWorkByTitle(workTitle ? workTitle : '').then((work) => {
@@ -34,10 +35,12 @@ const WorkDetail = ({ workRepository, onClose }: WorkDetailProps) => {
       return;
     }
 
-    const { url, branch } = work.repo;
+    const { repo, projectURL } = work;
+    const { url, branch } = repo;
     setRepoURL(convertToRepoURL(url, branch));
     setRepoContentURL(convertToRepoContentURL(url, branch));
     setContentURL(convertToRawContentURL(url, branch));
+    projectURL && setProjectURL(projectURL);
   }, [work]);
 
   useEffect(() => {
@@ -57,9 +60,24 @@ const WorkDetail = ({ workRepository, onClose }: WorkDetailProps) => {
           <header className={styles.header}>
             <h2 className={styles.title}>{work.title}</h2>
             <div className={styles.links}>
-              <a className={styles.link} href={repoURL} target='_blank'>
+              <a
+                className={styles.link}
+                href={repoURL}
+                aria-label='Github'
+                target='_blank'
+              >
                 <i className='fa-brands fa-github'></i>
               </a>
+              {projectURL && (
+                <a
+                  className={styles.link}
+                  href={projectURL}
+                  aria-label='Project URL'
+                  target='_blank'
+                >
+                  <i className='fa-solid fa-arrow-up-right-from-square'></i>
+                </a>
+              )}
             </div>
             <button className={styles.close} onClick={onClose}>
               <i className='fa-solid fa-xmark'></i>
