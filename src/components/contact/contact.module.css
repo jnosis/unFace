@@ -1,0 +1,38 @@
+@value appOnBackgroundLight from '../../common/colors.css';
+@value appOnBackgroundDark from '../../common/colors.css';
+
+.contact {
+  padding: 3.75em;
+  text-align: center;
+}
+
+.title {
+  margin: 2em 0;
+}
+
+.email {
+  font-size: 1.75em;
+  color: appOnBackgroundLight;
+  margin: 0.5em 0;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  width: 6.75em;
+  height: 3em;
+  margin: 1.5em auto;
+  justify-content: space-around;
+}
+
+.link {
+  font-size: 1.75em;
+  color: appOnBackgroundLight;
+}
+
+@media (prefers-color-scheme: dark) {
+  .title,
+  .link {
+    color: appOnBackgroundDark;
+  }
+}
