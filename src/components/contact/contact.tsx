@@ -3,7 +3,7 @@ import styles from './contact.module.css';
 
 const Contact = forwardRef<HTMLElement>((_, scrollRef) => {
   return (
-    <section ref={scrollRef} className={styles.contact} id='contact'>
+    <section ref={scrollRef} className={styles.container} id='contact'>
       <h1 className={styles.title}>Contact</h1>
       <ul className={styles.links}>
         <li>
