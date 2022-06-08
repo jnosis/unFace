@@ -44,7 +44,7 @@ const Works = forwardRef<HTMLElement, WorksProps>(
 
       let temp = { ...techs };
       temp = techsArray.reduce((obj, tech, index) => {
-        obj[index] = tech;
+        if (tech !== '') obj[index] = tech;
         return obj;
       }, temp);
 

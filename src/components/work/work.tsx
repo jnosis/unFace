@@ -35,11 +35,13 @@ const Work = ({ work, isAdmin, deleteWork, onWorkClick }: WorkProps) => {
             ${isAdmin ? ` ${styles.admin}` : ''}
           `}
         >
-          {Object.keys(work.techs).map((key) => (
-            <li key={key}>
-              <Tech tech={work.techs[key]} selected={false} />
-            </li>
-          ))}
+          {Object.keys(work.techs)
+            .filter((key) => work.techs[key] !== '')
+            .map((key) => (
+              <li key={key}>
+                <Tech tech={work.techs[key]} selected={false} />
+              </li>
+            ))}
         </ul>
       </div>
       {isAdmin && (
