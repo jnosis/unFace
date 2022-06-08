@@ -1,0 +1,47 @@
+@value appOnBackgroundLight from '../../common/colors.css';
+@value appOnBackgroundDark from '../../common/colors.css';
+
+.container {
+  width: 100%;
+  padding: 0 2rem;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  height: 5rem;
+  align-items: center;
+}
+
+.title {
+  flex: none;
+  color: appOnBackgroundLight;
+}
+
+.links {
+  flex: auto;
+  margin-left: 0.5rem;
+}
+
+.link {
+  flex: none;
+  color: appOnBackgroundLight;
+  margin-right: 0.25rem;
+}
+
+.close {
+  flex: none;
+  color: appOnBackgroundLight;
+}
+
+.readme {
+  margin-bottom: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .title,
+  .link,
+  .close {
+    color: appOnBackgroundDark;
+  }
+}

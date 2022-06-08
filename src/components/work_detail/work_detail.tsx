@@ -55,11 +55,14 @@ const WorkDetail = ({ workRepository, onClose }: WorkDetailProps) => {
       {!!work && !!contentURL && (
         <div className={styles.container}>
           <header className={styles.header}>
-            <a className={styles.title} href={repoURL} target='_blank'>
-              <h2>{work.title}</h2>
-            </a>
+            <h2 className={styles.title}>{work.title}</h2>
+            <div className={styles.links}>
+              <a className={styles.link} href={repoURL} target='_blank'>
+                <i className='fa-brands fa-github'></i>
+              </a>
+            </div>
             <button className={styles.close} onClick={onClose}>
-              X
+              <i className='fa-solid fa-xmark'></i>
             </button>
           </header>
           <div className={styles.readme}>
