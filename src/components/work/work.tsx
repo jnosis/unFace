@@ -6,13 +6,25 @@ import styles from './work.module.css';
 type WorkProps = {
   work: WorkData;
   isAdmin: boolean;
+  editWork(work: WorkData): void;
   deleteWork(work: WorkData): void;
   onWorkClick(work: WorkData): void;
 };
 
-const Work = ({ work, isAdmin, deleteWork, onWorkClick }: WorkProps) => {
+const Work = ({
+  work,
+  isAdmin,
+  editWork,
+  deleteWork,
+  onWorkClick,
+}: WorkProps) => {
   const { thumbnail } = work;
   const fileURL = thumbnail?.fileURL;
+
+  const onEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    editWork(work);
+  };
 
   const onDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -47,6 +59,12 @@ const Work = ({ work, isAdmin, deleteWork, onWorkClick }: WorkProps) => {
       {isAdmin && (
         <Actions
           actions={[
+            {
+              type: 'button',
+              title: 'Edit',
+              isDisable: false,
+              onClick: onEdit,
+            },
             {
               type: 'button',
               title: 'Delete',

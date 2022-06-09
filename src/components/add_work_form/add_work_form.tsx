@@ -4,7 +4,7 @@ import { IFileInput } from '../..';
 import { validateRepo, validateTitle } from '../../util/validator';
 import { addHttpsOnURL } from '../../util/url_converter';
 import Actions from '../actions/actions';
-import { convertTechs } from '../../util/tech_converter';
+import { convertStringToTechs } from '../../util/tech_converter';
 
 type AddWorkFormProps = {
   FileInput: typeof IFileInput;
@@ -40,7 +40,7 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
           url: addHttpsOnURL(repoRef.current?.value || ''),
           branch: branchRef.current?.value || 'master',
         },
-        techs: convertTechs(techsRef.current?.value || ''),
+        techs: convertStringToTechs(techsRef.current?.value || ''),
         description: descriptionRef.current?.value || '',
         thumbnail: file || { fileName: '', fileURL: '' },
       };

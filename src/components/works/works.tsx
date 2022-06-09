@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import { IFileInput } from '../..';
 import WorkRepository from '../../service/work_repository';
 import AddWorkForm from '../add_work_form/add_work_form';
+import EditWorkForm from '../edit_work_form/edit_work_form';
 import Tech from '../tech/tech';
 import Work from '../work/work';
 import styles from './works.module.css';
@@ -16,6 +17,7 @@ type WorksProps = {
 const Works = forwardRef<HTMLElement, WorksProps>(
   ({ isAdmin, FileInput, onWorkClick, workRepository }, scrollRef) => {
     const [works, setWorks] = useState<WorksDatabase>({});
+    const [target, setTarget] = useState<WorkData | null>(null);
     const [techs, setTechs] = useState<Techs>({});
     const [selected, setSelected] = useState<string>('');
     const [isAdd, setIsAdd] = useState<boolean>(false);
@@ -59,6 +61,21 @@ const Works = forwardRef<HTMLElement, WorksProps>(
       setIsAdd(false);
     };
 
+    const setEditForm = (work: WorkData) => {
+      setTarget(work);
+    };
+
+    const editWork = (work: WorkData) => {
+      const { id } = work;
+      setWorks((works) => {
+        const updated = { ...works };
+        updated[id] = work;
+        return updated;
+      });
+      workRepository.saveWork(work);
+      setTarget(null);
+    };
+
     const deleteWork = (work: WorkData) => {
       setWorks((works) => {
         const updated = { ...works };
@@ -70,6 +87,7 @@ const Works = forwardRef<HTMLElement, WorksProps>(
 
     const onCancel = () => {
       setIsAdd(false);
+      setTarget(null);
     };
 
     const selectTech = (tech: string) => {
@@ -102,12 +120,22 @@ const Works = forwardRef<HTMLElement, WorksProps>(
               )
               .map((key) => (
                 <li key={key} className={styles.card}>
-                  <Work
-                    work={works[key]}
-                    isAdmin={isAdmin}
-                    deleteWork={deleteWork}
-                    onWorkClick={onWorkClick}
-                  />
+                  {target?.id !== works[key].id ? (
+                    <Work
+                      work={works[key]}
+                      isAdmin={isAdmin}
+                      editWork={setEditForm}
+                      deleteWork={deleteWork}
+                      onWorkClick={onWorkClick}
+                    />
+                  ) : (
+                    <EditWorkForm
+                      work={target}
+                      FileInput={FileInput}
+                      onEdit={editWork}
+                      onCancel={onCancel}
+                    />
+                  )}
                 </li>
               ))}
             {isAdmin && (

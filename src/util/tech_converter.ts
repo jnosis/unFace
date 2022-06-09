@@ -1,4 +1,4 @@
-export function convertTechs(rawTechs: string): Techs {
+export function convertStringToTechs(rawTechs: string): Techs {
   const techs = rawTechs.split(',');
   const init: Techs = {};
 
@@ -6,4 +6,12 @@ export function convertTechs(rawTechs: string): Techs {
     obj[index] = tech;
     return obj;
   }, init);
+}
+
+export function convertTechsToString(techs: Techs): string {
+  const rawTechs = Object.keys(techs)
+    .map((key) => techs[key])
+    .join(',');
+
+  return rawTechs;
 }
