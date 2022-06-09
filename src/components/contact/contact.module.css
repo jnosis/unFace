@@ -1,19 +1,22 @@
-@value appOnBackgroundLight from '../../common/colors.css';
-@value appOnBackgroundDark from '../../common/colors.css';
+@value appSecondaryLight, appOnSecondaryLight from '../../common/colors.css';
+@value appSecondaryDark, appOnSecondaryDark from '../../common/colors.css';
 
 .container {
-  padding: 3.75em;
+  width: 100%;
+  margin: 4em 0;
   text-align: center;
 }
 
-.title {
-  margin: 2em 0;
+.card {
+  background-color: appSecondaryLight;
+  margin: 0 2.5em;
+  padding: 3em 0;
+  border-radius: 2em;
 }
 
-.email {
-  font-size: 1.75em;
-  color: appOnBackgroundLight;
-  margin: 0.5em 0;
+.title {
+  font-size: 3.6em;
+  color: appOnSecondaryLight;
 }
 
 .links {
@@ -21,24 +24,35 @@
   display: flex;
   width: 6.75em;
   height: 3em;
-  margin: 1.5em auto;
+  margin: 2em auto 1em;
   justify-content: space-around;
 }
 
 .link {
   font-size: 1.75em;
-  color: appOnBackgroundLight;
+  color: appOnSecondaryLight;
 }
 
 @media screen and (max-width: 600px) {
   .container {
-    padding-bottom: 6em;
+    margin-top: 2.5em;
+    margin-bottom: 7.5em;
+  }
+
+  .card {
+    margin: 0 1em;
+    padding: 2em 0;
+    border-radius: 2em;
   }
 }
 
 @media (prefers-color-scheme: dark) {
+  .card {
+    background-color: appSecondaryDark;
+  }
+
   .title,
   .link {
-    color: appOnBackgroundDark;
+    color: appOnSecondaryDark;
   }
 }
