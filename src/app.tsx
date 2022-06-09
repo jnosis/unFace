@@ -93,8 +93,10 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
       return;
     }
     setIsWorkDetail(true);
-    setActive('works');
     navigate(`/works/${work.title}`);
+    setTimeout(() => {
+      setActive('works');
+    }, 0);
   };
 
   const onWorkDetailClose = (byClose = true) => {
@@ -157,11 +159,25 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
     });
   };
 
+  const onBottom = () => {
+    const bottom =
+      Math.ceil(window.scrollY + window.innerHeight) >=
+      document.body.clientHeight;
+
+    if (bottom) {
+      setActive('contact');
+    }
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(observerCallback, observerOption);
     aboutRef.current && observer.observe(aboutRef.current);
     worksRef.current && observer.observe(worksRef.current);
     contactRef.current && observer.observe(contactRef.current);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', onBottom);
   }, []);
 
   useEffect(() => {
