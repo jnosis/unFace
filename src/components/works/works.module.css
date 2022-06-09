@@ -1,18 +1,24 @@
 @value appOnBackgroundLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
 @value appOnBackgroundDark, appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
 
+@value scrollMargin from '../../common/sizes.css';
+@value sectionTopMarginDesktop, contentSideMarginDesktop from '../../common/sizes.css';
+@value sectionTopMarginMobile, contentSideMarginMobile from '../../common/sizes.css';
+
+@value titleFontSize from '../../common/sizes.css';
+
 .container {
   width: 100%;
-  margin-top: 4em;
-  scroll-margin: 6.5em;
+  margin-top: sectionTopMarginDesktop;
+  scroll-margin: scrollMargin;
 }
 
 .content {
-  margin: 0 2.5em;
+  margin: 0 contentSideMarginDesktop;
 }
 
 .title {
-  font-size: 3.6em;
+  font-size: titleFontSize;
 }
 
 .techs {
@@ -60,9 +66,14 @@
 }
 
 @media screen and (max-width: 600px) {
-  .content {
-    margin: 0 1rem;
+  .container {
+    margin-top: sectionTopMarginMobile;
   }
+
+  .content {
+    margin: 0 contentSideMarginMobile;
+  }
+
   .list {
     grid-template-columns: 1fr;
     padding: 0;

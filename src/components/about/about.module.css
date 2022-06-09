@@ -1,9 +1,15 @@
 @value appOnPrimaryLight, appImageFilter, appImageFilter2 from '../../common/colors.css';
 
+@value scrollMargin from '../../common/sizes.css';
+@value contentSideMarginDesktop from '../../common/sizes.css';
+@value contentSideMarginMobile from '../../common/sizes.css';
+
+@value titleFontSize from '../../common/sizes.css';
+
 .container {
   width: 100%;
   margin-top: 1.5em;
-  scroll-margin: 6.5em;
+  scroll-margin: scrollMargin;
 }
 
 .card {
@@ -12,7 +18,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 0 50%;
-  margin: 0 2.5em;
+  margin: 0 contentSideMarginDesktop;
   padding: 0 4em;
   border-radius: 4em;
   color: appOnPrimaryLight;
@@ -23,7 +29,7 @@
 }
 
 .title {
-  font-size: 3.6em;
+  font-size: titleFontSize;
 }
 
 .description {
@@ -33,6 +39,6 @@
 
 @media screen and (max-width: 600px) {
   .card {
-    margin: 0 1rem;
+    margin: 0 contentSideMarginMobile;
   }
 }

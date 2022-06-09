@@ -1,21 +1,26 @@
 @value appSecondaryLight, appOnSecondaryLight from '../../common/colors.css';
 @value appSecondaryDark, appOnSecondaryDark from '../../common/colors.css';
 
+@value sectionTopMarginDesktop, contentSideMarginDesktop from '../../common/sizes.css';
+@value sectionTopMarginMobile, contentSideMarginMobile from '../../common/sizes.css';
+
+@value titleFontSize from '../../common/sizes.css';
+
 .container {
   width: 100%;
-  margin: 4em 0;
+  margin: sectionTopMarginDesktop 0;
   text-align: center;
 }
 
 .card {
   background-color: appSecondaryLight;
-  margin: 0 2.5em;
+  margin: 0 contentSideMarginDesktop;
   padding: 3em 0;
   border-radius: 2em;
 }
 
 .title {
-  font-size: 3.6em;
+  font-size: titleFontSize;
   color: appOnSecondaryLight;
 }
 
@@ -35,12 +40,12 @@
 
 @media screen and (max-width: 600px) {
   .container {
-    margin-top: 2.5em;
+    margin-top: sectionTopMarginMobile;
     margin-bottom: 7.5em;
   }
 
   .card {
-    margin: 0 1em;
+    margin: 0 contentSideMarginMobile;
     padding: 2em 0;
     border-radius: 2em;
   }
