@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { IFileInput } from '.';
 import styles from './app.module.css';
-// import Footer from './components/footer/footer';
 import Header from './components/header/header';
 import Main from './components/main/main';
 import WorkDetail from './components/work_detail/work_detail';
@@ -224,7 +223,6 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
           />
         </Routes>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };
