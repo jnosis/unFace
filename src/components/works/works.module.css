@@ -61,7 +61,7 @@
 
 @media screen and (max-width: 600px) {
   .content {
-    margin: 0 0.5rem;
+    margin: 0 1rem;
   }
   .list {
     grid-template-columns: 1fr;
