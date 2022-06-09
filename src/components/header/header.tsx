@@ -37,7 +37,6 @@ const Header = ({
     >
       <div className={styles.content}>
         <div className={styles.logo} onClick={onLogoClick}>
-          <img className={styles.img} src='/images/logo.png' alt='logo' />
           <h1 className={styles.title}>unFace</h1>
         </div>
         <ul className={styles.menu}>
