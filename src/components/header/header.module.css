@@ -1,3 +1,7 @@
+@value mediaQuery from '../../common/sizes.css';
+@value headerHeight from '../../common/sizes.css';
+@value titleLargeFontSize from '../../common/sizes.css';
+
 @value appBarLight, appBackgroundLight, appPrimaryLight, appOnSurfaceLight from '../../common/colors.css';
 @value appBarDark, appBackgroundDark, appPrimaryDark, appOnSurfaceDark from '../../common/colors.css';
 
@@ -7,7 +11,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  height: 5em;
+  height: headerHeight;
   background-color: appBarLight;
   color: appOnSurfaceLight;
   z-index: 1;
@@ -18,7 +22,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 5em;
+  height: headerHeight;
   padding: 1em;
   display: flex;
   justify-content: space-between;
@@ -35,7 +39,7 @@
 }
 
 .title {
-  font-size: 2em;
+  font-size: titleLargeFontSize;
 }
 
 .menu {
@@ -51,7 +55,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: mediaQuery) {
   .header {
     background-color: appBackgroundLight;
   }
@@ -65,14 +69,14 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 5em;
+    height: headerHeight;
     justify-content: center;
     align-items: center;
     background-color: appBarLight;
   }
 }
 
-@media screen and (max-width: 600px) and (prefers-color-scheme: dark) {
+@media screen and (max-width: mediaQuery) and (prefers-color-scheme: dark) {
   .header {
     background-color: appBackgroundDark;
   }

@@ -1,3 +1,9 @@
+@value formPadding from '../../common/sizes.css';
+@value fieldPadding, fieldGap from '../../common/sizes.css';
+@value inputPadding, inputOutline, inputBorderRadius from '../../common/sizes.css';
+@value contentAndActionsMargin from '../../common/sizes.css';
+@value labelMediumFontSize from '../../common/sizes.css';
+
 @value appOutlineLight, appPrimaryLight, appErrorLight, appOnSurfaceLight from '../../common/colors.css';
 @value appOutlineDark, appPrimaryDark, appErrorDark, appOnSurfaceDark from '../../common/colors.css';
 
@@ -6,16 +12,16 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: formPadding;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  font-size: 0.75rem;
+  font-size: labelMediumFontSize;
   font-weight: bold;
-  padding: 0.2rem;
-  gap: 0.25rem;
+  padding: fieldPadding;
+  gap: fieldGap;
 }
 
 .title {
@@ -28,7 +34,7 @@
 
 .repo {
   display: flex;
-  gap: 0.25rem;
+  gap: fieldGap;
 }
 
 .url {
@@ -44,15 +50,16 @@
 }
 
 .thumbnail {
-  margin-bottom: 1.5rem;
+  margin-bottom: contentAndActionsMargin;
 }
 
 .input,
 .textarea {
   width: 100%;
-  outline: appOutlineLight solid 0.1rem;
-  border-radius: 0.3rem;
-  padding: 0.2rem 0.25rem;
+  outline: appOutlineLight solid inputOutline;
+  border-radius: inputBorderRadius;
+  padding: inputPadding;
+  font-size: labelMediumFontSize;
   color: appOnSurfaceLight;
 }
 

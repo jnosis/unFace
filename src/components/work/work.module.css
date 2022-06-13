@@ -1,3 +1,6 @@
+@value smallCardBorderRadius from '../../common/sizes.css';
+@value headlineMediumFontSize, bodyLargeFontSize from '../../common/sizes.css';
+
 .container {
   position: relative;
   height: 100%;
@@ -5,7 +8,7 @@
 
 .thumbnail {
   width: 100%;
-  border-radius: 1rem;
+  border-radius: smallCardBorderRadius;
 }
 
 .content {
@@ -13,11 +16,11 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: headlineMediumFontSize;
 }
 
 .description {
-  font-size: 1rem;
+  font-size: bodyLargeFontSize;
   margin-top: 0.5rem;
 }
 

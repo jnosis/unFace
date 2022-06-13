@@ -1,3 +1,6 @@
+@value inputBorderRadius from '../../common/sizes.css';
+@value labelMediumFontSize from '../../common/sizes.css';
+
 @value appPrimaryLight, appSecondaryLight, appOnSecondaryLight, appOutlineLight, appButtonHoverLight from '../../common/colors.css';
 @value appPrimaryDark, appSecondaryDark, appOnSecondaryDark, appOutlineDark, appButtonHoverDark from '../../common/colors.css';
 
@@ -11,10 +14,10 @@
 .button {
   font-weight: bold;
   cursor: pointer;
-  border-radius: 1.25rem;
+  border-radius: inputBorderRadius;
   padding: 0.25rem 0.75rem;
   outline: appOutlineLight solid 0.02rem;
-  font-size: 0.8rem;
+  font-size: labelMediumFontSize;
   color: appPrimaryLight;
 }
 

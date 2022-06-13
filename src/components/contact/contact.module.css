@@ -4,7 +4,11 @@
 @value sectionTopMarginDesktop, contentSideMarginDesktop from '../../common/sizes.css';
 @value sectionTopMarginMobile, contentSideMarginMobile from '../../common/sizes.css';
 
-@value titleFontSize from '../../common/sizes.css';
+@value mediaQuery from '../../common/sizes.css';
+
+@value mediumCardBorderRadius from '../../common/sizes.css';
+
+@value headlineLargeFontSize, displaySmallFontSize from '../../common/sizes.css';
 
 .container {
   width: 100%;
@@ -16,11 +20,11 @@
   background-color: appSecondaryLight;
   margin: 0 contentSideMarginDesktop;
   padding: 3em 0;
-  border-radius: 2em;
+  border-radius: mediumCardBorderRadius;
 }
 
 .title {
-  font-size: titleFontSize;
+  font-size: headlineLargeFontSize;
   color: appOnSecondaryLight;
 }
 
@@ -34,11 +38,11 @@
 }
 
 .link {
-  font-size: 1.75em;
+  font-size: displaySmallFontSize;
   color: appOnSecondaryLight;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: mediaQuery) {
   .container {
     margin-top: sectionTopMarginMobile;
     margin-bottom: 7.5em;
@@ -47,7 +51,6 @@
   .card {
     margin: 0 contentSideMarginMobile;
     padding: 2em 0;
-    border-radius: 2em;
   }
 }
 

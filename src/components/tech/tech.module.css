@@ -1,13 +1,18 @@
+@value chipHeight, chipPadding, chipOutline, chipBorderRadius from '../../common/sizes.css';
+@value labelMediumFontSize from '../../common/sizes.css';
+
 @value appOutlineLight, appSecondaryContainerLight, appOnSurfaceVariantLight from '../../common/colors.css';
 @value appOutlineDark, appSecondaryContainerDark, appOnSurfaceVariantDark from '../../common/colors.css';
 
 .chip {
-  padding: 0 1rem;
-  outline: 0.05rem solid appOutlineLight;
+  padding: chipPadding;
+  outline: chipOutline solid appOutlineLight;
   color: appOnSurfaceVariantLight;
-  border-radius: 0.5rem;
-  height: 2rem;
-  line-height: 2rem;
+  border-radius: chipBorderRadius;
+  height: chipHeight;
+  line-height: chipHeight;
+  font-weight: bold;
+  font-size: labelMediumFontSize;
 }
 
 .chip.clickable {

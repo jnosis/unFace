@@ -1,18 +1,22 @@
+@value actionsPositionBottom, actionsPositionRight from '../../common/sizes.css';
+@value actionPadding, actionBorderRadius from '../../common/sizes.css';
+@value labelLargeFontSize from '../../common/sizes.css';
+
 @value appPrimaryLight, appOnsurfaceLight, appButtonHoverLight from '../../common/colors.css';
 @value appPrimaryDark, appOnsurfaceDark, appButtonHoverDark from '../../common/colors.css';
 
 .actions {
   position: absolute;
-  bottom: 0.5rem;
-  right: 0.75rem;
+  bottom: actionsPositionBottom;
+  right: actionsPositionRight;
 }
 
 .button {
-  padding: 0.25rem 0.75rem;
-  border-radius: 1.25rem;
+  padding: actionPadding;
+  border-radius: actionBorderRadius;
   color: appPrimaryLight;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: labelLargeFontSize;
 }
 
 .button.disable {

@@ -1,12 +1,16 @@
+@value menuPadding, menuBorderRadius from '../../common/sizes.css';
+@value titleMediumFontSize from '../../common/sizes.css';
+
 @value appSecondaryContainerLight, appOnSecondaryContainerLight, appSurfaceLight, appOnSurfaceLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
 @value appSecondaryContainerDark, appOnSecondaryContainerDark, appSurfaceDark, appOnSurfaceDark, appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
 
 .item {
   cursor: pointer;
-  padding: 1rem;
+  padding: menuPadding;
   transition: 500ms ease-in;
-  border-radius: 1em;
+  border-radius: menuBorderRadius;
   text-align: center;
+  font-size: titleMediumFontSize;
   color: appOnSurfaceVariantLight;
 }
 

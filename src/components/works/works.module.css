@@ -1,11 +1,15 @@
+@value mediaQuery from '../../common/sizes.css';
+
+@value smallCardBorderRadius from '../../common/sizes.css';
+
+@value headlineLargeFontSize from '../../common/sizes.css';
+
 @value appOnBackgroundLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
 @value appOnBackgroundDark, appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
 
 @value scrollMargin from '../../common/sizes.css';
 @value sectionTopMarginDesktop, contentSideMarginDesktop from '../../common/sizes.css';
 @value sectionTopMarginMobile, contentSideMarginMobile from '../../common/sizes.css';
-
-@value titleFontSize from '../../common/sizes.css';
 
 .container {
   width: 100%;
@@ -18,7 +22,7 @@
 }
 
 .title {
-  font-size: titleFontSize;
+  font-size: headlineLargeFontSize;
 }
 
 .techs {
@@ -41,7 +45,7 @@
 }
 
 .card {
-  border-radius: 1em;
+  border-radius: smallCardBorderRadius;
   width: 100%;
   min-height: 20rem;
   background-color: appSurfaceVariantLight;
@@ -65,7 +69,7 @@
   color: appOnSurfaceVariantLight;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: mediaQuery) {
   .container {
     margin-top: sectionTopMarginMobile;
   }

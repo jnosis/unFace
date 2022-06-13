@@ -1,8 +1,65 @@
-@value scrollMargin: 6.5rem;
+@value mediaQuery: 37.5rem;
+
+@value headerHeight: 4rem;
+@value scrollMargin: 5.5rem;
 @value sectionTopMarginDesktop: 4rem;
 @value contentSideMarginDesktop: 2.5rem;
 
 @value sectionTopMarginMobile: 2.5rem;
 @value contentSideMarginMobile: 1rem;
+@value contentAndActionsMargin: 1.5rem;
 
-@value titleFontSize: 3.6rem;
+/* Card */
+@value cardsTopMargin: 1rem;
+@value cardsTopPadding: 0.5rem;
+@value cardsGap: 1rem;
+@value largeCardBorderRadius: 4rem;
+@value mediumCardBorderRadius: 2rem;
+@value smallCardBorderRadius: 1rem;
+@value cardMinHeight: 20rem;
+
+/* Menu */
+@value menuPadding: 0.5rem 1rem;
+@value menuBorderRadius: 1rem;
+
+/* Action */
+@value actionsPositionBottom: 0.5rem;
+@value actionsPositionRight: 0.75rem;
+@value actionBorderRadius: 1.25rem;
+@value actionPadding: 0.25rem 0.75rem;
+
+/* Input */
+@value formPadding: 1rem;
+@value fieldPadding: 0.2rem;
+@value fieldGap: 0.25rem;
+@value inputPadding: 0.2rem 0.25rem;
+@value inputOutline: 0.1rem;
+@value inputBorderRadius: 0.3rem;
+
+/* Chip */
+@value chipsGap: 0.5rem;
+@value chipHeight: 1.5rem;
+@value chipPadding: 0 1rem;
+@value chipOutline: 0.05rem;
+@value chipBorderRadius: 0.5rem;
+
+/* Font */
+@value displayLargeFontSize: 3.6rem;
+@value displayMediumFontSize: 2.8rem;
+@value displaySmallFontSize: 2.25rem;
+
+@value headlineLargeFontSize: 2.5rem;
+@value headlineMediumFontSize: 1.75rem;
+@value headlineSmallFontSize: 1.5rem;
+
+@value titleLargeFontSize: 1.375rem;
+@value titleMediumFontSize: 1rem;
+@value titleSmallFontSize: 0.875rem;
+
+@value labelLargeFontSize: 0.875rem;
+@value labelMediumFontSize: 0.75rem;
+@value labelSmallFontSize: 0.6rem;
+
+@value bodyLargeFontSize: 1rem;
+@value bodyMediumFontSize: 0.875rem;
+@value bodySmallFontSize: 0.75rem;
