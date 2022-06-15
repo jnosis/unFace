@@ -5,6 +5,7 @@ import AddWorkForm from '../add_work_form/add_work_form';
 import EditWorkForm from '../edit_work_form/edit_work_form';
 import Tech from '../tech/tech';
 import Work from '../work/work';
+import '../../../public/images/default.jpg';
 import styles from './works.module.css';
 
 type WorksProps = {
