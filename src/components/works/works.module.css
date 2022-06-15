@@ -1,15 +1,14 @@
 @value mediaQuery from '../../common/sizes.css';
-
+@value scrollMargin from '../../common/sizes.css';
+@value sectionTopMarginDesktop, contentSideMarginDesktop from '../../common/sizes.css';
+@value sectionTopMarginMobile, contentSideMarginMobile from '../../common/sizes.css';
 @value smallCardBorderRadius from '../../common/sizes.css';
-
+@value chipsTopMargin, chipsPadding, chipsGap from '../../common/sizes.css';
+@value worksListTopMargin, worksListPadding, worksListGap, worksCardMinHeight from '../../common/sizes.css';
 @value headlineLargeFontSize from '../../common/sizes.css';
 
 @value appOnBackgroundLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
 @value appOnBackgroundDark, appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
-
-@value scrollMargin from '../../common/sizes.css';
-@value sectionTopMarginDesktop, contentSideMarginDesktop from '../../common/sizes.css';
-@value sectionTopMarginMobile, contentSideMarginMobile from '../../common/sizes.css';
 
 .container {
   width: 100%;
@@ -26,28 +25,28 @@
 }
 
 .techs {
-  margin-top: 0.25rem;
+  margin-top: chipsTopMargin;
   display: flex;
   flex-wrap: wrap;
-  padding: 0 0.5em;
+  padding: chipsPadding;
   list-style: none;
-  gap: 0.5rem;
+  gap: chipsGap;
 }
 
 .list {
-  margin-top: 1em;
-  padding: 0.5em;
+  margin-top: worksListTopMargin;
+  padding: worksListPadding;
   list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 1fr;
-  gap: 1em;
+  gap: worksListGap;
 }
 
 .card {
   border-radius: smallCardBorderRadius;
   width: 100%;
-  min-height: 20rem;
+  min-height: worksCardMinHeight;
   background-color: appSurfaceVariantLight;
   color: appOnSurfaceVariantLight;
   cursor: pointer;

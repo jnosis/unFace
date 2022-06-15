@@ -1,5 +1,5 @@
 @value mediaQuery from '../../common/sizes.css';
-@value headerHeight from '../../common/sizes.css';
+@value headerHeight, headerPadding, menuGap from '../../common/sizes.css';
 @value titleLargeFontSize from '../../common/sizes.css';
 
 @value appBarLight, appBackgroundLight, appPrimaryLight, appOnSurfaceLight from '../../common/colors.css';
@@ -23,7 +23,7 @@
   left: 0;
   width: 100%;
   height: headerHeight;
-  padding: 1em;
+  padding: headerPadding;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,7 +45,7 @@
 .menu {
   list-style: none;
   display: flex;
-  gap: 0.5em;
+  gap: menuGap;
 }
 
 @media (prefers-color-scheme: dark) {

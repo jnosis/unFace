@@ -1,4 +1,5 @@
-@value inputBorderRadius from '../../common/sizes.css';
+@value imageInputPadding, inputOutline, inputBorderRadius from '../../common/sizes.css';
+@value loadingWidth, loadingHeight, loadingBorder, loadingBorderTop from '../../common/sizes.css';
 @value labelMediumFontSize from '../../common/sizes.css';
 
 @value appPrimaryLight, appSecondaryLight, appOnSecondaryLight, appOutlineLight, appButtonHoverLight from '../../common/colors.css';
@@ -15,8 +16,8 @@
   font-weight: bold;
   cursor: pointer;
   border-radius: inputBorderRadius;
-  padding: 0.25rem 0.75rem;
-  outline: appOutlineLight solid 0.02rem;
+  padding: imageInputPadding;
+  outline: appOutlineLight solid inputOutline;
   font-size: labelMediumFontSize;
   color: appPrimaryLight;
 }
@@ -26,17 +27,17 @@
 }
 
 .loading {
-  width: 1.5em;
-  height: 1.5em;
+  width: loadingWidth;
+  height: loadingHeight;
   border-radius: 50%;
-  border: 0.1rem solid appSecondaryLight;
-  border-top: 0.1rem solid appOnSecondaryLight;
+  border: loadingBorder solid appSecondaryLight;
+  border-top: loadingBorderTop solid appOnSecondaryLight;
   animation: spin 2s linear infinite;
 }
 
 @media (prefers-color-scheme: dark) {
   .button {
-    outline: appOutlineDark solid 0.02rem;
+    outline: appOutlineDark solid inputOutline;
     color: appPrimaryDark;
   }
 
@@ -45,8 +46,8 @@
   }
 
   .loading {
-    border: 0.1rem solid appSecondaryDark;
-    border-top: 0.1rem solid appOnSecondaryDark;
+    border: loadingBorder solid appSecondaryDark;
+    border-top: loadingBorderTop solid appOnSecondaryDark;
   }
 }
 

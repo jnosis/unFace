@@ -1,14 +1,12 @@
+@value mediaQuery from '../../common/sizes.css';
+@value sectionTopMarginDesktop, contentSideMarginDesktop, contactPaddingDesktop from '../../common/sizes.css';
+@value sectionTopMarginMobile, contentSideMarginMobile, contactBottomMarginMobile, contactPaddingMobile from '../../common/sizes.css';
+@value mediumCardBorderRadius from '../../common/sizes.css';
+@value contactContentWidth, contactContentHeight, contactContentMargin from '../../common/sizes.css';
+@value headlineLargeFontSize, displaySmallFontSize from '../../common/sizes.css';
+
 @value appSecondaryLight, appOnSecondaryLight from '../../common/colors.css';
 @value appSecondaryDark, appOnSecondaryDark from '../../common/colors.css';
-
-@value sectionTopMarginDesktop, contentSideMarginDesktop from '../../common/sizes.css';
-@value sectionTopMarginMobile, contentSideMarginMobile from '../../common/sizes.css';
-
-@value mediaQuery from '../../common/sizes.css';
-
-@value mediumCardBorderRadius from '../../common/sizes.css';
-
-@value headlineLargeFontSize, displaySmallFontSize from '../../common/sizes.css';
 
 .container {
   width: 100%;
@@ -19,7 +17,7 @@
 .card {
   background-color: appSecondaryLight;
   margin: 0 contentSideMarginDesktop;
-  padding: 3em 0;
+  padding: contactPaddingDesktop;
   border-radius: mediumCardBorderRadius;
 }
 
@@ -31,9 +29,9 @@
 .links {
   list-style: none;
   display: flex;
-  width: 6.75em;
-  height: 3em;
-  margin: 2em auto 1em;
+  width: contactContentWidth;
+  height: contactContentHeight;
+  margin: contactContentMargin;
   justify-content: space-around;
 }
 
@@ -45,12 +43,12 @@
 @media screen and (max-width: mediaQuery) {
   .container {
     margin-top: sectionTopMarginMobile;
-    margin-bottom: 7.5em;
+    margin-bottom: contactBottomMarginMobile;
   }
 
   .card {
     margin: 0 contentSideMarginMobile;
-    padding: 2em 0;
+    padding: contactPaddingMobile;
   }
 }
 

@@ -1,4 +1,7 @@
 @value smallCardBorderRadius from '../../common/sizes.css';
+@value workContentPadding, workTitleAndDescMargin from '../../common/sizes.css';
+@value chipsTopMargin, chipsPadding, chipsGap from '../../common/sizes.css';
+@value contentAndActionsMargin from '../../common/sizes.css';
 @value headlineMediumFontSize, bodyLargeFontSize from '../../common/sizes.css';
 
 .container {
@@ -12,7 +15,7 @@
 }
 
 .content {
-  padding: 0.25rem 1rem 1rem;
+  padding: workContentPadding;
 }
 
 .title {
@@ -21,17 +24,17 @@
 
 .description {
   font-size: bodyLargeFontSize;
-  margin-top: 0.5rem;
+  margin-top: workTitleAndDescMargin;
 }
 
 .techs {
-  margin-top: 0.75rem;
+  margin-top: chipsTopMargin;
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  gap: 0.5rem;
+  gap: chipsGap;
 }
 
 .techs.admin {
-  margin-bottom: 1.5rem;
+  margin-bottom: contentAndActionsMargin;
 }

@@ -1,11 +1,12 @@
-@value headerHeight from '../../common/sizes.css';
+@value mediaQuery from '../../common/sizes.css';
+@value headerHeight, workDetailPadding, workDetailLinksLeftMargin, workDetailLinkRightMargin, workDetailReadmeBottomMargin from '../../common/sizes.css';
 
 @value appOnBackgroundLight from '../../common/colors.css';
 @value appOnBackgroundDark from '../../common/colors.css';
 
 .container {
   width: 100%;
-  padding: 0 2rem;
+  padding: workDetailPadding;
   overflow: hidden;
 }
 
@@ -22,13 +23,13 @@
 
 .links {
   flex: auto;
-  margin-left: 0.5rem;
+  margin-left: workDetailLinksLeftMargin;
 }
 
 .link {
   flex: none;
   color: appOnBackgroundLight;
-  margin-right: 0.25rem;
+  margin-right: workDetailLinkRightMargin;
 }
 
 .close {
@@ -37,7 +38,13 @@
 }
 
 .readme {
-  margin-bottom: 2rem;
+  margin-bottom: workDetailReadmeBottomMargin;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .container {
+    margin-bottom: headerHeight;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

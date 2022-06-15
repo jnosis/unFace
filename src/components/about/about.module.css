@@ -1,18 +1,15 @@
-@value appOnPrimaryLight, appImageFilter, appImageFilter2 from '../../common/colors.css';
-
+@value mediaQuery from '../../common/sizes.css';
 @value scrollMargin from '../../common/sizes.css';
 @value contentSideMarginDesktop from '../../common/sizes.css';
 @value contentSideMarginMobile from '../../common/sizes.css';
-
-@value mediaQuery from '../../common/sizes.css';
-
-@value largeCardBorderRadius from '../../common/sizes.css';
-
+@value aboutTopMargin, aboutPadding, aboutTitleAndDescMargin, largeCardBorderRadius from '../../common/sizes.css';
 @value headlineLargeFontSize, headlineMediumFontSize from '../../common/sizes.css';
+
+@value appOnPrimaryLight, appImageFilter, appImageFilter2 from '../../common/colors.css';
 
 .container {
   width: 100%;
-  margin-top: 1.5em;
+  margin-top: aboutTopMargin;
   scroll-margin: scrollMargin;
 }
 
@@ -23,13 +20,12 @@
   background-repeat: no-repeat;
   background-position: 0 50%;
   margin: 0 contentSideMarginDesktop;
-  padding: 0 4em;
+  padding: aboutPadding;
   border-radius: largeCardBorderRadius;
   color: appOnPrimaryLight;
 }
 
 .content {
-  padding: 9em 0;
 }
 
 .title {
@@ -37,7 +33,7 @@
 }
 
 .description {
-  margin-top: 3em;
+  margin-top: aboutTitleAndDescMargin;
   font-size: headlineMediumFontSize;
 }
 
