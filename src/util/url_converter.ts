@@ -1,4 +1,8 @@
-export function addHttpsOnURL(url: string) {
+export function checkRepoContent(uri: string): boolean {
+  return !uri.startsWith('http');
+}
+
+export function addHttpsOnURL(url: string): string {
   return /^(https?\:\/\/)/.test(url) ? url : `https://${url}`;
 }
 

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import rehypeRaw from 'rehype-raw';
 import WorkRepository from '../../service/work_repository';
 import {
+  checkRepoContent,
   convertToRawContentURL,
   convertToRepoContentURL,
   convertToRepoURL,
@@ -87,8 +88,12 @@ const WorkDetail = ({ workRepository, onClose }: WorkDetailProps) => {
             <ReactMarkdown
               children={readme}
               rehypePlugins={[rehypeRaw]}
-              transformLinkUri={(uri) => `${repoContentURL}/${uri}`}
-              transformImageUri={(uri) => `${contentURL}/${uri}`}
+              transformLinkUri={(uri) =>
+                checkRepoContent(uri) ? `${repoContentURL}/${uri}` : uri
+              }
+              transformImageUri={(uri) =>
+                checkRepoContent(uri) ? `${contentURL}/${uri}` : uri
+              }
             />
           </div>
         </div>
