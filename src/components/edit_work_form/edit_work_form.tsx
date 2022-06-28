@@ -12,7 +12,7 @@ import {
 type EditWorkFormProps = {
   work: WorkData;
   FileInput: typeof IFileInput;
-  onEdit(work: WorkData): void;
+  onEdit(work: WorkInputData): void;
   onCancel(): void;
 };
 
@@ -37,8 +37,7 @@ const EditWorkForm = memo(
       event.preventDefault();
 
       if (isValidTitle && isValidRepo) {
-        const edited: WorkData = {
-          id: work.id,
+        const edited: WorkInputData = {
           title: titleRef.current?.value || '',
           projectURL: projectRef.current?.value,
           repo: {

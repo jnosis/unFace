@@ -54,7 +54,7 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
   };
 
   const checkAdmin = async (uid: string): Promise<boolean> => {
-    const uids = await workRepository.getAdmins();
+    const uids = await authService.getAdmins();
     if (uids) {
       const admin = uids[uid];
       return admin;

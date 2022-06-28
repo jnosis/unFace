@@ -1,44 +1,62 @@
-import { FirebaseApp } from 'firebase/app';
-import * as FirebaseDB from 'firebase/database';
-import { isWorkDataBase } from '../util/checker';
-
 class WorkRepository {
-  private readonly database: FirebaseDB.Database;
+  constructor(private baseURL: string) {}
 
-  constructor(app: FirebaseApp) {
-    this.database = FirebaseDB.getDatabase(app);
-  }
-
-  async getAdmins(): Promise<{ [uid: string]: boolean } | null> {
-    const query = FirebaseDB.ref(this.database, `admins`);
-    const value = (await FirebaseDB.get(query)).val();
-    return value;
-  }
-
-  syncWorks(onUpdate: (works: WorksDatabase) => void) {
-    const query = FirebaseDB.ref(this.database, `works`);
-    FirebaseDB.onValue(query, (snapshot) => {
-      const value = snapshot.val();
-      value && onUpdate(value);
+  async fetch(url: string, options: any) {
+    const res = await fetch(`${this.baseURL}/${url}`, {
+      ...options,
+      headers: { 'Content-Type': 'application/json', ...options.headers },
     });
+    let data;
+    try {
+      data = await res.json();
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (res.status > 299 || res.status < 200) {
+      const message =
+        data && data.message ? data.message : 'Something went wrong';
+      throw new Error(message);
+    }
+
+    return data;
+  }
+
+  async syncWorks(onUpdate: (works: WorkData[]) => void) {
+    const works = await this.fetch('works', { method: 'GET' });
+    onUpdate(works);
   }
 
   async getWorkByTitle(title: string): Promise<WorkData | null> {
-    const query = FirebaseDB.ref(this.database, `works`);
-    const works = (await FirebaseDB.get(query)).val();
-    if (!isWorkDataBase(works)) return null;
+    const work = await this.fetch(`works/${title}`, { method: 'GET' });
 
-    const id = Object.keys(works).find((id) => works[id].title === title);
-    const work = id ? works[id] : null;
     return work;
   }
 
-  saveWork(work: WorkData) {
-    FirebaseDB.set(FirebaseDB.ref(this.database, `works/${work.id}`), work);
+  async addWork(work: WorkInputData) {
+    const body = JSON.stringify(work);
+
+    const data = await this.fetch(`works`, {
+      method: 'POST',
+      body,
+    });
+    return data as WorkData;
   }
 
-  deleteWork(work: WorkData) {
-    FirebaseDB.remove(FirebaseDB.ref(this.database, `works/${work.id}`));
+  async updateWork(work: WorkInputData) {
+    const { title } = work;
+    const body = JSON.stringify(work);
+
+    const data = await this.fetch(`works/${title}`, {
+      method: 'PUT',
+      body,
+    });
+    return data as WorkData;
+  }
+
+  async deleteWork(work: WorkData) {
+    const { title } = work;
+    await this.fetch(`works/${title}`, { method: 'DELETE' });
   }
 }
 

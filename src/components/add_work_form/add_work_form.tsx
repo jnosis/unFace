@@ -8,7 +8,7 @@ import { convertStringToTechs } from '../../util/tech_converter';
 
 type AddWorkFormProps = {
   FileInput: typeof IFileInput;
-  onAdd(work: WorkData): void;
+  onAdd(work: WorkInputData): void;
   onCancel(): void;
 };
 
@@ -32,8 +32,7 @@ const AddWorkForm = memo(({ FileInput, onAdd, onCancel }: AddWorkFormProps) => {
     event.preventDefault();
 
     if (isValidTitle && isValidRepo) {
-      const work: WorkData = {
-        id: Date.now(),
+      const work: WorkInputData = {
         title: titleRef.current?.value || '',
         projectURL: projectRef.current?.value,
         repo: {

@@ -17,15 +17,15 @@ type WorksProps = {
 
 const Works = forwardRef<HTMLElement, WorksProps>(
   ({ isAdmin, FileInput, onWorkClick, workRepository }, scrollRef) => {
-    const [works, setWorks] = useState<WorksDatabase>({});
+    const [works, setWorks] = useState<WorkData[]>([]);
     const [target, setTarget] = useState<WorkData | null>(null);
-    const [techs, setTechs] = useState<Techs>({});
+    const [techs, setTechs] = useState<Techs>([]);
     const [selected, setSelected] = useState<string>('');
     const [isAdd, setIsAdd] = useState<boolean>(false);
 
     useEffect(() => {
       const stopSync = () =>
-        workRepository.syncWorks((works: WorksDatabase) => {
+        workRepository.syncWorks((works: WorkData[]) => {
           setWorks(works);
         });
 
@@ -35,30 +35,22 @@ const Works = forwardRef<HTMLElement, WorksProps>(
     }, []);
 
     useEffect(() => {
-      let techsArray: string[] = [];
-      Object.keys(works).forEach((key) => {
-        const temp = works[key].techs;
-        Object.keys(temp).forEach((key) => {
-          if (!techsArray.includes(temp[key])) {
-            techsArray = [...techsArray, temp[key]];
+      let techs: Techs = [];
+      works.forEach((work) => {
+        work.techs.forEach((tech) => {
+          if (!techs.includes(tech)) {
+            techs = [...techs, tech];
           }
         });
       });
 
-      let temp = { ...techs };
-      temp = techsArray.reduce((obj, tech, index) => {
-        if (tech !== '') obj[index] = tech;
-        return obj;
-      }, temp);
-
-      setTechs(temp);
+      setTechs(techs);
     }, [works]);
 
     const addWork = (work: WorkData) => {
-      setWorks((works) => {
-        return { ...works, [work.id]: work };
-      });
-      workRepository.saveWork(work);
+      workRepository
+        .addWork(work)
+        .then((added) => setWorks((works) => [...works, added]));
       setIsAdd(false);
     };
 
@@ -67,20 +59,15 @@ const Works = forwardRef<HTMLElement, WorksProps>(
     };
 
     const editWork = (work: WorkData) => {
-      const { id } = work;
-      setWorks((works) => {
-        const updated = { ...works };
-        updated[id] = work;
-        return updated;
-      });
-      workRepository.saveWork(work);
+      workRepository
+        .updateWork(work)
+        .then((updated) => setWorks((works) => [...works, updated]));
       setTarget(null);
     };
 
     const deleteWork = (work: WorkData) => {
       setWorks((works) => {
-        const updated = { ...works };
-        delete updated[work.id];
+        const updated = works.filter((w) => work.title !== w.title);
         return updated;
       });
       workRepository.deleteWork(work);
@@ -100,30 +87,26 @@ const Works = forwardRef<HTMLElement, WorksProps>(
         <div className={styles.content}>
           <h1 className={styles.title}>Works</h1>
           <ul className={styles.techs}>
-            {Object.keys(techs).map((key) => (
-              <li key={key} className={styles.tech}>
+            {techs.map((tech, index) => (
+              <li key={index} className={styles.tech}>
                 <Tech
-                  tech={techs[key]}
-                  selected={selected === techs[key]}
+                  tech={tech}
+                  selected={selected === tech}
                   onTechClick={selectTech}
                 />
               </li>
             ))}
           </ul>
           <ul className={styles.list}>
-            {Object.keys(works)
-              .filter((key) =>
-                selected === ''
-                  ? true
-                  : Object.keys(works[key].techs)
-                      .map((k) => works[key].techs[k])
-                      .includes(selected)
+            {works
+              .filter((work) =>
+                selected === '' ? true : work.techs.includes(selected)
               )
-              .map((key) => (
-                <li key={key} className={styles.card}>
-                  {target?.id !== works[key].id ? (
+              .map((work) => (
+                <li key={work.id} className={styles.card}>
+                  {target?.title !== work.title ? (
                     <Work
-                      work={works[key]}
+                      work={work}
                       isAdmin={isAdmin}
                       editWork={setEditForm}
                       deleteWork={deleteWork}

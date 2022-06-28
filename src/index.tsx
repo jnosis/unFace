@@ -9,9 +9,10 @@ import AuthService from './service/auth_service';
 import WorkRepository from './service/work_repository';
 import ImageUploader from './service/image_uploader';
 import ImageFileInput from './components/image_file_input/image_file_input';
+import { env } from '../config/env';
 
 const authService = new AuthService(firebaseApp);
-const workRepository = new WorkRepository(firebaseApp);
+const workRepository = new WorkRepository(env.database.url);
 const imageUploader = new ImageUploader();
 
 type FileInputProps = {

@@ -9,10 +9,19 @@ declare type Repo = {
   branch: string;
 };
 
-declare type Techs = { [index: string]: string };
+declare type Techs = string[];
 
 declare type WorkData = {
-  id: number;
+  id: string;
+  title: string;
+  description: string;
+  techs: Techs;
+  repo: Repo;
+  projectURL?: string;
+  thumbnail: FileData;
+};
+
+declare type WorkInputData = {
   title: string;
   description: string;
   techs: Techs;

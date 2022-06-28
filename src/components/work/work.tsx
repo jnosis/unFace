@@ -47,11 +47,11 @@ const Work = ({
             ${isAdmin ? ` ${styles.admin}` : ''}
           `}
         >
-          {Object.keys(work.techs)
-            .filter((key) => work.techs[key] !== '')
-            .map((key) => (
-              <li key={key}>
-                <Tech tech={work.techs[key]} selected={false} />
+          {work.techs
+            .filter((tech) => tech !== '')
+            .map((tech, index) => (
+              <li key={index}>
+                <Tech tech={tech} selected={false} />
               </li>
             ))}
         </ul>
