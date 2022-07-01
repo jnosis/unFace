@@ -59,9 +59,11 @@ const Works = forwardRef<HTMLElement, WorksProps>(
     };
 
     const editWork = (work: WorkData) => {
-      workRepository
-        .updateWork(work)
-        .then((updated) => setWorks((works) => [...works, updated]));
+      workRepository.updateWork(work).then((updated) => {
+        setWorks((works) =>
+          works.map((work) => (work.id !== updated.id ? work : updated))
+        );
+      });
       setTarget(null);
     };
 
