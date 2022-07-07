@@ -2,35 +2,39 @@ class WorkService {
   constructor(private http: IHttpClient) {}
 
   async syncWorks(onUpdate: (works: WorkData[]) => void) {
-    const works = await this.http.fetch('works', { method: 'GET' });
+    const works = await this.http.fetch<WorkData[]>('works', {
+      method: 'GET',
+    });
     onUpdate(works);
   }
 
   async getWorkByTitle(title: string): Promise<WorkData | null> {
-    const work = await this.http.fetch(`works/${title}`, { method: 'GET' });
+    const work = await this.http.fetch<WorkData | null>(`works/${title}`, {
+      method: 'GET',
+    });
 
     return work;
   }
 
-  async addWork(work: WorkInputData) {
+  async addWork(work: WorkInputData): Promise<WorkData> {
     const body = JSON.stringify(work);
 
-    const data = await this.http.fetch(`works`, {
+    const data = await this.http.fetch<WorkData>(`works`, {
       method: 'POST',
       body,
     });
-    return data as WorkData;
+    return data;
   }
 
-  async updateWork(work: WorkInputData) {
+  async updateWork(work: WorkInputData): Promise<WorkData> {
     const { title } = work;
     const body = JSON.stringify(work);
 
-    const data = await this.http.fetch(`works/${title}`, {
+    const data = await this.http.fetch<WorkData>(`works/${title}`, {
       method: 'PUT',
       body,
     });
-    return data as WorkData;
+    return data;
   }
 
   async deleteWork(work: WorkData) {

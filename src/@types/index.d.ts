@@ -1,7 +1,7 @@
 declare module '*.module.css';
 
 declare interface IHttpClient {
-  fetch(url: string, options: any): Promise<any>;
+  fetch<Data>(url: string, options: any): Promise<Data>;
 }
 
 declare type AuthProvider = 'Google' | 'Github';

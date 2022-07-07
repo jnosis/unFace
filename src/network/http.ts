@@ -1,7 +1,7 @@
 export default class HttpClient implements IHttpClient {
   constructor(private baseURL: string) {}
 
-  async fetch(url: string, options: any) {
+  async fetch<Data>(url: string, options: any) {
     const res = await fetch(`${this.baseURL}/${url}`, {
       ...options,
       headers: { 'Content-Type': 'application/json', ...options.headers },
@@ -19,6 +19,6 @@ export default class HttpClient implements IHttpClient {
       throw new Error(message);
     }
 
-    return data;
+    return data as Data;
   }
 }
