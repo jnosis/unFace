@@ -1,5 +1,9 @@
 declare module '*.module.css';
 
+declare interface IHttpClient {
+  fetch(url: string, options: any): Promise<any>;
+}
+
 declare type AuthProvider = 'Google' | 'Github';
 
 declare type MenuItem = 'home' | 'works' | 'contact';

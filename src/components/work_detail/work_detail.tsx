@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
 import rehypeRaw from 'rehype-raw';
-import WorkRepository from '../../service/work_repository';
+import WorkService from '../../service/work';
 import {
   checkRepoContent,
   convertToRawContentURL,
@@ -12,7 +12,7 @@ import {
 import styles from './work_detail.module.css';
 
 type WorkDetailProps = {
-  workRepository: WorkRepository;
+  workRepository: WorkService;
   onClose(): void;
 };
 

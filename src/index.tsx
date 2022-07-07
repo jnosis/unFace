@@ -6,13 +6,15 @@ import './index.module.css';
 import App from './app';
 import { firebaseApp } from './service/firebase';
 import AuthService from './service/auth_service';
-import WorkRepository from './service/work_repository';
+import WorkService from './service/work';
 import ImageUploader from './service/image_uploader';
 import ImageFileInput from './components/image_file_input/image_file_input';
 import { env } from '../config/env';
+import HttpClient from './network/http';
 
 const authService = new AuthService(firebaseApp);
-const workRepository = new WorkRepository(env.database.url);
+const httpClient = new HttpClient(env.database.url);
+const workRepository = new WorkService(httpClient);
 const imageUploader = new ImageUploader();
 
 type FileInputProps = {

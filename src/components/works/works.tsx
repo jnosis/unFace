@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { IFileInput } from '../..';
-import WorkRepository from '../../service/work_repository';
+import WorkService from '../../service/work';
 import AddWorkForm from '../add_work_form/add_work_form';
 import EditWorkForm from '../edit_work_form/edit_work_form';
 import Tech from '../tech/tech';
@@ -12,7 +12,7 @@ type WorksProps = {
   isAdmin: boolean;
   FileInput: typeof IFileInput;
   onWorkClick(work: WorkData): void;
-  workRepository: WorkRepository;
+  workRepository: WorkService;
 };
 
 const Works = forwardRef<HTMLElement, WorksProps>(

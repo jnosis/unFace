@@ -1,6 +1,6 @@
 import React from 'react';
 import { IFileInput } from '../..';
-import WorkRepository from '../../service/work_repository';
+import WorkService from '../../service/work';
 import About from '../about/about';
 import Contact from '../contact/contact';
 import Works from '../works/works';
@@ -17,7 +17,7 @@ type MainProps = {
   isAdmin: boolean;
   FileInput: typeof IFileInput;
   onWorkClick(work: WorkData): void;
-  workRepository: WorkRepository;
+  workRepository: WorkService;
 };
 
 const Main = ({

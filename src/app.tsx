@@ -6,13 +6,13 @@ import Header from './components/header/header';
 import Main from './components/main/main';
 import WorkDetail from './components/work_detail/work_detail';
 import AuthService from './service/auth_service';
-import WorkRepository from './service/work_repository';
+import WorkService from './service/work';
 import { isMenuItem } from './util/checker';
 
 type AppProps = {
   FileInput: typeof IFileInput;
   authService: AuthService;
-  workRepository: WorkRepository;
+  workRepository: WorkService;
 };
 
 const scrollOption: ScrollIntoViewOptions = {
