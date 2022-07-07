@@ -4,6 +4,21 @@ declare interface IHttpClient {
   fetch<Data>(url: string, options: any): Promise<Data>;
 }
 
+declare type LoginInfo = {
+  username: string;
+  password: string;
+};
+
+declare type UserInfo = LoginInfo & {
+  name: string;
+  email: string;
+};
+
+declare type UserToken = {
+  token: string;
+  username: string;
+};
+
 declare type AuthProvider = 'Google' | 'Github';
 
 declare type MenuItem = 'home' | 'works' | 'contact';
