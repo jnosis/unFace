@@ -6,7 +6,7 @@ type HeaderProps = {
   active: string;
   menus: MenuItem[];
   isLogin: boolean;
-  onSignClick(): Promise<boolean>;
+  onSignClick(user?: LoginInfo): Promise<void>;
   onLogoClick(): void;
   onMenuClick(name: MenuItem): void;
 };
@@ -49,8 +49,8 @@ const Header = ({
             />
           ))}
         </ul>
-        {false && (
-          <button onClick={onSignClick}>
+        {true && (
+          <button onClick={() => onSignClick()}>
             {isLogin ? 'sign out' : 'sign in'}
           </button>
         )}

@@ -5,7 +5,7 @@ import styles from './app.module.css';
 import Header from './components/header/header';
 import Main from './components/main/main';
 import WorkDetail from './components/work_detail/work_detail';
-import AuthService from './service/auth_service';
+import AuthService from './service/auth';
 import WorkService from './service/work';
 import { isMenuItem } from './util/checker';
 
@@ -25,6 +25,7 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
   const [isWorkDetail, setIsWorkDetail] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [userToken, setUserToken] = useState<UserToken | null>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const worksRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
@@ -53,26 +54,33 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
     }
   };
 
-  const checkAdmin = async (uid: string): Promise<boolean> => {
-    const uids = await authService.getAdmins();
-    if (uids) {
-      const admin = uids[uid];
-      return admin;
-    }
-    return false;
-  };
-
-  const onSignClick = async (): Promise<boolean> => {
+  const onSignClick = async (user?: LoginInfo) => {
     if (isLogin) {
       await authService.logout();
-      setIsLogin(false);
-      isAdmin && setIsAdmin(false);
-      return isLogin;
-    } else {
-      const user = (await authService.login('Google')).user;
-      setIsAdmin(await checkAdmin(user.uid));
-      setIsLogin(true);
-      return isLogin;
+      setUserToken(null);
+      return;
+    }
+    if (!user) {
+      setUserToken(null);
+      return;
+    }
+    const token = await authService.login(user);
+    if (!token) {
+      setUserToken(null);
+      return;
+    }
+    setUserToken(token);
+  };
+
+  const onSignup = async (user: UserInfo) => {
+    if (isLogin) {
+      return;
+    }
+
+    const token = await authService.signup(user);
+
+    if (token) {
+      setUserToken(token);
     }
   };
 
@@ -180,13 +188,21 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
   }, []);
 
   useEffect(() => {
-    authService.onAuthChange((user) => {
-      if (user) {
-        setIsLogin(true);
-        checkAdmin(user.uid).then(setIsAdmin);
-      }
-    });
+    authService
+      .me()
+      .then((token) => {
+        if (token) {
+          setUserToken(token);
+        }
+      })
+      .catch(() => setUserToken(null));
   }, [authService]);
+
+  useEffect(() => {
+    const isLoginAndAdmin = !!userToken;
+    setIsLogin(isLoginAndAdmin);
+    setIsAdmin(isLoginAndAdmin);
+  }, [userToken]);
 
   return (
     <div className={styles.container}>

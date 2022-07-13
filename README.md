@@ -2,6 +2,7 @@
 
 ### TODO:
 
-- Change auth firebase to unServer with jwt
 - Change ImageUploader unFace to unServer
+- Add Sign up and sign in page
+- Add UserContext and WorkContext
 <!-- - Change node.js to deno for deno deploy -->

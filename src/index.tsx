@@ -4,16 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/js/all';
 import './index.module.css';
 import App from './app';
-import { firebaseApp } from './service/firebase';
-import AuthService from './service/auth_service';
+import AuthService from './service/auth';
 import WorkService from './service/work';
 import ImageUploader from './service/image_uploader';
 import ImageFileInput from './components/image_file_input/image_file_input';
 import { env } from '../config/env';
 import HttpClient from './network/http';
 
-const authService = new AuthService(firebaseApp);
 const httpClient = new HttpClient(env.database.url);
+const authService = new AuthService(httpClient);
 const workRepository = new WorkService(httpClient);
 const imageUploader = new ImageUploader();
 
