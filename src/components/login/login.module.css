@@ -1,0 +1,99 @@
+@value mediaQuery from '../../common/sizes.css';
+@value sectionTopMarginDesktop from '../../common/sizes.css';
+@value smallCardBorderRadius from '../../common/sizes.css';
+@value loginWidth, loginHeight, loginFormPadding from '../../common/sizes.css';
+@value fieldPadding, fieldGap from '../../common/sizes.css';
+@value inputPadding, inputOutline, inputBorderRadius from '../../common/sizes.css';
+@value contentAndActionsMargin from '../../common/sizes.css';
+@value labelMediumFontSize from '../../common/sizes.css';
+
+@value appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
+@value appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
+
+@value appOutlineLight, appPrimaryLight, appErrorLight, appOnSurfaceLight from '../../common/colors.css';
+@value appOutlineDark, appPrimaryDark, appErrorDark, appOnSurfaceDark from '../../common/colors.css';
+
+.container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: sectionTopMarginDesktop;
+}
+
+.card {
+  width: loginWidth;
+  border-radius: smallCardBorderRadius;
+  background-color: appSurfaceVariantLight;
+  color: appOnSurfaceVariantLight;
+}
+
+.form {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: loginFormPadding;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  font-size: labelMediumFontSize;
+  font-weight: bold;
+  padding: fieldPadding;
+  gap: fieldGap;
+}
+
+.username {
+  width: 80%;
+}
+
+.password {
+  width: 80%;
+  margin-bottom: contentAndActionsMargin;
+}
+
+.input {
+  width: 100%;
+  outline: appOutlineLight solid inputOutline;
+  border-radius: inputBorderRadius;
+  padding: inputPadding;
+  font-size: labelMediumFontSize;
+  color: appOnSurfaceLight;
+}
+
+.input:not(:placeholder-shown).invalid {
+  outline-color: appErrorLight;
+}
+
+.input:focus {
+  outline-color: appPrimaryLight;
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: appSurfaceVariantDark;
+    color: appOnSurfaceVariantDark;
+  }
+
+  .input {
+    outline-color: appOutlineDark;
+    color: appOnSurfaceDark;
+  }
+
+  .input:not(:placeholder-shown).invalid {
+    outline-color: appErrorDark;
+  }
+
+  .input:focus,
+  .textarea:focus {
+    outline-color: appPrimaryDark;
+  }
+}
+
+@media screen and (max-width: mediaQuery) {
+  .card {
+    width: 95%;
+  }
+}

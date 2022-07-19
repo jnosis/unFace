@@ -37,6 +37,10 @@
 @value contactContentHeight: 3rem;
 @value contactContentMargin: 2rem auto 1rem;
 
+/* Login */
+@value loginWidth: 20rem;
+@value loginFormPadding: 2.5rem 1.5rem;
+
 /* WorkDetail */
 @value workDetailPadding: 0 2rem;
 @value workDetailLinksLeftMargin: 0.5rem;

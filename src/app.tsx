@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { IFileInput } from '.';
 import styles from './app.module.css';
 import Header from './components/header/header';
+import Login from './components/login/login';
 import Main from './components/main/main';
 import WorkDetail from './components/work_detail/work_detail';
 import AuthService from './service/auth';
@@ -70,6 +71,7 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
       return;
     }
     setUserToken(token);
+    navigate('/');
   };
 
   const onSignup = async (user: UserInfo) => {
@@ -235,6 +237,7 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
               />
             }
           />
+          <Route path='/login' element={<Login onSignClick={onSignClick} />} />
         </Routes>
       </div>
     </div>
