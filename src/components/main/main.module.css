@@ -1,2 +1,12 @@
+@value mediaQueryTablet from '../../common/sizes.css';
+@value mainSideMarginDesktop from '../../common/sizes.css';
+
 .container {
+  margin: 0 mainSideMarginDesktop;
+}
+
+@media screen and (max-width: mediaQueryTablet) {
+  .container {
+    margin: 0;
+  }
 }

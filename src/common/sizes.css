@@ -1,4 +1,5 @@
 @value mediaQuery: 37.5rem;
+@value mediaQueryTablet: 60rem;
 
 @value headerHeight: 4rem;
 @value scrollMargin: 5.5rem;
@@ -11,6 +12,9 @@
 
 /* Header */
 @value headerPadding: 1rem;
+
+/* Main */
+@value mainSideMarginDesktop: 10rem;
 
 /* About */
 @value aboutTopMargin: 1.5rem;
