@@ -59,6 +59,7 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
     if (isLogin) {
       await authService.logout();
       setUserToken(null);
+      navigate('/');
       return;
     }
     if (!user) {
@@ -237,7 +238,10 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
               />
             }
           />
-          <Route path='/login' element={<Login onSignClick={onSignClick} />} />
+          <Route
+            path='/login'
+            element={<Login isLogin={isLogin} onSignClick={onSignClick} />}
+          />
         </Routes>
       </div>
     </div>
