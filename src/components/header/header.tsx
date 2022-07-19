@@ -5,20 +5,11 @@ import styles from './header.module.css';
 type HeaderProps = {
   active: string;
   menus: MenuItem[];
-  isLogin: boolean;
-  onSignClick(user?: LoginInfo): Promise<void>;
   onLogoClick(): void;
   onMenuClick(name: MenuItem): void;
 };
 
-const Header = ({
-  active,
-  menus,
-  isLogin,
-  onSignClick,
-  onLogoClick,
-  onMenuClick,
-}: HeaderProps) => {
+const Header = ({ active, menus, onLogoClick, onMenuClick }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -49,11 +40,6 @@ const Header = ({
             />
           ))}
         </ul>
-        {true && (
-          <button onClick={() => onSignClick()}>
-            {isLogin ? 'sign out' : 'sign in'}
-          </button>
-        )}
       </div>
     </header>
   );

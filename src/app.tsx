@@ -209,8 +209,6 @@ const App = ({ FileInput, authService, workRepository }: AppProps) => {
       <Header
         active={active}
         menus={menus}
-        isLogin={isLogin}
-        onSignClick={onSignClick}
         onLogoClick={onLogoClick}
         onMenuClick={onMenuClick}
       />
