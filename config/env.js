@@ -7,12 +7,6 @@ function required(key, defaultValue = undefined) {
 }
 
 export const env = {
-  firebase: {
-    apiKey: required('FIREBASE_API_KEY'),
-    authDomain: required('FIREBASE_AUTH_DOMAIN'),
-    databaseURL: required('FIREBASE_DATABASE_URL'),
-    projectId: required('FIREBASE_PROJECT_ID'),
-  },
   database: {
     url: required('DATABASE_URL'),
   },

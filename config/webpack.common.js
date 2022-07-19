@@ -21,7 +21,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      ENV: JSON.stringify(dotenv.parsed),
+      ENV: JSON.stringify(dotenv.parsed) || JSON.stringify(process.env),
     }),
     new HtmlWebpackPlugin({
       template: path.join(srcDir, '..', 'public', 'index.html'),
