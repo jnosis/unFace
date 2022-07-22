@@ -18,7 +18,7 @@
     url('../../../public/images/profile.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 0 50%;
+  background-position: right;
   margin: 0 contentSideMarginDesktop;
   padding: aboutPadding;
   border-radius: largeCardBorderRadius;
