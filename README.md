@@ -2,7 +2,6 @@
 
 ### TODO:
 
-- Change ImageUploader unFace to unServer
-- Add Sign up and sign in page
+- Add Sign up page
+- Refactor file structure (i.e. separate components and page)
 - Add UserContext and WorkContext
-<!-- - Change node.js to deno for deno deploy -->
