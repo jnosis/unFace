@@ -15,14 +15,6 @@
   background-color: appBarLight;
   color: appOnSurfaceLight;
   z-index: 1;
-}
-
-.content {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: headerHeight;
   padding: headerPadding;
   display: flex;
   justify-content: space-between;
@@ -32,6 +24,7 @@
 .logo {
   display: flex;
   align-items: center;
+  color: inherit;
 }
 
 .logo:hover {
