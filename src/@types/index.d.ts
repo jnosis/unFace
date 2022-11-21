@@ -19,8 +19,6 @@ declare type UserToken = {
   username: string;
 };
 
-declare type AuthProvider = 'Google' | 'Github';
-
 declare type MenuItem = 'home' | 'works' | 'contact';
 
 declare type Repo = {
