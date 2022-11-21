@@ -1,0 +1,64 @@
+@value mediaQuery from '../../common/sizes.css';
+@value sectionTopMarginDesktop, contentSideMarginDesktop, contactPaddingDesktop from '../../common/sizes.css';
+@value sectionTopMarginMobile, contentSideMarginMobile, contactBottomMarginMobile, contactPaddingMobile from '../../common/sizes.css';
+@value mediumCardBorderRadius from '../../common/sizes.css';
+@value contactContentWidth, contactContentHeight, contactContentMargin from '../../common/sizes.css';
+@value headlineLargeFontSize, displaySmallFontSize from '../../common/sizes.css';
+
+@value appSecondaryLight, appOnSecondaryLight from '../../common/colors.css';
+@value appSecondaryDark, appOnSecondaryDark from '../../common/colors.css';
+
+.container {
+  width: 100%;
+  margin: sectionTopMarginDesktop 0;
+  text-align: center;
+}
+
+.card {
+  background-color: appSecondaryLight;
+  margin: 0 contentSideMarginDesktop;
+  padding: contactPaddingDesktop;
+  border-radius: mediumCardBorderRadius;
+}
+
+.title {
+  font-size: headlineLargeFontSize;
+  color: appOnSecondaryLight;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  width: contactContentWidth;
+  height: contactContentHeight;
+  margin: contactContentMargin;
+  justify-content: space-around;
+}
+
+.link {
+  font-size: displaySmallFontSize;
+  color: appOnSecondaryLight;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .container {
+    margin-top: sectionTopMarginMobile;
+    margin-bottom: contactBottomMarginMobile;
+  }
+
+  .card {
+    margin: 0 contentSideMarginMobile;
+    padding: contactPaddingMobile;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background-color: appSecondaryDark;
+  }
+
+  .title,
+  .link {
+    color: appOnSecondaryDark;
+  }
+}

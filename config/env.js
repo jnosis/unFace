@@ -14,4 +14,8 @@ export const env = {
     uploadPreset: required('CLOUDINARY_UPLOAD_PRESET'),
     cloudId: required('CLOUDINARY_CLOUD_ID'),
   },
+  user: {
+    email: required('USER_EMAIL'),
+    github: required('USER_GITHUB'),
+  },
 };

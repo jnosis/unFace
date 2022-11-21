@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/js/all';
 import App from './app';
 import Main from './pages/main/main';
 import WorkDetail from './pages/work_detail/work_detail';
