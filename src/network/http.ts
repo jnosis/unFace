@@ -1,4 +1,6 @@
-export default class HttpClient implements IHttpClient {
+import { env } from '../../config/env';
+
+export class HttpClient implements IHttpClient {
   constructor(private baseURL: string) {}
 
   async fetch<Data>(url: string, options: any) {
@@ -23,3 +25,7 @@ export default class HttpClient implements IHttpClient {
     return data as Data;
   }
 }
+
+const httpClient = new HttpClient(env.database.url);
+
+export default httpClient;
