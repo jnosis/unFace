@@ -4,10 +4,10 @@
 @value headerHeight: 4rem;
 @value scrollMargin: 5.5rem;
 @value sectionTopMarginDesktop: 4rem;
-@value contentSideMarginDesktop: 2.5rem;
+@value sectionSidePaddingDesktop: 2.5rem;
 
 @value sectionTopMarginMobile: 2.5rem;
-@value contentSideMarginMobile: 1rem;
+@value sectionSidePaddingMobile: 1rem;
 @value contentAndActionsMargin: 1.5rem;
 
 /* Header */

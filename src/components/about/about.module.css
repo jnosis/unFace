@@ -1,7 +1,7 @@
 @value mediaQuery from '../../common/sizes.css';
 @value scrollMargin from '../../common/sizes.css';
-@value contentSideMarginDesktop from '../../common/sizes.css';
-@value contentSideMarginMobile from '../../common/sizes.css';
+@value sectionSidePaddingDesktop from '../../common/sizes.css';
+@value sectionSidePaddingMobile from '../../common/sizes.css';
 @value aboutTopMargin, aboutPadding, aboutTitleAndDescMargin, largeCardBorderRadius from '../../common/sizes.css';
 @value aboutTopMarginMobile from '../../common/sizes.css';
 @value headlineLargeFontSize, headlineMediumFontSize from '../../common/sizes.css';
@@ -12,6 +12,8 @@
   width: 100%;
   margin-top: aboutTopMargin;
   scroll-margin: scrollMargin;
+  background-position: right;
+  padding: 0 sectionSidePaddingDesktop;
 }
 
 .card {
@@ -19,8 +21,6 @@
     url('../../../public/images/profile.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: right;
-  margin: 0 contentSideMarginDesktop;
   padding: aboutPadding;
   border-radius: largeCardBorderRadius;
   color: appOnPrimaryLight;

@@ -1,7 +1,7 @@
 @value mediaQuery from '../../common/sizes.css';
 @value scrollMargin from '../../common/sizes.css';
-@value sectionTopMarginDesktop, contentSideMarginDesktop from '../../common/sizes.css';
-@value sectionTopMarginMobile, contentSideMarginMobile from '../../common/sizes.css';
+@value sectionTopMarginDesktop, sectionSidePaddingDesktop from '../../common/sizes.css';
+@value sectionTopMarginMobile, sectionSidePaddingMobile from '../../common/sizes.css';
 @value smallCardBorderRadius from '../../common/sizes.css';
 @value chipsTopMargin, chipsPadding, chipsGap from '../../common/sizes.css';
 @value worksListTopMargin, worksListPadding, worksListGap, worksCardMinHeight from '../../common/sizes.css';
@@ -12,7 +12,8 @@
 
 .container {
   width: 100%;
-  margin: sectionTopMarginDesktop contentSideMarginDesktop 0;
+  margin-top: sectionTopMarginDesktop;
+  padding: 0 sectionSidePaddingDesktop;
   scroll-margin: scrollMargin;
 }
 
@@ -67,10 +68,7 @@
 @media screen and (max-width: mediaQuery) {
   .container {
     margin-top: sectionTopMarginMobile;
-  }
-
-  .content {
-    margin: 0 contentSideMarginMobile;
+    padding: 0 sectionSidePaddingMobile;
   }
 
   .list {

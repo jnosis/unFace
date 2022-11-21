@@ -1,28 +1,17 @@
 @value mediaQueryTablet from '../../common/sizes.css';
+
 @value headerHeight from '../../common/sizes.css';
 @value mainSideMarginDesktop from '../../common/sizes.css';
-
-@value appBackgroundLight, appOnBackgroundLight from '../../common/colors.css';
-@value appBackgroundDark, appOnBackgroundDark from '../../common/colors.css';
 
 .container {
   display: flex;
   flex-direction: column;
   height: 100%;
   margin: headerHeight mainSideMarginDesktop 0;
-  background-color: appBackgroundLight;
-  color: appOnBackgroundLight;
 }
 
 @media screen and (max-width: mediaQueryTablet) {
   .container {
     margin: headerHeight 0 0;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .container {
-    background-color: appBackgroundDark;
-    color: appOnBackgroundDark;
   }
 }

@@ -8,11 +8,11 @@ type MainProps = {};
 
 function Main({}: MainProps) {
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <About />
       <Works />
       <Contact />
-    </div>
+    </main>
   );
 }
 

@@ -1,6 +1,6 @@
 @value mediaQuery from '../../common/sizes.css';
-@value sectionTopMarginDesktop, contentSideMarginDesktop, contactPaddingDesktop from '../../common/sizes.css';
-@value sectionTopMarginMobile, contentSideMarginMobile, contactBottomMarginMobile, contactPaddingMobile from '../../common/sizes.css';
+@value sectionTopMarginDesktop, sectionSidePaddingDesktop, contactPaddingDesktop from '../../common/sizes.css';
+@value sectionTopMarginMobile, sectionSidePaddingMobile, contactBottomMarginMobile, contactPaddingMobile from '../../common/sizes.css';
 @value mediumCardBorderRadius from '../../common/sizes.css';
 @value contactContentWidth, contactContentHeight, contactContentMargin from '../../common/sizes.css';
 @value headlineLargeFontSize, displaySmallFontSize from '../../common/sizes.css';
@@ -11,12 +11,12 @@
 .container {
   width: 100%;
   margin: sectionTopMarginDesktop 0;
+  padding: 0 sectionSidePaddingDesktop;
   text-align: center;
 }
 
 .card {
   background-color: appSecondaryLight;
-  margin: 0 contentSideMarginDesktop;
   padding: contactPaddingDesktop;
   border-radius: mediumCardBorderRadius;
 }
@@ -44,10 +44,10 @@
   .container {
     margin-top: sectionTopMarginMobile;
     margin-bottom: contactBottomMarginMobile;
+    padding: 0 sectionSidePaddingMobile;
   }
 
   .card {
-    margin: 0 contentSideMarginMobile;
     padding: contactPaddingMobile;
   }
 }
