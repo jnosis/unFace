@@ -18,6 +18,7 @@
 
 /* About */
 @value aboutTopMargin: 1.5rem;
+@value aboutTopMarginMobile: 0.5rem;
 @value aboutPadding: 9rem 4rem;
 @value aboutTitleAndDescMargin: 3rem;
 
