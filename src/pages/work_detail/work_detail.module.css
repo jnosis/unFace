@@ -1,0 +1,57 @@
+@value mediaQuery from '../../common/sizes.css';
+@value headerHeight, workDetailPadding, workDetailLinksLeftMargin, workDetailLinkRightMargin, workDetailReadmeBottomMargin from '../../common/sizes.css';
+
+@value appOnBackgroundLight from '../../common/colors.css';
+@value appOnBackgroundDark from '../../common/colors.css';
+
+.container {
+  width: 100%;
+  margin-top: headerHeight;
+  padding: workDetailPadding;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  height: headerHeight;
+  align-items: center;
+}
+
+.title {
+  flex: none;
+  color: appOnBackgroundLight;
+}
+
+.links {
+  flex: auto;
+  margin-left: workDetailLinksLeftMargin;
+}
+
+.link {
+  flex: none;
+  color: appOnBackgroundLight;
+  margin-right: workDetailLinkRightMargin;
+}
+
+.close {
+  flex: none;
+  color: appOnBackgroundLight;
+}
+
+.readme {
+  margin-bottom: workDetailReadmeBottomMargin;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .container {
+    margin-bottom: headerHeight;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .title,
+  .link,
+  .close {
+    color: appOnBackgroundDark;
+  }
+}
