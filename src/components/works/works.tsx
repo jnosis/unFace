@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useWorks from '../../hooks/use_works';
 import Tech from '../tech/tech';
+import WorkCard from '../work_card/work_card';
 import styles from './works.module.css';
 
 type WorksProps = {};
@@ -37,7 +38,7 @@ function Works({}: WorksProps) {
             .filter((work) =>
               !selectedTech ? true : work.techs.includes(selectedTech)
             )
-            .map((work) => <li key={work.id}>{work.title}</li>)}
+            .map((work) => <WorkCard key={work.id} work={work} />)}
       </ul>
     </section>
   );

@@ -1,0 +1,61 @@
+@value smallCardBorderRadius from '../../common/sizes.css';
+@value worksCardMinHeight, workContentPadding, workTitleAndDescMargin from '../../common/sizes.css';
+@value chipsTopMargin, chipsPadding, chipsGap from '../../common/sizes.css';
+@value contentAndActionsMargin from '../../common/sizes.css';
+@value headlineMediumFontSize, bodyLargeFontSize from '../../common/sizes.css';
+
+@value appOnBackgroundLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
+@value appOnBackgroundDark, appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: smallCardBorderRadius;
+  min-height: worksCardMinHeight;
+  background-color: appSurfaceVariantLight;
+  color: appOnSurfaceVariantLight;
+  cursor: pointer;
+}
+
+.container:hover {
+  transform: scale(1.01);
+  transition-duration: 150ms;
+}
+
+.thumbnail {
+  width: 100%;
+  border-radius: smallCardBorderRadius;
+}
+
+.content {
+  padding: workContentPadding;
+}
+
+.title {
+  font-size: headlineMediumFontSize;
+}
+
+.description {
+  font-size: bodyLargeFontSize;
+  margin-top: workTitleAndDescMargin;
+}
+
+.techs {
+  margin-top: chipsTopMargin;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: chipsGap;
+}
+
+.techs.admin {
+  margin-bottom: contentAndActionsMargin;
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: appSurfaceVariantDark;
+    color: appOnSurfaceVariantDark;
+  }
+}
