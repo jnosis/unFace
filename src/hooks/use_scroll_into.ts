@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 
-type Scroll<E> = [React.RefObject<E>, () => void];
+export type Scroll<E> = [React.RefObject<E>, () => void];
 
-export default function useScroll<E extends HTMLElement>(
+export default function useScrollInto<E extends HTMLElement>(
   options: ScrollIntoViewOptions = { behavior: 'smooth' }
 ): Scroll<E> {
   const elementRef = useRef<E>(null);
@@ -18,7 +18,7 @@ export function useScrolls<K extends string, E extends HTMLElement>(
   options: ScrollIntoViewOptions = { behavior: 'smooth' }
 ): Record<K, Scroll<E>> {
   return names.reduce(
-    (prev, name) => ({ ...prev, [name]: useScroll<E>(options) }),
+    (prev, name) => ({ ...prev, [name]: useScrollInto<E>(options) }),
     {} as Record<K, Scroll<E>>
   );
 }
