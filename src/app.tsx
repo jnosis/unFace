@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import useScrolls from './hooks/use_scrolls';
 import { useMenuContext } from './context/menu_context';
+import { TechContextProvider } from './context/tech_Context';
 import { isMenuItem } from './util/checker';
 import Header from './components/header/header';
 import styles from './app.module.css';
@@ -58,7 +59,9 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <div className={styles.container}>
         <Header menus={menus} active={active} onMenuClick={handleMenuClick} />
-        <Outlet context={scrollRef} />
+        <TechContextProvider>
+          <Outlet context={scrollRef} />
+        </TechContextProvider>
         <ScrollRestoration
           getKey={(location) =>
             ['/'].includes(location.pathname) && !location.state?.scrollToTop

@@ -1,5 +1,6 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef } from 'react';
 import useWorks from '../../hooks/use_works';
+import { useTechContext } from '../../context/tech_Context';
 import Tech from '../tech/tech';
 import WorkCard from '../work_card/work_card';
 import styles from './works.module.css';
@@ -8,12 +9,12 @@ const Works = forwardRef<HTMLElement>((_, scrollRef) => {
   const {
     worksQuery: { data: works },
   } = useWorks();
-  const [selectedTech, setSelectedTech] = useState('');
+  const { selected, setSelected } = useTechContext();
 
   const techs = works && [...new Set(works.map((work) => work.techs).flat())];
 
   const handleTechClick = (tech: string) => {
-    tech === selectedTech ? setSelectedTech('') : setSelectedTech(tech);
+    tech === selected ? setSelected('') : setSelected(tech);
   };
 
   return (
@@ -25,7 +26,7 @@ const Works = forwardRef<HTMLElement>((_, scrollRef) => {
             <Tech
               key={index}
               name={tech}
-              selected={selectedTech === tech}
+              selected={selected === tech}
               onClick={handleTechClick}
             />
           ))}
@@ -34,7 +35,7 @@ const Works = forwardRef<HTMLElement>((_, scrollRef) => {
         {works &&
           works
             .filter((work) =>
-              !selectedTech ? true : work.techs.includes(selectedTech)
+              !selected ? true : work.techs.includes(selected)
             )
             .map((work) => <WorkCard key={work.id} work={work} />)}
       </ul>
