@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { env } from '../../../config/env';
 import styles from './contact.module.css';
 
-function Contact() {
+const Contact = forwardRef<HTMLElement>((_, scrollRef) => {
   return (
-    <section className={styles.container}>
+    <section ref={scrollRef} className={styles.container} id='contact'>
       <article className={styles.card}>
         <h1 className={styles.title}>Contact</h1>
         <ul className={styles.links}>
@@ -31,6 +31,6 @@ function Contact() {
       </article>
     </section>
   );
-}
+});
 
 export default Contact;

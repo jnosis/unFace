@@ -12,7 +12,7 @@ type HeaderProps = {
 function Header({ menus, active, onMenuClick }: HeaderProps) {
   return (
     <header className={`${styles.header}`}>
-      <Link to='/' className={styles.logo}>
+      <Link to='/' state={{ scrollToTop: true }} className={styles.logo}>
         <h1 className={styles.title}>unFace</h1>
       </Link>
       <nav>

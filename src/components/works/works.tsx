@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import useWorks from '../../hooks/use_works';
 import Tech from '../tech/tech';
 import WorkCard from '../work_card/work_card';
 import styles from './works.module.css';
 
-type WorksProps = {};
-
-function Works({}: WorksProps) {
+const Works = forwardRef<HTMLElement>((_, scrollRef) => {
   const {
     worksQuery: { data: works },
   } = useWorks();
@@ -19,7 +17,7 @@ function Works({}: WorksProps) {
   };
 
   return (
-    <section className={styles.container}>
+    <section ref={scrollRef} className={styles.container} id='works'>
       <h1 className={styles.title}>Works</h1>
       <ul className={styles.techs}>
         {techs &&
@@ -42,6 +40,6 @@ function Works({}: WorksProps) {
       </ul>
     </section>
   );
-}
+});
 
 export default Works;

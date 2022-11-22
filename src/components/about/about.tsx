@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styles from './about.module.css';
 
-function About() {
+const About = forwardRef<HTMLElement>((_, scrollRef) => {
   return (
-    <section className={styles.container}>
+    <section ref={scrollRef} className={styles.container} id='home'>
       <article className={styles.card}>
         <div className={styles.content}>
           <h1 className={styles.title}></h1>
@@ -12,6 +12,6 @@ function About() {
       </article>
     </section>
   );
-}
+});
 
 export default About;
