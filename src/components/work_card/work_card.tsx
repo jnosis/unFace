@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMenuContext } from '../../context/menu_context';
 import Tech from '../tech/tech';
 import styles from './work_card.module.css';
 
@@ -12,9 +13,11 @@ function WorkCard({ work }: WorkCardProps) {
   const fileUrl = thumbnail?.fileURL;
 
   const navigate = useNavigate();
+  const { setActive } = useMenuContext();
 
   const handleClick = () => {
     navigate(`/works/${work.title}`);
+    setActive('works');
   };
 
   return (

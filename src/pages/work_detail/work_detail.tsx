@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import useWorks from '../../hooks/use_works';
+import { useMenuContext } from '../../context/menu_context';
 import {
   checkRepoContent,
   convertToRawContentURL,
@@ -19,6 +20,14 @@ export default function WorkDetail() {
   const { repoUrl, repoContentUrl, contentUrl, projectUrl } = convertUrls(work);
   const [readme, setReadme] = useState('');
   getReadme(contentUrl, setReadme);
+
+  const navigate = useNavigate();
+  const { setActive } = useMenuContext();
+
+  const handleClose = () => {
+    navigate('/');
+    setActive('works');
+  };
 
   return (
     <section className={styles.container}>
@@ -46,9 +55,9 @@ export default function WorkDetail() {
                 </a>
               )}
             </div>
-            <Link to='/' className={styles.close}>
+            <button className={styles.close} onClick={handleClose}>
               <i className='fa-solid fa-xmark'></i>
-            </Link>
+            </button>
           </header>
           <article className={styles.readme}>
             <ReactMarkdown

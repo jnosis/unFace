@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/js/all';
+import { MenuContextProvider } from './context/menu_context';
 import App from './app';
 import NotFound from './pages/not_found/not_found';
 import Main from './pages/main/main';
@@ -33,6 +34,8 @@ const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MenuContextProvider>
+      <RouterProvider router={router} />
+    </MenuContextProvider>
   </React.StrictMode>
 );
