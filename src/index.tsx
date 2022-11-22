@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from 'react-router-dom';
 import '@fortawesome/fontawesome-free/js/all';
 import App from './app';
+import NotFound from './pages/not_found/not_found';
 import Main from './pages/main/main';
 import WorkDetail from './pages/work_detail/work_detail';
 import Login from './pages/login/login';
@@ -12,10 +17,12 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <Navigate to='/404' />,
     children: [
       { index: true, element: <Main /> },
       { path: 'works/:title', element: <WorkDetail /> },
       { path: 'login', element: <Login /> },
+      { path: '/404', element: <NotFound /> },
     ],
   },
 ]);
