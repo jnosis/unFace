@@ -7,18 +7,21 @@ import React, {
 } from 'react';
 
 type MenuContextType = {
+  isScrolled: boolean;
   active: MenuItem;
   setActive: React.Dispatch<React.SetStateAction<MenuItem>>;
   switchActiveWhenScrolled(menu: MenuItem, isUp: boolean): void;
 };
 
 const MenuContext = createContext<MenuContextType>({
+  isScrolled: false,
   active: 'home',
   setActive: () => {},
   switchActiveWhenScrolled: () => {},
 });
 
 export function MenuContextProvider({ children }: PropsWithChildren) {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [active, setActive] = useState<MenuItem>('home');
 
   const switchActiveWhenScrolled = (menu: MenuItem, isUp: boolean) => {
@@ -51,6 +54,16 @@ export function MenuContextProvider({ children }: PropsWithChildren) {
   };
 
   useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     window.addEventListener('scroll', (e) => {
       const {
         location: { pathname },
@@ -58,16 +71,19 @@ export function MenuContextProvider({ children }: PropsWithChildren) {
       const bottom =
         Math.ceil(window.scrollY + window.innerHeight) >=
         document.body.clientHeight;
+      const top = Math.ceil(window.scrollY) === 0;
 
-      if (bottom && pathname === '/') {
+      if (pathname === '/' && bottom) {
         setActive('contact');
+      } else if (pathname === '/' && top) {
+        setActive('home');
       }
     });
   }, []);
 
   return (
     <MenuContext.Provider
-      value={{ active, setActive, switchActiveWhenScrolled }}
+      value={{ isScrolled, active, setActive, switchActiveWhenScrolled }}
     >
       {children}
     </MenuContext.Provider>

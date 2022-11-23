@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDarkMode } from '../../context/dark_mode_context';
+import { useMenuContext } from '../../context/menu_context';
 import NavItem from '../nav_item/nav_item';
 import styles from './header.module.css';
 
@@ -12,9 +13,12 @@ type HeaderProps = {
 
 function Header({ menus, active, onMenuClick }: HeaderProps) {
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const { isScrolled } = useMenuContext();
 
   return (
-    <header className={`${styles.header}`}>
+    <header
+      className={`${styles.header}${isScrolled ? ` ${styles.scrolled}` : ''}`}
+    >
       <Link to='/' state={{ scrollToTop: true }} className={styles.logo}>
         <h1 className={styles.title}>unFace</h1>
       </Link>
