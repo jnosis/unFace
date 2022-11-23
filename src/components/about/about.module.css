@@ -6,8 +6,6 @@
 @value aboutTopMarginMobile from '../../common/sizes.css';
 @value headlineLargeFontSize, headlineMediumFontSize from '../../common/sizes.css';
 
-@value appOnPrimaryLight, appImageFilter, appImageFilter2 from '../../common/colors.css';
-
 .container {
   width: 100%;
   margin-top: aboutTopMargin;
@@ -17,13 +15,17 @@
 }
 
 .card {
-  background-image: linear-gradient(to bottom, appImageFilter, appImageFilter),
+  background-image: linear-gradient(
+      to bottom,
+      var(--color-image-filter),
+      var(--color-image-filter)
+    ),
     url('../../../public/images/profile.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   padding: aboutPadding;
   border-radius: largeCardBorderRadius;
-  color: appOnPrimaryLight;
+  color: var(--color-on-primary);
 }
 
 .content {

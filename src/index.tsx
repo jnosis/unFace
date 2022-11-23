@@ -6,13 +6,14 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/js/all';
+import { DarkModeProvider } from './context/dark_mode_context';
 import { MenuContextProvider } from './context/menu_context';
 import App from './app';
 import NotFound from './pages/not_found/not_found';
 import Main from './pages/main/main';
 import WorkDetail from './pages/work_detail/work_detail';
 import Login from './pages/login/login';
-import './index.module.css';
+import './index.css';
 
 const router = createBrowserRouter([
   {
@@ -33,9 +34,11 @@ if (!rootElement) throw new Error('Failed to find the root element');
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <DarkModeProvider>
     <MenuContextProvider>
       <RouterProvider router={router} />
     </MenuContextProvider>
-  </React.StrictMode>
+  </DarkModeProvider>
+  // </React.StrictMode>
 );

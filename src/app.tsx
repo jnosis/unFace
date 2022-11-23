@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import useScrolls from './hooks/use_scrolls';
 import { useMenuContext } from './context/menu_context';
-import { TechContextProvider } from './context/tech_Context';
+import { TechContextProvider } from './context/tech_context';
 import { isMenuItem } from './util/checker';
 import Header from './components/header/header';
 import styles from './app.module.css';

@@ -7,9 +7,6 @@
 @value worksListTopMargin, worksListPadding, worksListGap, worksCardMinHeight from '../../common/sizes.css';
 @value headlineLargeFontSize from '../../common/sizes.css';
 
-@value appOnBackgroundLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
-@value appOnBackgroundDark, appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
-
 .container {
   width: 100%;
   margin-top: sectionTopMarginDesktop;
@@ -44,8 +41,8 @@
   border-radius: smallCardBorderRadius;
   width: 100%;
   min-height: worksCardMinHeight;
-  background-color: appSurfaceVariantLight;
-  color: appOnSurfaceVariantLight;
+  background-color: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
   cursor: pointer;
 }
 
@@ -57,7 +54,7 @@
   width: 100%;
   height: 100%;
   font-size: 10rem;
-  color: appOnSurfaceVariantLight;
+  color: var(--color-on-surface-variant);
 }
 
 @media screen and (max-width: mediaQuery) {
@@ -69,16 +66,5 @@
   .list {
     grid-template-columns: 1fr;
     padding: 0;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .card {
-    background-color: appSurfaceVariantDark;
-    color: appOnSurfaceVariantDark;
-  }
-
-  .add {
-    color: appOnSurfaceVariantDark;
   }
 }

@@ -4,17 +4,14 @@
 @value contentAndActionsMargin from '../../common/sizes.css';
 @value headlineMediumFontSize, bodyLargeFontSize from '../../common/sizes.css';
 
-@value appOnBackgroundLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
-@value appOnBackgroundDark, appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
-
 .container {
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: smallCardBorderRadius;
   min-height: worksCardMinHeight;
-  background-color: appSurfaceVariantLight;
-  color: appOnSurfaceVariantLight;
+  background-color: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
   cursor: pointer;
 }
 
@@ -51,11 +48,4 @@
 
 .techs.admin {
   margin-bottom: contentAndActionsMargin;
-}
-
-@media (prefers-color-scheme: dark) {
-  .container {
-    background-color: appSurfaceVariantDark;
-    color: appOnSurfaceVariantDark;
-  }
 }

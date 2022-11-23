@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import useWorks from '../../hooks/use_works';
-import { useTechContext } from '../../context/tech_Context';
+import { useTechContext } from '../../context/tech_context';
 import Tech from '../tech/tech';
 import WorkCard from '../work_card/work_card';
 import styles from './works.module.css';

@@ -1,0 +1,91 @@
+:root {
+  --color-primary: #2b5da7;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #d6e3ff;
+  --color-on-primary-container: #001a40;
+  --color-secondary: #565f71;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #dae2f8;
+  --color-on-secondary-container: #131c2c;
+  --color-tertiary: #705575;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #fad7fd;
+  --color-on-tertiary-container: #28132e;
+  --color-error: #ba1b1b;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad4;
+  --color-on-error-container: #410001;
+  --color-background: #fdfbff;
+  --color-on-background: #1a1b1f;
+  --color-surface: #fdfbff;
+  --color-on-surface: #1a1b1f;
+  --color-surface-variant: #e0e2ec;
+  --color-on-surface-variant: #44474f;
+  --color-outline: #74777f;
+  --color-inverse-on-surface: #f2f0f4;
+  --color-inverse-surface: #2f3034;
+  --color-inverse-primary: #a9c7ff;
+  --color-shadow: #000000;
+  --color-bar: #eceef8;
+  --color-button-hover: #2b5da714;
+  --color-image-filter: #001a4066;
+}
+
+html.dark {
+  --color-primary: #a9c7ff;
+  --color-on-primary: #002f68;
+  --color-primary-container: #03458e;
+  --color-on-primary-container: #d6e3ff;
+  --color-secondary: #bec6dc;
+  --color-on-secondary: #283041;
+  --color-secondary-container: #3e4759;
+  --color-on-secondary-container: #dae2f8;
+  --color-tertiary: #ddbce0;
+  --color-on-tertiary: #3f2844;
+  --color-tertiary-container: #573e5c;
+  --color-on-tertiary-container: #fad7fd;
+  --color-error: #ffb4a9;
+  --color-on-error: #680003;
+  --color-error-container: #930006;
+  --color-on-error-container: #ffdad4;
+  --color-background: #1a1b1f;
+  --color-on-background: #e3e2e6;
+  --color-surface: #1a1b1f;
+  --color-on-surface: #e3e2e6;
+  --color-surface-variant: #44474f;
+  --color-on-surface-variant: #c4c6d0;
+  --color-outline: #8e9099;
+  --color-inverse-on-surface: #1a1b1f;
+  --color-inverse-surface: #e3e2e6;
+  --color-inverse-primary: #2b5da7;
+  --color-shadow: #000000;
+  --color-bar: #252931;
+  --color-button-hover: #a9c7ff14;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.1s;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+
+input,
+textarea {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  transition-duration: 0.5s;
+}

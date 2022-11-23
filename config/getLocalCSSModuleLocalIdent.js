@@ -6,6 +6,7 @@ module.exports = function getCSSModuleLocalIdent(
   _localIdentName,
   localName
 ) {
+  if (localName === 'dark') return localName;
   const { rootContext, resourcePath } = context;
   const fileOrFolderName = resourcePath.match(/index\.module\.css$/)
     ? '[folder]'
