@@ -12,6 +12,7 @@ import App from './app';
 import NotFound from './pages/not_found/not_found';
 import Main from './pages/main/main';
 import WorkDetail from './pages/work_detail/work_detail';
+import Signup from './pages/signup/signup';
 import Login from './pages/login/login';
 import './index.css';
 
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Main /> },
       { path: 'works/:title', element: <WorkDetail /> },
+      { path: 'signup', element: <Signup /> },
       { path: 'login', element: <Login /> },
       { path: '/404', element: <NotFound /> },
     ],

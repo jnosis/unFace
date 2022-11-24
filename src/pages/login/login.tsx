@@ -1,15 +1,31 @@
 import React, { useState } from 'react';
+import { validateUser } from '../../util/validator';
 import Action from '../../components/action/action';
 import styles from './login.module.css';
 
+type LoginInfoValidation = {
+  username: boolean;
+  password: boolean;
+};
+
+const initialLoginInfo: LoginInfo = {
+  username: '',
+  password: '',
+};
+
 function Login() {
-  const [loginInfo, setLoginInfo] = useState<LoginInfo>({
-    username: '',
-    password: '',
+  const [loginInfo, setLoginInfo] = useState<LoginInfo>(initialLoginInfo);
+  const [validation, setValidation] = useState<LoginInfoValidation>({
+    username: false,
+    password: false,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    setValidation((validation) => ({
+      ...validation,
+      [name]: validateUser(name, value),
+    }));
     setLoginInfo((loginInfo) => ({ ...loginInfo, [name]: value }));
   };
 
@@ -25,7 +41,9 @@ function Login() {
         <div className={styles.fields}>
           <label className={styles.field}>Username</label>
           <input
-            className={styles.input}
+            className={`${styles.input}${
+              validation.username ? '' : ` ${styles.invalid}`
+            }`}
             type='text'
             name='username'
             value={loginInfo.username ?? ''}
@@ -35,7 +53,9 @@ function Login() {
           />
           <label className={styles.field}>Password</label>
           <input
-            className={styles.input}
+            className={`${styles.input}${
+              validation.password ? '' : ` ${styles.invalid}`
+            }`}
             type='password'
             name='password'
             value={loginInfo.password ?? ''}
