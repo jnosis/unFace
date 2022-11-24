@@ -63,5 +63,5 @@ declare type Action = {
   type: 'button' | 'submit' | 'reset';
   title: string;
   isDisable: boolean;
-  onClick(event: any): void;
+  onClick?(event: any): void;
 };
