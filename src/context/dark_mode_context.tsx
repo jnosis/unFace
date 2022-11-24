@@ -6,13 +6,15 @@ type ThemeScheme = 'light' | 'dark' | 'system';
 type Theme = {
   scheme: ThemeScheme;
   darkMode: boolean;
-  setTheme?(theme: ThemeScheme): void;
-  toggleDarkMode?(): void;
+  setTheme(theme: ThemeScheme): void;
+  toggleDarkMode(): void;
 };
 
 const DarkModeContext = createContext<Theme>({
   scheme: 'system',
   darkMode: false,
+  setTheme: () => {},
+  toggleDarkMode: () => {},
 });
 
 export function DarkModeProvider({ children }: { children: React.ReactNode }) {

@@ -1,0 +1,67 @@
+@value mediaQuery from '../../common/sizes.css';
+
+@value menuPadding from '../../common/sizes.css';
+@value titleMediumFontSize from '../../common/sizes.css';
+
+.container {
+  position: relative;
+  width: 3rem;
+  padding: menuPadding;
+  font-size: titleMediumFontSize;
+  text-align: center;
+  color: var(--color-on-surface-variant);
+}
+
+.toggle {
+  cursor: pointer;
+  transition: 150ms ease-in;
+}
+
+.toggle:hover {
+  color: var(--color-primary);
+}
+
+.toggle.none {
+  display: none;
+}
+
+.themes {
+  position: absolute;
+  left: 0;
+  width: 9rem;
+  margin-top: 0.5rem;
+  border-radius: 1rem;
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 0.25rem;
+  list-style: none;
+  background-color: var(--color-surface-variant);
+  box-shadow: 7px 5px 23px -9px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 7px 5px 23px -9px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 7px 5px 23px -9px rgba(0, 0, 0, 0.75);
+}
+
+.theme {
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.label {
+  cursor: pointer;
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.icon {
+  width: 1rem;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .themes {
+    bottom: 2.5rem;
+  }
+}
