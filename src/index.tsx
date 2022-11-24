@@ -34,11 +34,11 @@ if (!rootElement) throw new Error('Failed to find the root element');
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(
-  // <React.StrictMode>
-  <DarkModeProvider>
-    <MenuContextProvider>
-      <RouterProvider router={router} />
-    </MenuContextProvider>
-  </DarkModeProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <DarkModeProvider>
+      <MenuContextProvider>
+        <RouterProvider router={router} />
+      </MenuContextProvider>
+    </DarkModeProvider>
+  </React.StrictMode>
 );
