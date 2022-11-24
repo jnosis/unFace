@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Outlet, ScrollRestoration } from 'react-router-dom';
+import {
+  Outlet,
+  ScrollRestoration,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import useScrolls from './hooks/use_scrolls';
 import { useMenuContext } from './context/menu_context';
 import { TechContextProvider } from './context/tech_context';
@@ -11,6 +16,9 @@ import styles from './app.module.css';
 const queryClient = new QueryClient();
 
 export default function App() {
+  const { pathname, state } = useLocation();
+  const navigate = useNavigate();
+
   const menus: MenuItem[] = ['home', 'works', 'contact'];
   const { active, setActive, switchActiveWhenScrolled } = useMenuContext();
   const {
@@ -51,9 +59,17 @@ export default function App() {
   };
 
   const handleMenuClick = (name: MenuItem) => {
+    if (pathname !== '/') navigate('/', { state: { scrollInto: name } });
     setActive(name);
     scrollInto(name);
   };
+
+  useEffect(() => {
+    if (isMenuItem(state?.scrollInto)) {
+      setActive(state.scrollInto);
+      scrollInto(state.scrollInto);
+    }
+  }, [state]);
 
   return (
     <QueryClientProvider client={queryClient}>
