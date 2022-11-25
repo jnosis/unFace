@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <Navigate to='/404' />,
+    errorElement: <Navigate to='/404' replace />,
     children: [
       { index: true, element: <Main /> },
       { path: 'works/:title', element: <WorkDetail /> },
