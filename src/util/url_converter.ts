@@ -3,7 +3,9 @@ export function checkRepoContent(uri: string): boolean {
 }
 
 export function addHttpsOnURL(url: string): string {
-  return /^(https?\:\/\/)/.test(url) ? url : `https://${url}`;
+  return /^(https?\:\/\/)/.test(url)
+    ? url.replace('http://', 'https://')
+    : `https://${url}`;
 }
 
 export function convertToRawContentURL(url: string, branch: string): string {

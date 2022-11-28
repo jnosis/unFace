@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import imageUploader from '../../api/image_uploader';
+import { addHttpsOnURL } from '../../util/url_converter';
 import styles from './image_file_input.module.css';
 
 type ImageFileInputProps = {
@@ -17,7 +18,7 @@ function ImageFileInput({ name, onFileChange }: ImageFileInputProps) {
       const uploaded = await imageUploader.upload(e.target.files[0]);
       onFileChange({
         fileName: uploaded.original_filename,
-        fileURL: uploaded.url,
+        fileURL: addHttpsOnURL(uploaded.url),
       });
     }
     setIsLoading(false);
