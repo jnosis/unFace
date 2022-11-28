@@ -5,6 +5,7 @@ import { useTechContext } from '../../context/tech_context';
 import Tech from '../tech/tech';
 import WorkCard from '../work_card/work_card';
 import EditWorkForm from '../edit_work_form/edit_work_form';
+import AddWorkForm from '../add_work_form/add_work_form';
 import styles from './works.module.css';
 
 const Works = forwardRef<HTMLElement>((_, scrollRef) => {
@@ -61,6 +62,7 @@ const Works = forwardRef<HTMLElement>((_, scrollRef) => {
                 <WorkCard key={work.id} work={work} onEdit={handleEdit} />
               )
             )}
+        {userToken && <AddWorkForm />}
       </ul>
     </section>
   );

@@ -37,26 +37,6 @@
   gap: worksListGap;
 }
 
-.card {
-  border-radius: smallCardBorderRadius;
-  width: 100%;
-  min-height: worksCardMinHeight;
-  background-color: var(--color-surface-variant);
-  color: var(--color-on-surface-variant);
-  cursor: pointer;
-}
-
-.card.form {
-  cursor: initial;
-}
-
-.add {
-  width: 100%;
-  height: 100%;
-  font-size: 10rem;
-  color: var(--color-on-surface-variant);
-}
-
 @media screen and (max-width: mediaQuery) {
   .container {
     margin-top: sectionTopMarginMobile;
