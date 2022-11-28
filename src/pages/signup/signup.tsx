@@ -118,7 +118,13 @@ function Signup() {
           />
         </div>
         <div className={styles.actions}>
-          <Action type='submit' title='Sign up' isDisable={!isPossibleSignup} />
+          <Action
+            type='submit'
+            title='Sign up'
+            isDisable={
+              !isPossibleSignup || Object.values(validation).includes(false)
+            }
+          />
         </div>
       </form>
       {!isPossibleSignup && (

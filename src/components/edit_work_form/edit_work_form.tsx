@@ -170,7 +170,11 @@ function EditWorkForm({ work, onCancel }: EditWorkFormProps) {
             />
           </li>
           <li>
-            <Action type='submit' title='Edit' isDisable={false} />
+            <Action
+              type='submit'
+              title='Edit'
+              isDisable={Object.values(validation).includes(false)}
+            />
           </li>
         </ul>
       </form>

@@ -78,7 +78,11 @@ function Login() {
           />
         </div>
         <div className={styles.actions}>
-          <Action type='submit' title='Sign in' isDisable={false} />
+          <Action
+            type='submit'
+            title='Sign in'
+            isDisable={Object.values(validation).includes(false)}
+          />
         </div>
       </form>
     </section>
