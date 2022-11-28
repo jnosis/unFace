@@ -26,15 +26,19 @@ const AuthContext = createContext<AuthContextType>({
 export function AuthContextProvider({ children }: PropsWithChildren) {
   const [userToken, setUserToken] = useState<UserToken | null>(null);
 
+  const handleToken = (token: UserToken | null) => {
+    if (token?.username !== userToken?.username) setUserToken(token);
+  };
+
   useEffect(() => {
     authService
       .me()
       .then((token) => {
         if (token) {
-          setUserToken(token);
+          handleToken(token);
         }
       })
-      .catch(() => setUserToken(null));
+      .catch(() => handleToken(null));
   }, [userToken]);
 
   const signup = useCallback(async (user: UserInfo) => {
