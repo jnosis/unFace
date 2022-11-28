@@ -2,7 +2,7 @@
 
 ### TODO:
 
-- Add Sign up page
-- Add UserContext
-- Refactor form components
-- Rewrite Auth and Login
+- Create generic Input Component
+- Create generic Form Component
+- Add Tech autocompletion
+- Refactor size.css to :root
