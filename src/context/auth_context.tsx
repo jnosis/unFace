@@ -35,7 +35,7 @@ export function AuthContextProvider({ children }: PropsWithChildren) {
         }
       })
       .catch(() => setUserToken(null));
-  }, []);
+  }, [userToken]);
 
   const signup = useCallback(async (user: UserInfo) => {
     const token = await authService.signup(user);
