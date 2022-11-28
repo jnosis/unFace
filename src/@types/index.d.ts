@@ -1,7 +1,7 @@
 declare module '*.module.css';
 
 declare interface IHttpClient {
-  fetch<Data>(url: string, options: any): Promise<Data>;
+  fetch<Data>(url: string, options: RequestInit): Promise<Data>;
 }
 
 declare type LoginInfo = {
