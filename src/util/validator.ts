@@ -4,8 +4,8 @@ export function validateString(str: string): boolean {
   return str.length > 0 && str[0] !== ' ';
 }
 
-export function validateUsername(username: string) {
-  return !username.includes(' ') && username.length > 0;
+export function validateStringWithoutSpace(str: string): boolean {
+  return !str.includes(' ') && str.length > 0;
 }
 
 // TODO: make regexp
@@ -21,7 +21,7 @@ export function validateEmail(email: string): boolean {
 export function validateUser(name: string, value: string): boolean {
   switch (name) {
     case 'username':
-      return validateUsername(value);
+      return validateStringWithoutSpace(value);
     case 'password':
       return validatePassword(value);
     case 'name':
@@ -33,7 +33,31 @@ export function validateUser(name: string, value: string): boolean {
   }
 }
 
-export function validateRepo(repoURL: string): boolean {
+export function validateProjectUrl(repoURL: string): boolean {
+  const repoRegExps = [/^(https?\:\/\/)?[a-z0-9.-]+\.[a-z]{2,4}[a-z0-9.-\/]*/];
+  return !repoURL || repoRegExps.every((exp) => exp.test(repoURL));
+}
+
+export function validateRepoUrl(repoURL: string): boolean {
   const repoRegExps = [/^(https?\:\/\/)?github.com\/[\w]+\/[\w]+/];
   return repoRegExps.every((exp) => exp.test(repoURL));
+}
+
+export function validateRepoBranch(repoBranch: string): boolean {
+  return !repoBranch || validateStringWithoutSpace(repoBranch);
+}
+
+export function validateWork(name: string, value: string): boolean {
+  switch (name) {
+    case 'title':
+      return validateStringWithoutSpace(value);
+    case 'projectUrl':
+      return validateProjectUrl(value);
+    case 'repoUrl':
+      return validateRepoUrl(value);
+    case 'repoBranch':
+      return validateRepoBranch(value);
+    default:
+      throw new Error(`Work property(${name}) is undefined`);
+  }
 }

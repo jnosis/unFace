@@ -1,0 +1,43 @@
+@value imageInputPadding, inputOutline, inputBorderRadius from '../../common/sizes.css';
+@value loadingWidth, loadingHeight, loadingBorder, loadingBorderTop from '../../common/sizes.css';
+@value labelMediumFontSize from '../../common/sizes.css';
+
+.container {
+}
+
+.input {
+  display: none;
+}
+
+.button {
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: inputBorderRadius;
+  padding: imageInputPadding;
+  outline: var(--color-outline) solid inputOutline;
+  font-size: labelMediumFontSize;
+  color: var(--color-primary);
+}
+
+.button:hover {
+  background-color: var(--color-button-hover);
+}
+
+.loading {
+  width: loadingWidth;
+  height: loadingHeight;
+  border-radius: 50%;
+  border: loadingBorder solid var(--color-secondary);
+  border-top: loadingBorderTop solid var(--color-on-secondary);
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

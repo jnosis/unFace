@@ -68,7 +68,7 @@
 @value actionPadding: 0.25rem 0.75rem;
 
 /* Input */
-@value formPadding: 1rem;
+@value formPadding: 1rem 0;
 @value fieldPadding: 0.2rem;
 @value fieldGap: 0.25rem;
 @value inputPadding: 0.2rem 0.25rem;
