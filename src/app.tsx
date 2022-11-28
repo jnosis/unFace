@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import useScrolls from './hooks/use_scrolls';
 import { useMenuContext } from './context/menu_context';
+import { AuthContextProvider } from './context/auth_context';
 import { TechContextProvider } from './context/tech_context';
 import { isMenuItem } from './util/checker';
 import Header from './components/header/header';
@@ -73,19 +74,21 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className={styles.container}>
-        <Header menus={menus} active={active} onMenuClick={handleMenuClick} />
-        <TechContextProvider>
-          <Outlet context={scrollRef} />
-        </TechContextProvider>
-        <ScrollRestoration
-          getKey={(location) =>
-            ['/'].includes(location.pathname) && !location.state?.scrollToTop
-              ? location.pathname
-              : location.key
-          }
-        />
-      </div>
+      <AuthContextProvider>
+        <div className={styles.container}>
+          <Header menus={menus} active={active} onMenuClick={handleMenuClick} />
+          <TechContextProvider>
+            <Outlet context={scrollRef} />
+          </TechContextProvider>
+          <ScrollRestoration
+            getKey={(location) =>
+              ['/'].includes(location.pathname) && !location.state?.scrollToTop
+                ? location.pathname
+                : location.key
+            }
+          />
+        </div>
+      </AuthContextProvider>
     </QueryClientProvider>
   );
 }
