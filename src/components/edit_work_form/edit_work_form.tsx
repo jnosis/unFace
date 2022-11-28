@@ -42,10 +42,20 @@ function EditWorkForm({ work, onCancel }: EditWorkFormProps) {
         [name]: validateWork(name, value),
       }));
     }
-    setChanged((changed) => ({
-      ...changed,
-      [name]: name === 'techs' ? convertStringToTechs(value) : value,
-    }));
+    if (name.includes('repo')) {
+      setChanged((changed) => ({
+        ...changed,
+        repo: {
+          ...changed.repo,
+          [name === 'repoUrl' ? 'url' : 'branch']: value,
+        },
+      }));
+    } else {
+      setChanged((changed) => ({
+        ...changed,
+        [name]: name === 'techs' ? convertStringToTechs(value) : value,
+      }));
+    }
   };
 
   const handleFileChange = (file: FileData) => {
