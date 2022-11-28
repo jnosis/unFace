@@ -1,0 +1,79 @@
+@value mediaQuery from '../../common/sizes.css';
+@value headerHeight, aboutTopMargin from '../../common/sizes.css';
+@value smallCardBorderRadius from '../../common/sizes.css';
+@value loginWidth, loginHeight, loginFormPadding from '../../common/sizes.css';
+@value fieldPadding, fieldGap from '../../common/sizes.css';
+@value inputPadding, inputOutline, inputBorderRadius from '../../common/sizes.css';
+@value contentAndActionsMargin from '../../common/sizes.css';
+@value headlineLargeFontSize, labelMediumFontSize from '../../common/sizes.css';
+@value actionsPositionBottom, actionsPositionRight from '../../common/sizes.css';
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: headerHeight;
+}
+
+.title {
+  margin: aboutTopMargin 0;
+  font-size: headlineLargeFontSize;
+}
+
+.card {
+  position: relative;
+  width: loginWidth;
+  padding: loginFormPadding;
+  border-radius: smallCardBorderRadius;
+  background-color: appSurfaceVariantLight;
+  background-color: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
+}
+
+.fields {
+  display: flex;
+  margin-bottom: contentAndActionsMargin;
+  flex-direction: column;
+  gap: fieldPadding;
+}
+
+.field {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: fieldGap;
+  padding: fieldPadding;
+  font-size: labelMediumFontSize;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  outline: var(--color-outline) solid inputOutline;
+  border-radius: inputBorderRadius;
+  padding: inputPadding;
+  font-size: labelMediumFontSize;
+  color: var(--color-on-surface);
+}
+
+.input:not(:placeholder-shown).invalid {
+  outline-color: var(--color-error);
+}
+
+.input:focus {
+  outline-color: var(--color-primary);
+}
+
+.actions {
+  position: absolute;
+  bottom: actionsPositionBottom;
+  right: actionsPositionRight;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .card {
+    width: 95%;
+  }
+}

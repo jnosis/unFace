@@ -7,19 +7,18 @@ type NavItemProps = {
   onMenuClick(name: MenuItem): void;
 };
 
-const NavItem = ({ name, activated, onMenuClick }: NavItemProps) => {
-  const onClick = () => {
-    onMenuClick(name);
-  };
+function NavItem({ name, activated, onMenuClick }: NavItemProps) {
+  const handleClick = () => onMenuClick(name);
 
-  const className = activated
+  const menuClass = activated
     ? `${styles.item} ${styles.active}`
     : `${styles.item} ${styles.inactive}`;
+
   return (
-    <li className={className} onClick={onClick}>
+    <li className={menuClass} onClick={handleClick}>
       {name.toUpperCase()}
     </li>
   );
-};
+}
 
 export default NavItem;

@@ -18,4 +18,6 @@ class ImageUploader {
   }
 }
 
-export default ImageUploader;
+const imageUploader = new ImageUploader();
+
+export default imageUploader;

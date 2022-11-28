@@ -1,29 +1,37 @@
-import React, { memo } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from 'react-router-dom';
 import '@fortawesome/fontawesome-free/js/all';
-import './index.module.css';
+import { DarkModeProvider } from './context/dark_mode_context';
+import { MenuContextProvider } from './context/menu_context';
 import App from './app';
-import AuthService from './service/auth';
-import WorkService from './service/work';
-import ImageUploader from './service/image_uploader';
-import ImageFileInput from './components/image_file_input/image_file_input';
-import { env } from '../config/env';
-import HttpClient from './network/http';
+import NotFound from './pages/not_found/not_found';
+import Main from './pages/main/main';
+import WorkDetail from './pages/work_detail/work_detail';
+import Signup from './pages/signup/signup';
+import Login from './pages/login/login';
+import Logout from './pages/logout/logout';
+import './index.css';
 
-const httpClient = new HttpClient(env.database.url);
-const authService = new AuthService(httpClient);
-const workRepository = new WorkService(httpClient);
-const imageUploader = new ImageUploader();
-
-type FileInputProps = {
-  name: string | null;
-  onFileChange(file: FileData): void;
-};
-const FileInput = memo((props: FileInputProps) => {
-  return <ImageFileInput {...props} imageUploader={imageUploader} />;
-});
-export const IFileInput = FileInput;
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    errorElement: <Navigate to='/404' replace />,
+    children: [
+      { index: true, element: <Main /> },
+      { path: 'works/:title', element: <WorkDetail /> },
+      { path: 'signup', element: <Signup /> },
+      { path: 'login', element: <Login /> },
+      { path: 'logout', element: <Logout /> },
+      { path: '/404', element: <NotFound /> },
+    ],
+  },
+]);
 
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Failed to find the root element');
@@ -31,12 +39,10 @@ const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App
-        FileInput={FileInput}
-        authService={authService}
-        workRepository={workRepository}
-      />
-    </BrowserRouter>
+    <DarkModeProvider>
+      <MenuContextProvider>
+        <RouterProvider router={router} />
+      </MenuContextProvider>
+    </DarkModeProvider>
   </React.StrictMode>
 );

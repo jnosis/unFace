@@ -1,12 +1,17 @@
 @value mediaQueryTablet from '../../common/sizes.css';
+
+@value headerHeight from '../../common/sizes.css';
 @value mainSideMarginDesktop from '../../common/sizes.css';
 
 .container {
-  margin: 0 mainSideMarginDesktop;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: headerHeight mainSideMarginDesktop 0;
 }
 
 @media screen and (max-width: mediaQueryTablet) {
   .container {
-    margin: 0;
+    margin: headerHeight 0 0;
   }
 }

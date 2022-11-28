@@ -2,22 +2,22 @@ import React from 'react';
 import styles from './tech.module.css';
 
 type TechProps = {
-  tech: string;
+  name: string;
   selected: boolean;
-  onTechClick?(tech: string): void;
+  onClick?(tech: string): void;
 };
 
-const Tech = ({ tech, selected, onTechClick }: TechProps) => {
+function Tech({ name, selected, onClick }: TechProps) {
   return (
-    <div
+    <li
       className={`${styles.chip}${selected ? ` ${styles.selected}` : ''}${
-        !!onTechClick ? ` ${styles.clickable}` : ''
+        !!onClick ? ` ${styles.clickable}` : ''
       }`}
-      onClick={onTechClick && (() => onTechClick(tech))}
+      onClick={onClick && (() => onClick(name))}
     >
-      {tech}
-    </div>
+      {name}
+    </li>
   );
-};
+}
 
 export default Tech;

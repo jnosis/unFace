@@ -1,13 +1,10 @@
 @value chipHeight, chipPadding, chipOutline, chipBorderRadius from '../../common/sizes.css';
 @value labelMediumFontSize from '../../common/sizes.css';
 
-@value appOutlineLight, appSecondaryContainerLight, appOnSurfaceVariantLight from '../../common/colors.css';
-@value appOutlineDark, appSecondaryContainerDark, appOnSurfaceVariantDark from '../../common/colors.css';
-
 .chip {
   padding: chipPadding;
-  outline: chipOutline solid appOutlineLight;
-  color: appOnSurfaceVariantLight;
+  outline: chipOutline solid var(--color-outline);
+  color: var(--color-on-surface-variant);
   border-radius: chipBorderRadius;
   height: chipHeight;
   line-height: chipHeight;
@@ -20,17 +17,6 @@
 }
 
 .chip.selected {
-  background-color: appSecondaryContainerLight;
+  background-color: var(--color-secondary-container);
   outline-style: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  .chip {
-    outline-color: appOutlineDark;
-    color: appOnSurfaceVariantDark;
-  }
-
-  .chip.selected {
-    background-color: appSecondaryContainerDark;
-  }
 }

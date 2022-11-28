@@ -1,48 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useMenuContext } from '../../context/menu_context';
+import ThemeToggler from '../theme_toggler/theme_toggler';
 import NavItem from '../nav_item/nav_item';
 import styles from './header.module.css';
 
 type HeaderProps = {
-  active: string;
   menus: MenuItem[];
-  onLogoClick(): void;
+  active: MenuItem;
   onMenuClick(name: MenuItem): void;
 };
 
-const Header = ({ active, menus, onLogoClick, onMenuClick }: HeaderProps) => {
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
-
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    });
-  }, []);
+function Header({ menus, active, onMenuClick }: HeaderProps) {
+  const { isScrolled } = useMenuContext();
 
   return (
     <header
       className={`${styles.header}${isScrolled ? ` ${styles.scrolled}` : ''}`}
     >
-      <div className={styles.content}>
-        <div className={styles.logo} onClick={onLogoClick}>
-          <h1 className={styles.title}>unFace</h1>
-        </div>
+      <Link to='/' state={{ scrollToTop: true }} className={styles.logo}>
+        <h1 className={styles.title}>unFace</h1>
+      </Link>
+      <nav>
         <ul className={styles.menu}>
-          {menus.map((menu) => (
+          <li>
+            <ThemeToggler />
+          </li>
+          {menus.map((menu, index) => (
             <NavItem
-              key={menu}
+              key={index}
               name={menu}
               activated={menu === active}
               onMenuClick={onMenuClick}
             />
           ))}
         </ul>
-      </div>
+      </nav>
     </header>
   );
-};
+}
 
 export default Header;

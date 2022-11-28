@@ -1,9 +1,6 @@
 @value mediaQuery from '../../common/sizes.css';
-@value headerHeight, headerPadding, menuGap from '../../common/sizes.css';
-@value titleLargeFontSize from '../../common/sizes.css';
-
-@value appBarLight, appBackgroundLight, appPrimaryLight, appOnSurfaceLight from '../../common/colors.css';
-@value appBarDark, appBackgroundDark, appPrimaryDark, appOnSurfaceDark from '../../common/colors.css';
+@value headerHeight, headerPadding, menuGap, menuPadding from '../../common/sizes.css';
+@value titleLargeFontSize, titleMediumFontSize from '../../common/sizes.css';
 
 .header {
   position: fixed;
@@ -12,17 +9,9 @@
   right: 0;
   width: 100%;
   height: headerHeight;
-  background-color: appBarLight;
-  color: appOnSurfaceLight;
+  background-color: var(--color-bar);
+  color: var(--color-on-surface);
   z-index: 1;
-}
-
-.content {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: headerHeight;
   padding: headerPadding;
   display: flex;
   justify-content: space-between;
@@ -32,6 +21,7 @@
 .logo {
   display: flex;
   align-items: center;
+  color: inherit;
 }
 
 .logo:hover {
@@ -48,20 +38,27 @@
   gap: menuGap;
 }
 
-@media (prefers-color-scheme: dark) {
-  .header {
-    background-color: appBarDark;
-    color: appOnSurfaceDark;
-  }
+.toggle {
+  cursor: pointer;
+  padding: menuPadding;
+  transition: 150ms ease-in;
+  text-align: center;
+  width: 3rem;
+  font-size: titleMediumFontSize;
+  color: var(--color-on-surface-variant);
+}
+
+.toggle:hover {
+  color: var(--color-primary);
 }
 
 @media screen and (max-width: mediaQuery) {
   .header {
-    background-color: appBackgroundLight;
+    background-color: var(--color-background);
   }
 
   .header.scrolled {
-    background-color: appBarLight;
+    background-color: var(--color-bar);
   }
 
   .menu {
@@ -72,20 +69,6 @@
     height: headerHeight;
     justify-content: center;
     align-items: center;
-    background-color: appBarLight;
-  }
-}
-
-@media screen and (max-width: mediaQuery) and (prefers-color-scheme: dark) {
-  .header {
-    background-color: appBackgroundDark;
-  }
-
-  .header.scrolled {
-    background-color: appBarDark;
-  }
-
-  .menu {
-    background-color: appBarDark;
+    background-color: var(--color-bar);
   }
 }

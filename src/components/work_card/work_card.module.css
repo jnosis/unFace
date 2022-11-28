@@ -1,12 +1,24 @@
 @value smallCardBorderRadius from '../../common/sizes.css';
-@value workContentPadding, workTitleAndDescMargin from '../../common/sizes.css';
+@value worksCardMinHeight, workContentPadding, workTitleAndDescMargin from '../../common/sizes.css';
 @value chipsTopMargin, chipsPadding, chipsGap from '../../common/sizes.css';
 @value contentAndActionsMargin from '../../common/sizes.css';
 @value headlineMediumFontSize, bodyLargeFontSize from '../../common/sizes.css';
+@value actionsPositionBottom, actionsPositionRight from '../../common/sizes.css';
 
 .container {
   position: relative;
+  width: 100%;
   height: 100%;
+  border-radius: smallCardBorderRadius;
+  min-height: worksCardMinHeight;
+  background-color: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+}
+
+.container:hover {
+  transform: scale(1.01);
+  transition-duration: 150ms;
 }
 
 .thumbnail {
@@ -16,6 +28,10 @@
 
 .content {
   padding: workContentPadding;
+}
+
+.content.admin {
+  margin-bottom: contentAndActionsMargin;
 }
 
 .title {
@@ -35,6 +51,10 @@
   gap: chipsGap;
 }
 
-.techs.admin {
-  margin-bottom: contentAndActionsMargin;
+.actions {
+  position: absolute;
+  bottom: actionsPositionBottom;
+  right: actionsPositionRight;
+  display: flex;
+  list-style: none;
 }

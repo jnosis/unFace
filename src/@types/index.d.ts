@@ -19,8 +19,6 @@ declare type UserToken = {
   username: string;
 };
 
-declare type AuthProvider = 'Google' | 'Github';
-
 declare type MenuItem = 'home' | 'works' | 'contact';
 
 declare type Repo = {
@@ -65,5 +63,5 @@ declare type Action = {
   type: 'button' | 'submit' | 'reset';
   title: string;
   isDisable: boolean;
-  onClick(event: any): void;
+  onClick?(event: any): void;
 };

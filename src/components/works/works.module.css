@@ -1,23 +1,17 @@
 @value mediaQuery from '../../common/sizes.css';
 @value scrollMargin from '../../common/sizes.css';
-@value sectionTopMarginDesktop, contentSideMarginDesktop from '../../common/sizes.css';
-@value sectionTopMarginMobile, contentSideMarginMobile from '../../common/sizes.css';
+@value sectionTopMarginDesktop, sectionSidePaddingDesktop from '../../common/sizes.css';
+@value sectionTopMarginMobile, sectionSidePaddingMobile from '../../common/sizes.css';
 @value smallCardBorderRadius from '../../common/sizes.css';
 @value chipsTopMargin, chipsPadding, chipsGap from '../../common/sizes.css';
 @value worksListTopMargin, worksListPadding, worksListGap, worksCardMinHeight from '../../common/sizes.css';
 @value headlineLargeFontSize from '../../common/sizes.css';
 
-@value appOnBackgroundLight, appSurfaceVariantLight, appOnSurfaceVariantLight from '../../common/colors.css';
-@value appOnBackgroundDark, appSurfaceVariantDark, appOnSurfaceVariantDark from '../../common/colors.css';
-
 .container {
   width: 100%;
   margin-top: sectionTopMarginDesktop;
+  padding: 0 sectionSidePaddingDesktop;
   scroll-margin: scrollMargin;
-}
-
-.content {
-  margin: 0 contentSideMarginDesktop;
 }
 
 .title {
@@ -43,53 +37,14 @@
   gap: worksListGap;
 }
 
-.card {
-  border-radius: smallCardBorderRadius;
-  width: 100%;
-  min-height: worksCardMinHeight;
-  background-color: appSurfaceVariantLight;
-  color: appOnSurfaceVariantLight;
-  cursor: pointer;
-}
-
-.card.form {
-  cursor: initial;
-}
-
-.card:not(.form):hover {
-  transform: scale(1.01);
-  transition-duration: 0.5s;
-}
-
-.add {
-  width: 100%;
-  height: 100%;
-  font-size: 10rem;
-  color: appOnSurfaceVariantLight;
-}
-
 @media screen and (max-width: mediaQuery) {
   .container {
     margin-top: sectionTopMarginMobile;
-  }
-
-  .content {
-    margin: 0 contentSideMarginMobile;
+    padding: 0 sectionSidePaddingMobile;
   }
 
   .list {
     grid-template-columns: 1fr;
     padding: 0;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .card {
-    background-color: appSurfaceVariantDark;
-    color: appOnSurfaceVariantDark;
-  }
-
-  .add {
-    color: appOnSurfaceVariantDark;
   }
 }

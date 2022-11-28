@@ -1,33 +1,34 @@
 import React, { forwardRef } from 'react';
+import { env } from '../../../config/env';
 import styles from './contact.module.css';
 
 const Contact = forwardRef<HTMLElement>((_, scrollRef) => {
   return (
     <section ref={scrollRef} className={styles.container} id='contact'>
-      <div className={styles.card}>
+      <article className={styles.card}>
         <h1 className={styles.title}>Contact</h1>
         <ul className={styles.links}>
           <li>
             <a
               className={styles.link}
-              href='mailto:jnosis1546@gmail.com'
+              href={`mailto:${env.user.email}`}
               aria-label='Email'
             >
-              <i className='fa-solid fa-envelope'></i>
+              <i className='fa-solid fa-envelope' />
             </a>
           </li>
           <li>
             <a
               className={styles.link}
-              href='https://github.com/jnosis'
-              aria-label='Github'
+              href={env.user.github}
+              aria-label=''
               target='_blank'
             >
-              <i className='fa-brands fa-github'></i>
+              <i className='fa-brands fa-github' />
             </a>
           </li>
         </ul>
-      </div>
+      </article>
     </section>
   );
 });

@@ -1,168 +1,193 @@
-import React, { memo, useRef, useState } from 'react';
-import styles from './edit_work_form.module.css';
-import { IFileInput } from '../..';
-import { validateRepo, validateTitle } from '../../util/validator';
-import { addHttpsOnURL } from '../../util/url_converter';
-import Actions from '../actions/actions';
+import React, { useState } from 'react';
+import useWorks from '../../hooks/use_works';
 import {
   convertStringToTechs,
   convertTechsToString,
 } from '../../util/tech_converter';
+import { validateWork } from '../../util/validator';
+import ImageFileInput from '../image_file_input/image_file_input';
+import Action from '../action/action';
+import styles from './edit_work_form.module.css';
 
 type EditWorkFormProps = {
   work: WorkData;
-  FileInput: typeof IFileInput;
-  onEdit(work: WorkInputData): void;
   onCancel(): void;
 };
 
-const EditWorkForm = memo(
-  ({ work, FileInput, onEdit, onCancel }: EditWorkFormProps) => {
-    const formRef = useRef<HTMLFormElement>(null);
-    const titleRef = useRef<HTMLInputElement>(null);
-    const projectRef = useRef<HTMLInputElement>(null);
-    const repoRef = useRef<HTMLInputElement>(null);
-    const branchRef = useRef<HTMLInputElement>(null);
-    const descriptionRef = useRef<HTMLTextAreaElement>(null);
-    const techsRef = useRef<HTMLInputElement>(null);
-    const [isValidTitle, setIsValidTitle] = useState<boolean>(true);
-    const [isValidRepo, setIsValidRepo] = useState<boolean>(true);
-    const [file, setFile] = useState<FileData | null>(work.thumbnail);
+type WorkValidation = {
+  title: boolean;
+  projectUrl: boolean;
+  repoUrl: boolean;
+  repoBranch: boolean;
+};
 
-    const onFileChange = (file: FileData) => {
-      setFile(file);
-    };
+function EditWorkForm({ work, onCancel }: EditWorkFormProps) {
+  const { updateWork } = useWorks();
 
-    const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
+  const { title, description, techs, repo, projectURL, thumbnail } = work;
+  const [changed, setChanged] = useState<WorkInputData>({
+    title,
+    description,
+    techs,
+    repo,
+    projectURL,
+    thumbnail,
+  });
+  const [validation, setValidation] = useState<WorkValidation>({
+    title: true,
+    projectUrl: true,
+    repoUrl: true,
+    repoBranch: true,
+  });
 
-      if (isValidTitle && isValidRepo) {
-        const edited: WorkInputData = {
-          title: titleRef.current?.value || '',
-          projectURL: projectRef.current?.value,
-          repo: {
-            url: addHttpsOnURL(repoRef.current?.value || ''),
-            branch: branchRef.current?.value || 'master',
-          },
-          techs: convertStringToTechs(techsRef.current?.value || ''),
-          description: descriptionRef.current?.value || '',
-          thumbnail: file || { fileName: '', fileURL: '' },
-        };
-        formRef.current?.reset();
-        setFile(null);
-        onEdit(edited);
-      }
-    };
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    if (name !== 'techs' && name !== 'description') {
+      setValidation((validation) => ({
+        ...validation,
+        [name]: validateWork(name, value),
+      }));
+    }
+    if (name.includes('repo')) {
+      setChanged((changed) => ({
+        ...changed,
+        repo: {
+          ...changed.repo,
+          [name === 'repoUrl' ? 'url' : 'branch']: value,
+        },
+      }));
+    } else {
+      setChanged((changed) => ({
+        ...changed,
+        [name]: name === 'techs' ? convertStringToTechs(value) : value,
+      }));
+    }
+  };
 
-    const onChange = () => {
-      const title = titleRef.current?.value || '';
-      const repo = addHttpsOnURL(repoRef.current?.value || '');
+  const handleFileChange = (file: FileData) => {
+    setChanged((changed) => ({ ...changed, thumbnail: file }));
+  };
 
-      setIsValidTitle(validateTitle(title));
-      setIsValidRepo(validateRepo(repo));
-    };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!Object.values(validation).includes(false)) {
+      updateWork.mutate(changed);
+      onCancel();
+    }
+  };
 
-    return (
-      <form ref={formRef} className={styles.container} onChange={onChange}>
-        <label className={`${styles.field} ${styles.title}`}>
-          Title
+  return (
+    <li className={styles.container}>
+      <form className={styles.content} onSubmit={handleSubmit}>
+        <div className={styles.title}>
+          <label className={styles.field}>Title</label>
           <input
-            ref={titleRef}
             className={`${styles.input}${
-              isValidTitle ? '' : ` ${styles.invalid}`
+              validation.title ? '' : ` ${styles.invalid}`
             }`}
             type='text'
             name='title'
+            defaultValue={changed.title ?? ''}
             placeholder='title'
-            defaultValue={work.title}
+            required
+            readOnly
           />
-        </label>
-        <label className={`${styles.field} ${styles.project}`}>
-          Project URL
+        </div>
+        <div>
+          <label className={styles.field}>Project URL</label>
           <input
-            ref={projectRef}
-            className={styles.input}
+            className={`${styles.input}${
+              validation.projectUrl ? '' : ` ${styles.invalid}`
+            }`}
             type='text'
-            name='project'
+            name='projectUrl'
+            defaultValue={changed.projectURL ?? ''}
             placeholder='project url'
-            defaultValue={work.projectURL}
+            onChange={handleChange}
           />
-        </label>
+        </div>
         <div className={styles.repo}>
-          <label className={`${styles.field} ${styles.url}`}>
-            Repository URL
+          <div className={`${styles.field} ${styles.url}`}>
+            <label>Repository URL</label>
             <input
-              ref={repoRef}
               className={`${styles.input}${
-                isValidRepo ? '' : ` ${styles.invalid}`
+                validation.repoUrl ? '' : ` ${styles.invalid}`
               }`}
               type='text'
-              name='repo'
-              placeholder='repository url'
-              defaultValue={work.repo.url}
+              name='repoUrl'
+              defaultValue={changed.repo.url ?? ''}
+              placeholder='repo url'
+              required
+              onChange={handleChange}
             />
-          </label>
-          <label className={`${styles.field} ${styles.branch}`}>
-            Branch
+          </div>
+          <div className={`${styles.field} ${styles.branch}`}>
+            <label>Branch</label>
             <input
-              ref={branchRef}
-              className={styles.input}
+              className={`${styles.input}${
+                validation.repoBranch ? '' : ` ${styles.invalid}`
+              }`}
               type='text'
-              name='branch'
-              placeholder='master'
-              defaultValue={work.repo.branch}
-            />
-          </label>
-        </div>
-        <label className={`${styles.field} ${styles.description}`}>
-          Description
-          <textarea
-            ref={descriptionRef}
-            className={styles.textarea}
-            name='description'
-            placeholder='description'
-            defaultValue={work.description}
-          />
-        </label>
-        <label className={`${styles.field} ${styles.techs}`}>
-          Techs
-          <input
-            ref={techsRef}
-            className={styles.input}
-            type='text'
-            name='techs'
-            placeholder='techs'
-            defaultValue={convertTechsToString(work.techs)}
-          />
-        </label>
-        <div className={`${styles.field} ${styles.thumbnail}`}>
-          Thumbnail
-          <div>
-            <FileInput
-              name={file?.fileName ? file.fileName : null}
-              onFileChange={onFileChange}
+              name='repoBranch'
+              defaultValue={changed.repo.branch ?? ''}
+              placeholder='repo branch'
+              onChange={handleChange}
             />
           </div>
         </div>
-        <Actions
-          actions={[
-            {
-              type: 'button',
-              title: 'Cancel',
-              isDisable: false,
-              onClick: onCancel,
-            },
-            {
-              type: 'submit',
-              title: 'Edit',
-              isDisable: !(isValidTitle && isValidRepo),
-              onClick: onSubmit,
-            },
-          ]}
-        />
+        <div className={`${styles.field} ${styles.description}`}>
+          <label>Description</label>
+          <textarea
+            className={`${styles.textarea}`}
+            name='description'
+            defaultValue={changed.description ?? ''}
+            placeholder='description'
+            onChange={handleChange}
+          />
+        </div>
+        <div className={styles.field}>
+          <label>Techs</label>
+          <input
+            className={`${styles.input}`}
+            type='text'
+            name='techs'
+            defaultValue={convertTechsToString(changed.techs) ?? ''}
+            placeholder='techs'
+            onChange={handleChange}
+          />
+        </div>
+        <div className={styles.field}>
+          <label>Thumbnail</label>
+          <ImageFileInput
+            name={
+              changed.thumbnail?.fileName ? changed.thumbnail.fileName : null
+            }
+            onFileChange={handleFileChange}
+          />
+        </div>
+
+        <ul className={styles.actions}>
+          <li>
+            <Action
+              type='button'
+              title='Cancel'
+              isDisable={false}
+              onClick={onCancel}
+            />
+          </li>
+          <li>
+            <Action
+              type='submit'
+              title='Edit'
+              isDisable={Object.values(validation).includes(false)}
+            />
+          </li>
+        </ul>
       </form>
-    );
-  }
-);
+    </li>
+  );
+}
 
 export default EditWorkForm;

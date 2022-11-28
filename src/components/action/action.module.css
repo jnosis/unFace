@@ -1,0 +1,20 @@
+@value actionPadding, actionBorderRadius from '../../common/sizes.css';
+@value labelLargeFontSize from '../../common/sizes.css';
+
+.button {
+  padding: actionPadding;
+  border-radius: actionBorderRadius;
+  color: var(--color-primary);
+  font-weight: bold;
+  font-size: labelLargeFontSize;
+}
+
+.button.disable {
+  cursor: initial;
+  color: var(--color-on-surface);
+  opacity: 0.38;
+}
+
+.button:not(.disable):hover {
+  background-color: var(--color-button-hover);
+}

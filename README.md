@@ -2,6 +2,7 @@
 
 ### TODO:
 
-- Add Sign up page
-- Refactor file structure (i.e. separate components and page)
-- Add UserContext and WorkContext
+- Create generic Input Component
+- Create generic Form Component
+- Add Tech autocompletion
+- Refactor size.css to :root
