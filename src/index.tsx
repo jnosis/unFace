@@ -14,6 +14,7 @@ import Main from './pages/main/main';
 import WorkDetail from './pages/work_detail/work_detail';
 import Signup from './pages/signup/signup';
 import Login from './pages/login/login';
+import Logout from './pages/logout/logout';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: 'works/:title', element: <WorkDetail /> },
       { path: 'signup', element: <Signup /> },
       { path: 'login', element: <Login /> },
+      { path: 'logout', element: <Logout /> },
       { path: '/404', element: <NotFound /> },
     ],
   },
