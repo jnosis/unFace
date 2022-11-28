@@ -65,6 +65,12 @@
   outline-color: var(--color-primary);
 }
 
+.status {
+  margin-top: fieldGap;
+  color: var(--color-error);
+  font-weight: bold;
+}
+
 @media screen and (max-width: mediaQuery) {
   .card {
     width: 95%;

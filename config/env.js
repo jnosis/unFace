@@ -18,4 +18,7 @@ export const env = {
     email: required('USER_EMAIL'),
     github: required('USER_GITHUB'),
   },
+  status: {
+    signup: !!parseInt(required('SIGNUP_OPEN_STATUS', '0')),
+  },
 };
