@@ -24,7 +24,15 @@ type WorkValidation = {
 function EditWorkForm({ work, onCancel }: EditWorkFormProps) {
   const { updateWork } = useWorks();
 
-  const [changed, setChanged] = useState<WorkInputData>({ ...work });
+  const { title, description, techs, repo, projectURL, thumbnail } = work;
+  const [changed, setChanged] = useState<WorkInputData>({
+    title,
+    description,
+    techs,
+    repo,
+    projectURL,
+    thumbnail,
+  });
   const [validation, setValidation] = useState<WorkValidation>({
     title: true,
     projectUrl: true,

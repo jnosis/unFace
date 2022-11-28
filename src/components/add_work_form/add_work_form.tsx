@@ -25,17 +25,20 @@ const initialWorkInput: WorkInputData = {
   thumbnail: { fileName: '', fileURL: '' },
 };
 
+const initialValidation: WorkValidation = {
+  title: false,
+  projectUrl: true,
+  repoUrl: false,
+  repoBranch: true,
+};
+
 function AddWorkForm() {
   const { addWork } = useWorks();
 
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [added, setAdded] = useState<WorkInputData>(initialWorkInput);
-  const [validation, setValidation] = useState<WorkValidation>({
-    title: false,
-    projectUrl: true,
-    repoUrl: false,
-    repoBranch: true,
-  });
+  const [validation, setValidation] =
+    useState<WorkValidation>(initialValidation);
 
   const handleOpen = () => {
     setIsOpenForm(true);
@@ -73,6 +76,7 @@ function AddWorkForm() {
 
   const handleCancel = () => {
     setAdded(initialWorkInput);
+    setValidation(initialValidation);
     setIsOpenForm(false);
   };
 
