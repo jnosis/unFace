@@ -3,7 +3,7 @@ import { env } from '../../config/env';
 export class HttpClient implements IHttpClient {
   constructor(private baseURL: string) {}
 
-  async fetch<Data>(url: string, options: any) {
+  async fetch<Data>(url: string, options: RequestInit) {
     const res = await fetch(`${this.baseURL}/${url}`, {
       ...options,
       headers: { 'Content-Type': 'application/json', ...options.headers },
@@ -11,7 +11,7 @@ export class HttpClient implements IHttpClient {
     });
     let data;
     try {
-      data = await res.json();
+      if (res.status !== 204) data = await res.json();
     } catch (error) {
       console.log(error);
     }
