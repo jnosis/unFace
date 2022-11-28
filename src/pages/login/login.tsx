@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/auth_context';
 import { validateUser } from '../../util/validator';
 import Action from '../../components/action/action';
 import styles from './login.module.css';
@@ -14,11 +16,15 @@ const initialLoginInfo: LoginInfo = {
 };
 
 function Login() {
+  const { userToken, login } = useAuthContext();
+
   const [loginInfo, setLoginInfo] = useState<LoginInfo>(initialLoginInfo);
   const [validation, setValidation] = useState<LoginInfoValidation>({
     username: false,
     password: false,
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,8 +37,15 @@ function Login() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginInfo);
+    if (!Object.values(validation).includes(false)) {
+      login(loginInfo);
+      navigate('/', { replace: true });
+    }
   };
+
+  useEffect(() => {
+    !!userToken && navigate('/');
+  }, [userToken]);
 
   return (
     <section className={styles.container}>
