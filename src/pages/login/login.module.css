@@ -6,6 +6,7 @@
 @value inputPadding, inputOutline, inputBorderRadius from '../../common/sizes.css';
 @value contentAndActionsMargin from '../../common/sizes.css';
 @value headlineLargeFontSize, labelMediumFontSize from '../../common/sizes.css';
+@value actionsPositionBottom, actionsPositionRight from '../../common/sizes.css';
 
 .container {
   width: 100%;
@@ -63,6 +64,12 @@
 
 .input:focus {
   outline-color: var(--color-primary);
+}
+
+.actions {
+  position: absolute;
+  bottom: actionsPositionBottom;
+  right: actionsPositionRight;
 }
 
 @media screen and (max-width: mediaQuery) {

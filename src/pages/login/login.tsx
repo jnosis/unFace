@@ -77,7 +77,9 @@ function Login() {
             onChange={handleChange}
           />
         </div>
-        <Action type='submit' title='Sign in' isDisable={false} />
+        <div className={styles.actions}>
+          <Action type='submit' title='Sign in' isDisable={false} />
+        </div>
       </form>
     </section>
   );

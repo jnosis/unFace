@@ -1,11 +1,7 @@
-@value actionsPositionBottom, actionsPositionRight from '../../common/sizes.css';
 @value actionPadding, actionBorderRadius from '../../common/sizes.css';
 @value labelLargeFontSize from '../../common/sizes.css';
 
 .button {
-  position: absolute;
-  bottom: actionsPositionBottom;
-  right: actionsPositionRight;
   padding: actionPadding;
   border-radius: actionBorderRadius;
   color: var(--color-primary);

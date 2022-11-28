@@ -117,7 +117,9 @@ function Signup() {
             disabled={!isPossibleSignup}
           />
         </div>
-        <Action type='submit' title='Sign up' isDisable={!isPossibleSignup} />
+        <div className={styles.actions}>
+          <Action type='submit' title='Sign up' isDisable={!isPossibleSignup} />
+        </div>
       </form>
       {!isPossibleSignup && (
         <span className={styles.status}>Currently unavailable to sign up</span>
