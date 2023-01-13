@@ -1,0 +1,14 @@
+import { AppProps } from '$fresh/server.ts';
+import { color } from '~/utils/style_utils.ts';
+
+export default function App({ Component }: AppProps) {
+  return (
+    <body
+      class={`flex flex-col w-full h-full min-h-screen ${
+        color('bg-background text-on-background')
+      }`}
+    >
+      <Component />
+    </body>
+  );
+}

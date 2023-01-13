@@ -1,24 +1,20 @@
 import { Head } from '$fresh/runtime.ts';
-import Counter from '~/islands/Counter.tsx';
 
 export default function Home() {
   return (
-    <>
+    <main class='flex flex-col h-full mt-16 mx-0 md:mx-20 lg:mx-40'>
       <Head>
-        <title>Fresh App</title>
+        <title>unFace</title>
       </Head>
-      <div class='p-4 mx-auto max-w-screen-md'>
-        <img
-          src='/logo.svg'
-          class='w-32 h-32'
-          alt='the fresh logo: a sliced lemon dripping with juice'
-        />
-        <p class='my-6'>
-          Welcome to `fresh`. Try updating this message in the
-          ./routes/index.tsx file, and refresh.
-        </p>
-        <Counter start={3} />
-      </div>
-    </>
+      <section class='w-full px-4 mt-0 sm:mt-6'>
+        <article
+          class={`px-16 py-36 rounded-[4rem] bg-cover bg-no-repeat ${('text-on-primary bg-profile')}`}
+          id='home'
+        >
+          <h1 class='text-4xl font-bold'></h1>
+          <div class='mt-12 text-3xl'></div>
+        </article>
+      </section>
+    </main>
   );
 }
