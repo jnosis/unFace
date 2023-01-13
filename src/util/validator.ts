@@ -51,7 +51,7 @@ export function validateWork(name: string, value: string): boolean {
   switch (name) {
     case 'title':
       return validateStringWithoutSpace(value);
-    case 'projectUrl':
+    case 'projectURL':
       return validateProjectUrl(value);
     case 'repoUrl':
       return validateRepoUrl(value);
