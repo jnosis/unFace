@@ -1,4 +1,6 @@
 import { Head } from '$fresh/runtime.ts';
+import Contact from '~/components/Contact.tsx';
+import config from '~/config.ts';
 
 export default function Home() {
   return (
@@ -14,6 +16,12 @@ export default function Home() {
           <h1 class='text-4xl font-bold'></h1>
           <div class='mt-12 text-3xl'></div>
         </article>
+      </section>
+      <section
+        class='w-full mt-10 mb-4 sm:my-16 px-4 sm:px-10 text-center'
+        id='contact'
+      >
+        <Contact email={config.author.email} github={config.author.github} />
       </section>
     </main>
   );
