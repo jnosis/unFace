@@ -4,15 +4,14 @@ declare interface IHttpClient {
   fetch<Data>(url: string, options: RequestInit): Promise<Data>;
 }
 
-declare type LoginInfo = {
+declare type UserInfo = {
   username: string;
   password: string;
-};
-
-declare type UserInfo = LoginInfo & {
   name: string;
   email: string;
 };
+
+declare type LoginInfo = Pick<UserInfo, 'username' | 'password'>;
 
 declare type UserToken = {
   token: string;
@@ -38,16 +37,9 @@ declare type WorkData = {
   thumbnail: FileData;
 };
 
-declare type WorkInputData = {
-  title: string;
-  description: string;
-  techs: Techs;
-  repo: Repo;
-  projectURL?: string;
-  thumbnail: FileData;
-};
+declare type WorkInputData = Omit<WorkData, 'id'>;
 
-type WorksDatabase = { [id: string]: WorkData };
+type WorksDatabase = Record<string, WorkData>;
 
 declare type FileData = {
   fileName: string;

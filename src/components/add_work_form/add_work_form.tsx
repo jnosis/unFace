@@ -11,7 +11,7 @@ import styles from './add_work_form.module.css';
 
 type WorkValidation = {
   title: boolean;
-  projectUrl: boolean;
+  projectURL: boolean;
   repoUrl: boolean;
   repoBranch: boolean;
 };
@@ -27,7 +27,7 @@ const initialWorkInput: WorkInputData = {
 
 const initialValidation: WorkValidation = {
   title: false,
-  projectUrl: true,
+  projectURL: true,
   repoUrl: false,
   repoBranch: true,
 };
@@ -112,10 +112,10 @@ function AddWorkForm() {
             <label className={styles.field}>Project URL</label>
             <input
               className={`${styles.input}${
-                validation.projectUrl ? '' : ` ${styles.invalid}`
+                validation.projectURL ? '' : ` ${styles.invalid}`
               }`}
               type='text'
-              name='projectUrl'
+              name='projectURL'
               defaultValue={added.projectURL ?? ''}
               placeholder='project url'
               onChange={handleChange}
