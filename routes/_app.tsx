@@ -1,4 +1,5 @@
 import { AppProps } from '$fresh/server.ts';
+import { Head } from '$fresh/runtime.ts';
 import Header from '~/islands/Header.tsx';
 import { color } from '~/utils/style_utils.ts';
 
@@ -9,6 +10,12 @@ export default function App({ Component }: AppProps) {
         color('bg-background text-on-background')
       }`}
     >
+      <Head>
+        <link
+          rel='stylesheet'
+          href='https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css'
+        />
+      </Head>
       <Header menus={['home', 'works', 'contact']} />
       <Component />
     </body>

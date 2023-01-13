@@ -22,6 +22,13 @@ export type WorkData = {
   thumbnail: FileData;
 };
 
+export type WorkMarkDown = {
+  title: string;
+  repoUrl: string;
+  projectUrl: string;
+  markdown: string;
+};
+
 export type AuthorOptions = {
   email: string;
   github: string;
