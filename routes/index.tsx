@@ -40,7 +40,7 @@ export const handler: Handlers<WorkData[]> = {
 
 export default function Home({ data: works }: PageProps<WorkData[]>) {
   return (
-    <main class='flex flex-col h-full mt-16 mx-0 md:mx-20 lg:mx-40'>
+    <main class='flex flex-col h-full mt-16 mx-0 mb-16 sm:mb-0 md:mx-20 lg:mx-40'>
       <Head>
         <title>unFace</title>
       </Head>
