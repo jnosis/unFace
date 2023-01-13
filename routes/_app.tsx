@@ -1,4 +1,5 @@
 import { AppProps } from '$fresh/server.ts';
+import Header from '~/islands/Header.tsx';
 import { color } from '~/utils/style_utils.ts';
 
 export default function App({ Component }: AppProps) {
@@ -8,6 +9,7 @@ export default function App({ Component }: AppProps) {
         color('bg-background text-on-background')
       }`}
     >
+      <Header menus={['home', 'works', 'contact']} />
       <Component />
     </body>
   );
