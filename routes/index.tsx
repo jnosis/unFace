@@ -3,36 +3,13 @@ import { Head } from '$fresh/runtime.ts';
 import { WorkData } from '~/types.ts';
 import Contact from '~/components/Contact.tsx';
 import WorksSection from '~/islands/WorksSection.tsx';
+import { handler as worksHandler } from '~/routes/api/works/index.ts';
 import config from '~/config.ts';
 
 export const handler: Handlers<WorkData[]> = {
-  GET(_, ctx) {
-    const data: WorkData[] = [
-      {
-        id: '1',
-        title: 'unFace',
-        description: 'master branch',
-        repo: { url: 'https://github.com/jnosis/unFace', branch: 'master' },
-        techs: ['React', 'TypeScript', 'webpack'],
-        thumbnail: { fileName: '', fileUrl: '' },
-      },
-      {
-        id: '2',
-        title: 'unFace-netlify',
-        description: 'Deprecated',
-        repo: { url: 'https://github.com/jnosis/unFace', branch: 'netlify' },
-        techs: ['React', 'TypeScript', 'webpack'],
-        thumbnail: { fileName: '', fileUrl: '' },
-      },
-      {
-        id: '3',
-        title: 'unFace-deno',
-        description: 'WIP',
-        repo: { url: 'https://github.com/jnosis/unFace', branch: 'deno' },
-        techs: ['Deno', 'Fresh', 'Preact', 'twind', 'TypeScript'],
-        thumbnail: { fileName: '', fileUrl: '' },
-      },
-    ];
+  async GET(req, ctx) {
+    const res = await worksHandler.GET!(req, ctx);
+    const data = await res.json();
 
     return ctx.render(data ? data : []);
   },
