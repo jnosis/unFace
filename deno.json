@@ -1,21 +1,11 @@
 {
+  "tasks": {
+    "start": "deno run -A --watch=static/,routes/ dev.ts"
+  },
+  "importMap": "./import_map.json",
   "compilerOptions": {
-    "allowJs": true,
-    "strict": true
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
   },
-  "lint": {
-    "files": {
-      "include": ["src/"]
-    }
-  },
-  "fmt": {
-    "files": {
-      "include": ["src/"]
-    },
-    "options": {
-      "singleQuote": true,
-      "proseWrap": "preserve"
-    }
-  },
-  "importMap": "./import_map.json"
+  "fmt": { "options": { "singleQuote": true } }
 }
