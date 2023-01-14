@@ -11,12 +11,20 @@ type HeaderProps = {
 
 export default function Header({ menus }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [active, setActive] = useState<MenuItem>(menus[0]);
+  const [active, setActive] = useState<MenuItem>();
 
   const handleClick = (e: JSX.TargetedMouseEvent<HTMLUListElement>) => {
     const { dataset: { name } } = e.target as HTMLElement;
     if (isMenuItem(name)) {
       setActive(name);
+      if (location.pathname === '/') {
+        document.getElementById(name)?.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'start',
+        });
+      } else {
+        location.assign(`/#${name}`);
+      }
     }
   };
 
@@ -34,6 +42,76 @@ export default function Header({ menus }: HeaderProps) {
     const { pathname } = location;
     const active = menus.find((menu) => pathname.includes(menu));
     active && setActive(active);
+  }, []);
+
+  useEffect(() => {
+    globalThis.addEventListener('scroll', () => {
+      const { pathname } = location;
+      const isBottom = Math.ceil(window.scrollY + window.innerHeight) >=
+        document.body.clientHeight;
+      const isTop = Math.ceil(window.scrollY) === 0;
+
+      if (pathname === '/' && isBottom) {
+        setActive('contact');
+      } else if (pathname === '/' && isTop) {
+        setActive('home');
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const switchActiveWhenScrolled = (menu: MenuItem, isUp: boolean) => {
+      switch (menu) {
+        case 'home':
+          if (isUp) {
+            setActive('home');
+          } else {
+            setActive('works');
+          }
+          break;
+        case 'works':
+          if (isUp) {
+            setActive('home');
+          } else {
+            setActive('contact');
+          }
+          break;
+        case 'contact':
+          if (isUp) {
+            setActive('works');
+          } else {
+            setActive('contact');
+          }
+          break;
+
+        default:
+          throw new Error(`MenuItem(${menu}) is undefined`);
+      }
+    };
+
+    const observerOption = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.4,
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting && entry.intersectionRatio > 0) {
+          const menu = entry.target.id;
+          if (!isMenuItem(menu)) return;
+          if (entry.boundingClientRect.y < 0) {
+            switchActiveWhenScrolled(menu, false);
+          } else {
+            switchActiveWhenScrolled(menu, true);
+          }
+        }
+      });
+    }, observerOption);
+
+    menus
+      .map((menu) => document.getElementById(menu))
+      .forEach((section) => section && observer.observe(section));
   }, []);
 
   return (

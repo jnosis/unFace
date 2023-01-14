@@ -54,7 +54,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
                 </a>
               )}
             </div>
-            <a href='/'>
+            <a href='/#works'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 24 24'
