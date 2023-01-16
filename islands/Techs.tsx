@@ -1,4 +1,4 @@
-import { JSX } from 'preact/jsx-runtime';
+import type { JSX } from 'preact/jsx-runtime';
 import type { Techs } from '~/types.ts';
 import Tech from '~/components/Tech.tsx';
 

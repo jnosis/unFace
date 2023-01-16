@@ -1,4 +1,4 @@
-import { JSX } from 'preact/jsx-runtime';
+import type { JSX } from 'preact/jsx-runtime';
 import { useEffect, useState } from 'preact/hooks';
 import type { MenuItem } from '~/types.ts';
 import NavItem from '~/components/NavItem.tsx';

@@ -1,4 +1,4 @@
-import { JSX } from 'preact/jsx-runtime';
+import type { JSX } from 'preact/jsx-runtime';
 import { useEffect, useState } from 'preact/hooks';
 import IconAdjustments from 'tabler_icons/adjustments.tsx';
 import IconMoon from 'tabler_icons/moon.tsx';

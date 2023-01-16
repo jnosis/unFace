@@ -1,4 +1,4 @@
-import { Handlers } from '$fresh/server.ts';
+import type { Handlers } from '$fresh/server.ts';
 import type { WorkMarkDown } from '~/types.ts';
 import { getWorkByTitle } from '~/services/works.ts';
 import { convertMarkdownToHtml, convertUrls } from '~/utils/converter.ts';

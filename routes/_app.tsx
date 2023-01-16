@@ -1,4 +1,4 @@
-import { AppProps } from '$fresh/server.ts';
+import type { AppProps } from '$fresh/server.ts';
 import { Head } from '$fresh/runtime.ts';
 import Header from '~/islands/Header.tsx';
 import { color } from '~/utils/style_utils.ts';

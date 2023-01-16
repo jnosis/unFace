@@ -1,4 +1,4 @@
-import { Handlers, PageProps } from '$fresh/server.ts';
+import type { Handlers, PageProps } from '$fresh/server.ts';
 import { Head } from '$fresh/runtime.ts';
 import type { WorkMarkDown } from '~/types.ts';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';

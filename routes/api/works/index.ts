@@ -1,4 +1,4 @@
-import { Handlers } from '$fresh/server.ts';
+import type { Handlers } from '$fresh/server.ts';
 import type { WorkData } from '~/types.ts';
 import { getWorks } from '~/services/works.ts';
 
