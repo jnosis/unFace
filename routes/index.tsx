@@ -17,7 +17,7 @@ export const handler: Handlers<WorkData[]> = {
 
 export default function Home({ data: works }: PageProps<WorkData[]>) {
   return (
-    <main class='flex flex-col h-full mt-16 mx-0 mb-16 sm:mb-0 md:mx-20 lg:mx-40'>
+    <main class='flex flex-col h-full pt-16 px-0 pb-16 sm:pb-0 md:px-20 lg:px-40'>
       <Head>
         <title>unFace</title>
       </Head>

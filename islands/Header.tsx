@@ -12,6 +12,7 @@ type HeaderProps = {
 
 export default function Header({ menus }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isColored, setIsColored] = useState<boolean>(false);
   const [active, setActive] = useState<MenuItem>();
 
   const handleClick = (e: JSX.TargetedMouseEvent<HTMLUListElement>) => {
@@ -44,6 +45,14 @@ export default function Header({ menus }: HeaderProps) {
     const active = menus.find((menu) => pathname.includes(menu));
     active && setActive(active);
   }, []);
+
+  useEffect(() => {
+    if (location.pathname !== '/') setIsColored(true);
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname === '/') setIsColored(isScrolled);
+  }, [isScrolled]);
 
   useEffect(() => {
     globalThis.addEventListener('scroll', () => {
@@ -119,9 +128,7 @@ export default function Header({ menus }: HeaderProps) {
     <header
       class={`fixed top-0 left-0 z-10 w-full h-16 p-4 flex justify-between items-center ${
         color(
-          `${
-            isScrolled ? 'bg-bar' : 'bg-background'
-          } sm:bg-bar text-on-surface`,
+          `${isColored ? 'bg-bar' : 'bg-background'} sm:bg-bar text-on-surface`,
         )
       }`}
     >

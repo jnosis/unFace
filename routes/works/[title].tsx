@@ -5,6 +5,7 @@ import IconExternalLink from 'tabler_icons/external-link.tsx';
 import IconX from 'tabler_icons/x.tsx';
 import type { WorkMarkDown } from '~/types.ts';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';
+import { color } from '~/utils/style_utils.ts';
 
 export const handler: Handlers<WorkMarkDown | null> = {
   async GET(req, ctx) {
@@ -21,13 +22,17 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
   const { title, repoUrl, projectUrl, markdown } = data;
 
   return (
-    <section class='w-full mt-16 mb-16 px-8 overflow-hidden'>
+    <main
+      class={`w-full min-h-screen pt-16 pb-24 sm:pb-16 px-0 md:px-20 lg:px-40 overflow-hidden ${
+        color('bg-surface-variant text-on-surface-variant')
+      }`}
+    >
       <Head>
         <title>{`${title} | unFace`}</title>
       </Head>
       {markdown && (
-        <>
-          <header class='h-16 flex items-center'>
+        <section class='px-4 sm:px-10'>
+          <header class='h-16 flex items-center px-4'>
             <h2 class='font-bold'>{title}</h2>
             <div class='flex-auto flex gap-1 ml-2'>
               <a href={repoUrl} target='_blank'>
@@ -47,8 +52,8 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
             class={`mt-2 mb-8 p-6 rounded-2xl ${'markdown-body'}`}
             dangerouslySetInnerHTML={{ __html: markdown }}
           />
-        </>
+        </section>
       )}
-    </section>
+    </main>
   );
 }
