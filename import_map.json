@@ -11,6 +11,7 @@
     "freshwind/": "https://deno.land/x/freshwind@4.0.0/",
     "@twind/core": "https://esm.sh/@twind/core@1.1.2",
     "@twind/preset-tailwind": "https://esm.sh/@twind/preset-tailwind@1.1.2",
+    "tabler_icons/": "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/",
     "showdown": "https://esm.sh/showdown@2.1.0"
   }
 }

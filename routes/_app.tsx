@@ -12,6 +12,7 @@ export default function App({ Component }: AppProps) {
     >
       <Head>
         <link
+          id='markdown-styles'
           rel='stylesheet'
           href='https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css'
         />

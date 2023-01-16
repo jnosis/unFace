@@ -1,3 +1,5 @@
+export type ThemeScheme = 'light' | 'dark' | 'system';
+
 export type MenuItem = 'home' | 'works' | 'contact';
 
 export type Repo = {

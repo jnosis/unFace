@@ -11,8 +11,9 @@ import * as $4 from './routes/index.tsx';
 import * as $5 from './routes/works/[title].tsx';
 import * as $$0 from './islands/Header.tsx';
 import * as $$1 from './islands/Techs.tsx';
-import * as $$2 from './islands/Works.tsx';
-import * as $$3 from './islands/WorksSection.tsx';
+import * as $$2 from './islands/ThemeToggler.tsx';
+import * as $$3 from './islands/Works.tsx';
+import * as $$4 from './islands/WorksSection.tsx';
 
 const manifest = {
   routes: {
@@ -26,8 +27,9 @@ const manifest = {
   islands: {
     './islands/Header.tsx': $$0,
     './islands/Techs.tsx': $$1,
-    './islands/Works.tsx': $$2,
-    './islands/WorksSection.tsx': $$3,
+    './islands/ThemeToggler.tsx': $$2,
+    './islands/Works.tsx': $$3,
+    './islands/WorksSection.tsx': $$4,
   },
   baseUrl: import.meta.url,
   config,

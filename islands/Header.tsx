@@ -2,8 +2,9 @@ import { JSX } from 'preact/jsx-runtime';
 import { useEffect, useState } from 'preact/hooks';
 import type { MenuItem } from '~/types.ts';
 import NavItem from '~/components/NavItem.tsx';
-import { isMenuItem } from '~/utils/type_utils.ts';
+import ThemeToggler from '~/islands/ThemeToggler.tsx';
 import { color } from '~/utils/style_utils.ts';
+import { isMenuItem } from '~/utils/type_utils.ts';
 
 type HeaderProps = {
   menus: MenuItem[];
@@ -134,6 +135,9 @@ export default function Header({ menus }: HeaderProps) {
           }`}
           onClick={(e) => handleClick(e)}
         >
+          <li>
+            <ThemeToggler />
+          </li>
           {menus.map((menu, index) => (
             <NavItem
               key={index}

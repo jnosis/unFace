@@ -3,6 +3,7 @@ import presetTailwind from '@twind/preset-tailwind';
 
 export default defineConfig({
   presets: [presetTailwind()],
+  darkMode: 'class',
   theme: {
     colors: {
       'primary': '#2b5da7',
