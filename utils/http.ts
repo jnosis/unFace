@@ -14,7 +14,7 @@ async function f<Data>(url: string, options?: RequestInit): Promise<Data> {
   try {
     if (res.status !== 204) data = await res.json();
   } catch (error) {
-    console.log(error);
+    throw new Error(error.message, { cause: res.status });
   }
 
   if (res.status > 299 || res.status < 200) {
@@ -29,7 +29,7 @@ async function f<Data>(url: string, options?: RequestInit): Promise<Data> {
 
 const http = {
   async get<Data>(url: string, options?: Omit<RequestInit, 'method'>) {
-    return await f<Data>(url, options);
+    return await f<Data>(url, { ...options, method: 'GET' });
   },
 };
 

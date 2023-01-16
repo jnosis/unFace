@@ -7,14 +7,19 @@ import type { WorkMarkDown } from '~/types.ts';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';
 import { color } from '~/utils/style_utils.ts';
 
-export const handler: Handlers<WorkMarkDown | null> = {
+export const handler: Handlers<WorkMarkDown> = {
   async GET(req, ctx) {
-    const res = await workHandler.GET!(req, ctx);
-    const data = await res.json();
+    try {
+      const res = await workHandler.GET!(req, ctx);
+      const data = await res.json();
 
-    if (res.status === 404) return ctx.renderNotFound();
+      if (data) return ctx.renderNotFound();
 
-    return ctx.render(data);
+      return ctx.render(data);
+    } catch (error) {
+      if (error.cause === 404) return ctx.renderNotFound();
+      throw error;
+    }
   },
 };
 
