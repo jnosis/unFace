@@ -13,7 +13,7 @@ export const handler: Handlers<WorkMarkDown> = {
       const res = await workHandler.GET!(req, ctx);
       const data = await res.json();
 
-      if (data) return ctx.renderNotFound();
+      if (!data) return ctx.renderNotFound();
 
       return ctx.render(data);
     } catch (error) {
