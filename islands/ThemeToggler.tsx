@@ -35,15 +35,11 @@ export default function ThemeToggler() {
       : scheme === 'dark';
     setDarkMode(isDark);
     document.documentElement.classList.toggle('dark', isDark);
-  }, [scheme]);
-
-  useEffect(() => {
-    document.documentElement.classList[darkMode ? 'add' : 'remove']('dark');
     const href = darkMode
       ? 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.min.css'
       : 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css';
     document.getElementById('markdown-styles')?.setAttribute('href', href);
-  }, [darkMode]);
+  }, [scheme]);
 
   return (
     <div
