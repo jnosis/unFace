@@ -1,5 +1,5 @@
 import type { Handlers, PageProps } from '$fresh/server.ts';
-import { Head } from '$fresh/runtime.ts';
+import { asset, Head } from '$fresh/runtime.ts';
 import IconBrandGithub from 'tabler_icons/brand-github.tsx';
 import IconExternalLink from 'tabler_icons/external-link.tsx';
 import IconX from 'tabler_icons/x.tsx';
@@ -34,6 +34,11 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
     >
       <Head>
         <title>{`${title} | unFace`}</title>
+        <link
+          id='markdown-styles'
+          rel='stylesheet'
+          href={asset('/github-markdown.css')}
+        />
       </Head>
       {markdown && (
         <section class='px-4 sm:px-10'>

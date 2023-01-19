@@ -1,5 +1,5 @@
 import type { AppProps } from '$fresh/server.ts';
-import { asset, Head } from '$fresh/runtime.ts';
+import { Head } from '$fresh/runtime.ts';
 import Header from '~/islands/Header.tsx';
 import { color } from '~/utils/style_utils.ts';
 
@@ -26,11 +26,6 @@ export default function App({ Component }: AppProps) {
           dangerouslySetInnerHTML={{
             __html: code,
           }}
-        />
-        <link
-          id='markdown-styles'
-          rel='stylesheet'
-          href={asset('/github-markdown.css')}
         />
       </Head>
       <Header menus={['home', 'works', 'contact']} />
