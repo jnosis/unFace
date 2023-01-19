@@ -1,5 +1,5 @@
 import type { AppProps } from '$fresh/server.ts';
-import { Head } from '$fresh/runtime.ts';
+import { asset, Head } from '$fresh/runtime.ts';
 import Header from '~/islands/Header.tsx';
 import { color } from '~/utils/style_utils.ts';
 
@@ -12,10 +12,6 @@ export default function App({ Component }: AppProps) {
       (!("theme" in localStorage) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
     document.documentElement.classList.toggle('dark', window.isDark);
-    const href = window.isDark
-      ? 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.min.css'
-      : 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css';
-    document.getElementById('markdown-styles')?.setAttribute('href', href);
   }
   global_dark();`;
 
@@ -34,7 +30,7 @@ export default function App({ Component }: AppProps) {
         <link
           id='markdown-styles'
           rel='stylesheet'
-          href='https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css'
+          href={asset('/github-markdown.css')}
         />
       </Head>
       <Header menus={['home', 'works', 'contact']} />

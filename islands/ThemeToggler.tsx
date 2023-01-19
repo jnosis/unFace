@@ -31,10 +31,6 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches);
     document.documentElement.classList.toggle('dark', w.isDark);
-    const href = w.isDark
-      ? 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.min.css'
-      : 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css';
-    document.getElementById('markdown-styles')?.setAttribute('href', href);
     setDarkMode(w.isDark);
   }
 
