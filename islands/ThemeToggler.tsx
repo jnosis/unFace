@@ -1,23 +1,71 @@
+import { IS_BROWSER } from '$fresh/runtime.ts';
 import type { JSX } from 'preact/jsx-runtime';
 import { useEffect, useState } from 'preact/hooks';
 import IconAdjustments from 'tabler_icons/adjustments.tsx';
 import IconMoon from 'tabler_icons/moon.tsx';
 import IconSun from 'tabler_icons/sun.tsx';
 import type { ThemeScheme } from '~/types.ts';
-import useLocalStorage from '~/hooks/useLocalStorage.ts';
 import { color } from '~/utils/style_utils.ts';
 
-export default function ThemeToggler() {
-  const [scheme, setScheme] = useLocalStorage<ThemeScheme>('theme', 'system');
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+type ThemeTogglerProps = {
+  prev: ThemeScheme;
+};
+
+export default function ThemeToggler({ prev }: ThemeTogglerProps) {
+  function getScheme(): ThemeScheme {
+    if (!IS_BROWSER) {
+      return prev;
+    }
+    if (localStorage.theme === 'dark') {
+      return 'dark';
+    }
+    if (localStorage.theme) {
+      return 'light';
+    }
+    return 'system';
+  }
+
+  function updateThemeMode() {
+    const w = window as unknown as { isDark: boolean };
+    w.isDark = localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.classList.toggle('dark', w.isDark);
+    const href = w.isDark
+      ? 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.min.css'
+      : 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css';
+    document.getElementById('markdown-styles')?.setAttribute('href', href);
+    setDarkMode(w.isDark);
+  }
+
+  const [scheme, setScheme] = useState<ThemeScheme>(getScheme());
+  const [darkMode, setDarkMode] = useState<boolean>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const setTheme = (theme: ThemeScheme) => {
-    setScheme(theme);
+  const setDarkModeAuto = () => {
+    delete localStorage.theme;
+    updateThemeMode();
+    setScheme('system');
+  };
+
+  const setDarkModeOn = () => {
+    localStorage.theme = 'dark';
+    updateThemeMode();
+    setScheme('dark');
+  };
+
+  const setDarkModeOff = () => {
+    localStorage.theme = 'light';
+    updateThemeMode();
+    setScheme('light');
   };
 
   const handleToggle = () => {
-    setScheme(darkMode ? 'light' : 'dark');
+    const w = window as unknown as { isDark: boolean };
+    w.isDark = localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+    w.isDark ? setDarkModeOff() : setDarkModeOn();
   };
 
   const handleContextMenu = (e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
@@ -30,16 +78,8 @@ export default function ThemeToggler() {
   };
 
   useEffect(() => {
-    const isDark = scheme === 'system'
-      ? window.matchMedia('(prefers-color-scheme: dark)').matches
-      : scheme === 'dark';
-    setDarkMode(isDark);
-    document.documentElement.classList.toggle('dark', isDark);
-    const href = darkMode
-      ? 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.min.css'
-      : 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-light.min.css';
-    document.getElementById('markdown-styles')?.setAttribute('href', href);
-  }, [scheme]);
+    updateThemeMode();
+  }, []);
 
   return (
     <div
@@ -59,7 +99,7 @@ export default function ThemeToggler() {
               type='checkbox'
               id='light'
               checked={scheme === 'light'}
-              onChange={(_e) => setTheme!('light')}
+              onChange={setDarkModeOff}
             />
             <label class='flex gap-0.5' htmlFor='light'>
               <IconSun />
@@ -71,7 +111,7 @@ export default function ThemeToggler() {
               type='checkbox'
               id='dark'
               checked={scheme === 'dark'}
-              onChange={(_e) => setTheme!('dark')}
+              onChange={setDarkModeOn}
             />
             <label class='flex gap-0.5' htmlFor='dark'>
               <IconMoon />
@@ -83,7 +123,7 @@ export default function ThemeToggler() {
               type='checkbox'
               id='system'
               checked={scheme === 'system'}
-              onChange={(_e) => setTheme!('system')}
+              onChange={setDarkModeAuto}
             />
             <label class='flex gap-0.5' htmlFor='system'>
               <IconAdjustments />

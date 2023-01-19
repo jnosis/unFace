@@ -143,7 +143,7 @@ export default function Header({ menus }: HeaderProps) {
           onClick={(e) => handleClick(e)}
         >
           <li>
-            <ThemeToggler />
+            <ThemeToggler prev='system' />
           </li>
           {menus.map((menu, index) => (
             <NavItem
