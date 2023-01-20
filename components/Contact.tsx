@@ -1,5 +1,4 @@
-import IconBrandGithub from 'tabler_icons/brand-github.tsx';
-import IconMail from 'tabler_icons/mail.tsx';
+import { IconBrandGithub, IconMail } from '~/components/Icons.tsx';
 import { color } from '~/utils/style_utils.ts';
 
 type ContactProps = {

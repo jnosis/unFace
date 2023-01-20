@@ -1,10 +1,8 @@
 import { IS_BROWSER } from '$fresh/runtime.ts';
 import type { JSX } from 'preact/jsx-runtime';
 import { useEffect, useState } from 'preact/hooks';
-import IconAdjustments from 'tabler_icons/adjustments.tsx';
-import IconMoon from 'tabler_icons/moon.tsx';
-import IconSun from 'tabler_icons/sun.tsx';
 import type { ThemeScheme } from '~/types.ts';
+import { IconAdjustments, IconMoon, IconSun } from '~/components/Icons.tsx';
 import { color } from '~/utils/style_utils.ts';
 
 type ThemeTogglerProps = {

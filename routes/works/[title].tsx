@@ -1,9 +1,11 @@
 import type { Handlers, PageProps } from '$fresh/server.ts';
 import { asset, Head } from '$fresh/runtime.ts';
-import IconBrandGithub from 'tabler_icons/brand-github.tsx';
-import IconExternalLink from 'tabler_icons/external-link.tsx';
-import IconX from 'tabler_icons/x.tsx';
 import type { WorkMarkDown } from '~/types.ts';
+import {
+  IconBrandGithub,
+  IconExternalLink,
+  IconX,
+} from '~/components/Icons.tsx';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';
 import { color } from '~/utils/style_utils.ts';
 
