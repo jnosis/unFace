@@ -18,7 +18,7 @@ function ImageFileInput({ name, onFileChange }: ImageFileInputProps) {
       const uploaded = await imageUploader.upload(e.target.files[0]);
       onFileChange({
         fileName: uploaded.original_filename,
-        fileURL: addHttpsOnURL(uploaded.url),
+        fileUrl: addHttpsOnURL(uploaded.url),
       });
     }
     setIsLoading(false);

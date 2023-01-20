@@ -33,7 +33,7 @@ declare type WorkData = {
   description: string;
   techs: Techs;
   repo: Repo;
-  projectURL?: string;
+  projectUrl?: string;
   thumbnail: FileData;
 };
 
@@ -43,7 +43,7 @@ type WorksDatabase = Record<string, WorkData>;
 
 declare type FileData = {
   fileName: string;
-  fileURL: string;
+  fileUrl: string;
 };
 
 declare type CloudinaryData = {

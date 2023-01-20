@@ -16,7 +16,7 @@ type EditWorkFormProps = {
 
 type WorkValidation = {
   title: boolean;
-  projectURL: boolean;
+  projectUrl: boolean;
   repoUrl: boolean;
   repoBranch: boolean;
 };
@@ -24,18 +24,18 @@ type WorkValidation = {
 function EditWorkForm({ work, onCancel }: EditWorkFormProps) {
   const { updateWork } = useWorks();
 
-  const { title, description, techs, repo, projectURL, thumbnail } = work;
+  const { title, description, techs, repo, projectUrl, thumbnail } = work;
   const [changed, setChanged] = useState<WorkInputData>({
     title,
     description,
     techs,
     repo,
-    projectURL,
+    projectUrl,
     thumbnail,
   });
   const [validation, setValidation] = useState<WorkValidation>({
     title: true,
-    projectURL: true,
+    projectUrl: true,
     repoUrl: true,
     repoBranch: true,
   });
@@ -101,11 +101,11 @@ function EditWorkForm({ work, onCancel }: EditWorkFormProps) {
           <label className={styles.field}>Project URL</label>
           <input
             className={`${styles.input}${
-              validation.projectURL ? '' : ` ${styles.invalid}`
+              validation.projectUrl ? '' : ` ${styles.invalid}`
             }`}
             type='text'
-            name='projectURL'
-            defaultValue={changed.projectURL ?? ''}
+            name='projectUrl'
+            defaultValue={changed.projectUrl ?? ''}
             placeholder='project url'
             onChange={handleChange}
           />

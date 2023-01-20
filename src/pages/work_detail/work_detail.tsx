@@ -88,7 +88,7 @@ function convertUrls(work?: WorkData | null) {
     ? convertToRawContentURL(work.repo.url, work.repo.branch)
     : '';
 
-  const projectUrl = work ? work.projectURL : '';
+  const projectUrl = work ? work.projectUrl : '';
 
   return { repoUrl, repoContentUrl, contentUrl, projectUrl };
 }

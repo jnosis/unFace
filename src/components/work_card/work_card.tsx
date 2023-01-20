@@ -17,7 +17,7 @@ function WorkCard({ work, onEdit }: WorkCardProps) {
   const { deleteWork } = useWorks();
 
   const { thumbnail, title, description, techs } = work;
-  const fileUrl = thumbnail?.fileURL;
+  const fileUrl = thumbnail?.fileUrl;
 
   const navigate = useNavigate();
   const { setActive } = useMenuContext();

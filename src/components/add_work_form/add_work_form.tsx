@@ -1,33 +1,33 @@
-import React, { useState } from 'react';
-import useWorks from '../../hooks/use_works';
+import React, { useState } from "react";
+import useWorks from "../../hooks/use_works";
 import {
   convertStringToTechs,
   convertTechsToString,
-} from '../../util/tech_converter';
-import { validateWork } from '../../util/validator';
-import ImageFileInput from '../image_file_input/image_file_input';
-import Action from '../action/action';
-import styles from './add_work_form.module.css';
+} from "../../util/tech_converter";
+import { validateWork } from "../../util/validator";
+import ImageFileInput from "../image_file_input/image_file_input";
+import Action from "../action/action";
+import styles from "./add_work_form.module.css";
 
 type WorkValidation = {
   title: boolean;
-  projectURL: boolean;
+  projectUrl: boolean;
   repoUrl: boolean;
   repoBranch: boolean;
 };
 
 const initialWorkInput: WorkInputData = {
-  title: '',
-  projectURL: '',
-  repo: { url: '', branch: '' },
-  description: '',
+  title: "",
+  projectUrl: "",
+  repo: { url: "", branch: "" },
+  description: "",
   techs: [],
-  thumbnail: { fileName: '', fileURL: '' },
+  thumbnail: { fileName: "", fileUrl: "" },
 };
 
 const initialValidation: WorkValidation = {
   title: false,
-  projectURL: true,
+  projectUrl: true,
   repoUrl: false,
   repoBranch: true,
 };
@@ -37,35 +37,36 @@ function AddWorkForm() {
 
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [added, setAdded] = useState<WorkInputData>(initialWorkInput);
-  const [validation, setValidation] =
-    useState<WorkValidation>(initialValidation);
+  const [validation, setValidation] = useState<WorkValidation>(
+    initialValidation,
+  );
 
   const handleOpen = () => {
     setIsOpenForm(true);
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    if (name !== 'techs' && name !== 'description') {
+    if (name !== "techs" && name !== "description") {
       setValidation((validation) => ({
         ...validation,
         [name]: validateWork(name, value),
       }));
     }
-    if (name.includes('repo')) {
+    if (name.includes("repo")) {
       setAdded((changed) => ({
         ...changed,
         repo: {
           ...changed.repo,
-          [name === 'repoUrl' ? 'url' : 'branch']: value,
+          [name === "repoUrl" ? "url" : "branch"]: value,
         },
       }));
     } else {
       setAdded((changed) => ({
         ...changed,
-        [name]: name === 'techs' ? convertStringToTechs(value) : value,
+        [name]: name === "techs" ? convertStringToTechs(value) : value,
       }));
     }
   };
@@ -90,7 +91,7 @@ function AddWorkForm() {
 
   return (
     <li
-      className={`${styles.container}${isOpenForm ? ` ${styles.opened}` : ''}`}
+      className={`${styles.container}${isOpenForm ? ` ${styles.opened}` : ""}`}
     >
       {isOpenForm && (
         <form className={styles.content} onSubmit={handleSubmit}>
@@ -98,12 +99,12 @@ function AddWorkForm() {
             <label className={styles.field}>Title</label>
             <input
               className={`${styles.input}${
-                validation.title ? '' : ` ${styles.invalid}`
+                validation.title ? "" : ` ${styles.invalid}`
               }`}
-              type='text'
-              name='title'
-              defaultValue={added.title ?? ''}
-              placeholder='title'
+              type="text"
+              name="title"
+              defaultValue={added.title ?? ""}
+              placeholder="title"
               required
               onChange={handleChange}
             />
@@ -112,12 +113,12 @@ function AddWorkForm() {
             <label className={styles.field}>Project URL</label>
             <input
               className={`${styles.input}${
-                validation.projectURL ? '' : ` ${styles.invalid}`
+                validation.projectUrl ? "" : ` ${styles.invalid}`
               }`}
-              type='text'
-              name='projectURL'
-              defaultValue={added.projectURL ?? ''}
-              placeholder='project url'
+              type="text"
+              name="projectUrl"
+              defaultValue={added.projectUrl ?? ""}
+              placeholder="project url"
               onChange={handleChange}
             />
           </div>
@@ -126,12 +127,12 @@ function AddWorkForm() {
               <label>Repository URL</label>
               <input
                 className={`${styles.input}${
-                  validation.repoUrl ? '' : ` ${styles.invalid}`
+                  validation.repoUrl ? "" : ` ${styles.invalid}`
                 }`}
-                type='text'
-                name='repoUrl'
-                defaultValue={added.repo.url ?? ''}
-                placeholder='repo url'
+                type="text"
+                name="repoUrl"
+                defaultValue={added.repo.url ?? ""}
+                placeholder="repo url"
                 required
                 onChange={handleChange}
               />
@@ -140,12 +141,12 @@ function AddWorkForm() {
               <label>Branch</label>
               <input
                 className={`${styles.input}${
-                  validation.repoBranch ? '' : ` ${styles.invalid}`
+                  validation.repoBranch ? "" : ` ${styles.invalid}`
                 }`}
-                type='text'
-                name='repoBranch'
-                defaultValue={added.repo.branch ?? ''}
-                placeholder='repo branch'
+                type="text"
+                name="repoBranch"
+                defaultValue={added.repo.branch ?? ""}
+                placeholder="repo branch"
                 onChange={handleChange}
               />
             </div>
@@ -154,9 +155,9 @@ function AddWorkForm() {
             <label>Description</label>
             <textarea
               className={`${styles.textarea}`}
-              name='description'
-              defaultValue={added.description ?? ''}
-              placeholder='description'
+              name="description"
+              defaultValue={added.description ?? ""}
+              placeholder="description"
               onChange={handleChange}
             />
           </div>
@@ -164,10 +165,10 @@ function AddWorkForm() {
             <label>Techs</label>
             <input
               className={`${styles.input}`}
-              type='text'
-              name='techs'
-              defaultValue={convertTechsToString(added.techs) ?? ''}
-              placeholder='techs'
+              type="text"
+              name="techs"
+              defaultValue={convertTechsToString(added.techs) ?? ""}
+              placeholder="techs"
               onChange={handleChange}
             />
           </div>
@@ -182,16 +183,16 @@ function AddWorkForm() {
           <ul className={styles.actions}>
             <li>
               <Action
-                type='button'
-                title='Cancel'
+                type="button"
+                title="Cancel"
                 isDisable={false}
                 onClick={handleCancel}
               />
             </li>
             <li>
               <Action
-                type='submit'
-                title='Add'
+                type="submit"
+                title="Add"
                 isDisable={Object.values(validation).includes(false)}
               />
             </li>
@@ -200,7 +201,7 @@ function AddWorkForm() {
       )}
       {!isOpenForm && (
         <div className={styles.addButton} onClick={handleOpen}>
-          <i className='fa-solid fa-plus' />
+          <i className="fa-solid fa-plus" />
         </div>
       )}
     </li>
