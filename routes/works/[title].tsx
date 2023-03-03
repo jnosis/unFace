@@ -47,16 +47,16 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
           <header class='h-16 flex items-center px-4'>
             <h2 class='font-bold'>{title}</h2>
             <div class='flex-auto flex gap-1 ml-2'>
-              <a href={repoUrl} target='_blank'>
+              <a href={repoUrl} aria-label='Github' target='_blank'>
                 <IconBrandGithub class='w-4 h-4' />
               </a>
               {projectUrl && (
-                <a href={projectUrl} target='_blank'>
+                <a href={projectUrl} aria-label='Project Url' target='_blank'>
                   <IconExternalLink class='w-4 h-4' />
                 </a>
               )}
             </div>
-            <a href='/#works'>
+            <a href='/#works' aria-label='close'>
               <IconX class='w-6 h-6' />
             </a>
           </header>

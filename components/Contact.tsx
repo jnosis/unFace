@@ -24,7 +24,7 @@ export default function Contact({ email, github }: ContactProps) {
         <li>
           <a
             href={github}
-            aria-label=''
+            aria-label='Github'
             target='_blank'
           >
             <IconBrandGithub class='w-8 h-8' />
