@@ -23,7 +23,7 @@ export default function WorkCard({ work, filter }: WorkCardProps) {
       onClick={handleClick}
     >
       <img
-        class='w-full rounded-b-2xl'
+        class='w-full aspect-[8/5] rounded-b-2xl'
         src={fileUrl || '/images/default.jpg'}
         alt='work thumbnail'
       />
