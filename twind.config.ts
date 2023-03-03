@@ -1,3 +1,4 @@
+import { asset } from '$fresh/runtime.ts';
 import { defineConfig } from '@twind/core';
 import presetTailwind from '@twind/preset-tailwind';
 
@@ -67,8 +68,9 @@ export default defineConfig({
       'button-hover-dark': '#a9c7ff14',
     },
     backgroundImage: {
-      'profile':
-        'linear-gradient(to bottom, #001a4066, #001a4066), url(/images/profile.jpg);',
+      'profile': `linear-gradient(to bottom, #001a4066, #001a4066), url(${
+        asset('/images/profile.jpg')
+      });`,
     },
   },
 });
