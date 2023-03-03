@@ -20,6 +20,7 @@ export default function Home({ data: works }: PageProps<WorkData[]>) {
     <main class='flex flex-col h-full pt-16 px-0 pb-16 sm:pb-0 md:px-20 lg:px-40'>
       <Head>
         <title>unFace</title>
+        <meta name='description' content='Portfolio Site' />
       </Head>
       <section class='w-full px-4 mt-0 sm:mt-6'>
         <article

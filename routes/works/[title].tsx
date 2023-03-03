@@ -36,6 +36,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
     >
       <Head>
         <title>{`${title} | unFace`}</title>
+        <meta name='description' content={`${title} project's description`} />
         <link
           id='markdown-styles'
           rel='stylesheet'
