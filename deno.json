@@ -7,5 +7,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
-  "fmt": { "options": { "singleQuote": true } }
+  "fmt": {
+    "singleQuote": true
+  }
 }
