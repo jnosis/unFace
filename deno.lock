@@ -1,5 +1,5 @@
 {
-  "version": "2",
+  "version": "3",
   "remote": {
     "https://deno.land/std@0.140.0/_util/assert.ts": "e94f2eb37cebd7f199952e242c77654e43333c1ac4c5c700e929ea3aa5489f74",
     "https://deno.land/std@0.140.0/_util/os.ts": "3b4c6e27febd119d36a416d7a97bd3b0251b77c88942c8f16ee5953ea13e2e49",
@@ -113,6 +113,8 @@
     "https://deno.land/x/ts_morph@16.0.0/mod.ts": "adba9b82f24865d15d2c78ef6074b9a7457011719056c9928c800f130a617c93",
     "https://deno.land/x/ts_morph@16.0.0/ts_morph.d.ts": "38668b0e3780282a56a805425494490b0045d1928bd040c47a94095749dab8c3",
     "https://deno.land/x/ts_morph@16.0.0/ts_morph.js": "9fc0f3d6a3997c2df023fabc4e529d2117d214ffd4fd04247ca2f56c4e9cd470",
+    "https://esm.sh/*@preact/signals-core@1.5.0": "3c42c925f5de957b3abaede5615d503b2d8f27dabd1aee7b3142cf56182f2b4f",
+    "https://esm.sh/*@preact/signals@1.2.1": "e97def3b13accbdd3544bd47f5dd0fd74b10d3f0929db0e0e1d50580c535445a",
     "https://esm.sh/*preact-render-to-string@5.2.4": "0a65784d053ac491a6d2397ad38c14d2fa172240734b374d354fe38a74be873d",
     "https://esm.sh/@twind/core@1.1.2": "bc08007e9b908b96847c5e931db09cb6ec388e2b99e269ddfd3cd51e993a1cb5",
     "https://esm.sh/@twind/preset-tailwind@1.1.2": "45068eeee968c7bb715a4325ed79e74c640b62af3ceeeb1fca139347a74e8c41",
@@ -133,6 +135,8 @@
     "https://esm.sh/v102/@twind/preset-tailwind@1.1.2/deno/variants.js": "3af16f478a91c4190642696fb5de935f6a6be4e6cce3ee0a9c236b96a73cd247",
     "https://esm.sh/v102/@twind/preset-tailwind@1.1.2/preset-tailwind.d.ts": "4a4c59e8af822c319d855697108561c8f4141662de0d2b04e5b031840b232096",
     "https://esm.sh/v102/csstype@3.1.1/index.d.ts": "1c29793071152b207c01ea1954e343be9a44d85234447b2b236acae9e709a383",
+    "https://esm.sh/v133/@preact/signals-core@1.5.0/X-ZS8q/denonext/signals-core.mjs": "69a658490da1b25f2f8d4476c45e7f1f45e08a04a0418119ab3d3b574d77b96a",
+    "https://esm.sh/v133/@preact/signals@1.2.1/X-ZS8q/denonext/signals.mjs": "90531451d474fa35205f5f54e512ed566093722cb2a004316dc7b8d4b8122961",
     "https://esm.sh/v99/@types/showdown@2.0.0/index.d.ts": "0cae38d42cef880ce4848fcd9ed704d65ba3ecc825443cd548ff81931c64cdca",
     "https://esm.sh/v99/preact-render-to-string@5.2.4/X-ZS8q/deno/preact-render-to-string.js": "75aad97b00d5ad63383de7f729a3f1fea59e69a9b876db5551d9c746ed372f82",
     "https://esm.sh/v99/preact-render-to-string@5.2.4/X-ZS8q/src/index.d.ts": "b1d73703252c8570fdf2952475805f5808ba3511fefbd93a3e7bd8406de7dcd0",

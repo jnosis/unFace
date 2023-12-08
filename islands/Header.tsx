@@ -1,6 +1,6 @@
 import type { JSX } from 'preact/jsx-runtime';
-import { useEffect, useState } from 'preact/hooks';
 import type { MenuItem } from '~/types.ts';
+import { useSignal, useSignalEffect } from '@preact/signals';
 import NavItem from '~/components/NavItem.tsx';
 import ThemeToggler from '~/islands/ThemeToggler.tsx';
 import { color } from '~/utils/style_utils.ts';
@@ -11,14 +11,14 @@ type HeaderProps = {
 };
 
 export default function Header({ menus }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [isColored, setIsColored] = useState<boolean>(false);
-  const [active, setActive] = useState<MenuItem>();
+  const scrolled = useSignal<boolean>(false);
+  const tinted = useSignal<boolean>(false);
+  const activated = useSignal<MenuItem>('home');
 
   const handleClick = (e: JSX.TargetedMouseEvent<HTMLUListElement>) => {
     const { dataset: { name } } = e.target as HTMLElement;
     if (isMenuItem(name)) {
-      setActive(name);
+      activated.value = name;
       if (location.pathname === '/') {
         document.getElementById(name)?.scrollIntoView({
           behavior: 'smooth',
@@ -30,31 +30,31 @@ export default function Header({ menus }: HeaderProps) {
     }
   };
 
-  useEffect(() => {
+  useSignalEffect(() => {
     globalThis.addEventListener('scroll', () => {
       if (window.scrollY > 0) {
-        setIsScrolled(true);
+        scrolled.value = true;
       } else {
-        setIsScrolled(false);
+        scrolled.value = false;
       }
     });
-  }, []);
+  });
 
-  useEffect(() => {
+  useSignalEffect(() => {
     const { pathname } = location;
-    const active = menus.find((menu) => pathname.includes(menu));
-    active && setActive(active);
-  }, []);
+    activated.value = menus.find((menu) => pathname.includes(menu)) ||
+      activated.value;
+  });
 
-  useEffect(() => {
-    if (location.pathname !== '/') setIsColored(true);
-  }, []);
+  useSignalEffect(() => {
+    if (location.pathname !== '/') tinted.value = true;
+  });
 
-  useEffect(() => {
-    if (location.pathname === '/') setIsColored(isScrolled);
-  }, [isScrolled]);
+  useSignalEffect(() => {
+    if (location.pathname === '/') tinted.value = scrolled.value;
+  });
 
-  useEffect(() => {
+  useSignalEffect(() => {
     globalThis.addEventListener('scroll', () => {
       const { pathname } = location;
       const isBottom = Math.ceil(window.scrollY + window.innerHeight) >=
@@ -62,35 +62,35 @@ export default function Header({ menus }: HeaderProps) {
       const isTop = Math.ceil(window.scrollY) === 0;
 
       if (pathname === '/' && isBottom) {
-        setActive('contact');
+        activated.value = 'contact';
       } else if (pathname === '/' && isTop) {
-        setActive('home');
+        activated.value = 'home';
       }
     });
-  }, []);
+  });
 
-  useEffect(() => {
+  useSignalEffect(() => {
     const switchActiveWhenScrolled = (menu: MenuItem, isUp: boolean) => {
       switch (menu) {
         case 'home':
           if (isUp) {
-            setActive('home');
+            activated.value = 'home';
           } else {
-            setActive('works');
+            activated.value = 'works';
           }
           break;
         case 'works':
           if (isUp) {
-            setActive('home');
+            activated.value = 'home';
           } else {
-            setActive('contact');
+            activated.value = 'contact';
           }
           break;
         case 'contact':
           if (isUp) {
-            setActive('works');
+            activated.value = 'works';
           } else {
-            setActive('contact');
+            activated.value = 'contact';
           }
           break;
 
@@ -122,13 +122,15 @@ export default function Header({ menus }: HeaderProps) {
     menus
       .map((menu) => document.getElementById(menu))
       .forEach((section) => section && observer.observe(section));
-  }, []);
+  });
 
   return (
     <header
       class={`fixed top-0 left-0 z-10 w-full h-16 p-4 flex justify-between items-center ${
         color(
-          `${isColored ? 'bg-bar' : 'bg-background'} sm:bg-bar text-on-surface`,
+          `${
+            tinted.value ? 'bg-bar' : 'bg-background'
+          } sm:bg-bar text-on-surface`,
         )
       }`}
     >
@@ -149,7 +151,7 @@ export default function Header({ menus }: HeaderProps) {
             <NavItem
               key={index}
               name={menu}
-              activated={menu === active}
+              activated={menu === activated.value}
             />
           ))}
         </ul>
