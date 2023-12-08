@@ -1,6 +1,6 @@
 import type { JSX } from 'preact/jsx-runtime';
-import { useState } from 'preact/hooks';
 import type { WorkData } from '~/types.ts';
+import { useSignal } from '@preact/signals';
 import Techs from '~/islands/Techs.tsx';
 import Works from '~/islands/Works.tsx';
 
@@ -10,11 +10,13 @@ type WorksSectionProps = {
 
 export default function WorksSection({ works }: WorksSectionProps) {
   const techs = works && [...new Set(works.map((work) => work.techs).flat())];
-  const [selected, setSelected] = useState<string>('');
+  const selected = useSignal<string>('');
 
   const handleTechClick = (e: JSX.TargetedMouseEvent<HTMLUListElement>) => {
     const { dataset: { tech } } = e.target as HTMLElement;
-    tech && (tech === selected ? setSelected('') : setSelected(tech));
+    if (!tech) return;
+    if ((tech === selected.value)) selected.value = '';
+    else selected.value = tech;
   };
 
   return (
@@ -24,8 +26,12 @@ export default function WorksSection({ works }: WorksSectionProps) {
     >
       <h1 class='text-4xl font-bold'>Works</h1>
       <div class='px-0 sm:px-2'>
-        <Techs techs={techs} selected={selected} onClick={handleTechClick} />
-        <Works works={works} filter={selected} />
+        <Techs
+          techs={techs}
+          selected={selected.value}
+          onClick={handleTechClick}
+        />
+        <Works works={works} filter={selected.value} />
       </div>
     </section>
   );
