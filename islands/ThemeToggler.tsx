@@ -1,7 +1,7 @@
-import { IS_BROWSER } from '$fresh/runtime.ts';
 import type { JSX } from 'preact/jsx-runtime';
-import { useEffect, useState } from 'preact/hooks';
 import type { ThemeScheme } from '~/types.ts';
+import { IS_BROWSER } from '$fresh/runtime.ts';
+import { useSignal, useSignalEffect } from '@preact/signals';
 import { IconAdjustments, IconMoon, IconSun } from '~/components/Icons.tsx';
 import { color } from '~/utils/style_utils.ts';
 
@@ -29,29 +29,29 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches);
     document.documentElement.classList.toggle('dark', w.isDark);
-    setDarkMode(w.isDark);
+    darkMode.value = w.isDark;
   }
 
-  const [scheme, setScheme] = useState<ThemeScheme>(getScheme());
-  const [darkMode, setDarkMode] = useState<boolean>();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const scheme = useSignal<ThemeScheme>(getScheme());
+  const darkMode = useSignal<boolean>(false);
+  const panelOpened = useSignal<boolean>(false);
 
   const setDarkModeAuto = () => {
     delete localStorage.theme;
     updateThemeMode();
-    setScheme('system');
+    scheme.value = 'system';
   };
 
   const setDarkModeOn = () => {
     localStorage.theme = 'dark';
     updateThemeMode();
-    setScheme('dark');
+    scheme.value = 'dark';
   };
 
   const setDarkModeOff = () => {
     localStorage.theme = 'light';
     updateThemeMode();
-    setScheme('light');
+    scheme.value = 'light';
   };
 
   const handleToggle = () => {
@@ -64,16 +64,16 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
 
   const handleContextMenu = (e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    setIsOpen(true);
+    panelOpened.value = true;
   };
 
   const handleMouseLeave = () => {
-    setIsOpen(false);
+    panelOpened.value = false;
   };
 
-  useEffect(() => {
+  useSignalEffect(() => {
     updateThemeMode();
-  }, []);
+  });
 
   return (
     <div
@@ -81,8 +81,10 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
       onContextMenu={handleContextMenu}
       onMouseLeave={handleMouseLeave}
     >
-      <div onClick={handleToggle}>{darkMode ? <IconMoon /> : <IconSun />}</div>
-      {isOpen && (
+      <div onClick={handleToggle}>
+        {darkMode.value ? <IconMoon /> : <IconSun />}
+      </div>
+      {panelOpened.value && (
         <ul
           class={`absolute flex flex-col justify-between w-36 h-28 mt-1 p-4 rounded-2xl bottom-8 sm:top-8 shadow ${
             color('bg-surface-variant text-on-surface-variant')
@@ -92,7 +94,7 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
             <input
               type='checkbox'
               id='light'
-              checked={scheme === 'light'}
+              checked={scheme.value === 'light'}
               onChange={setDarkModeOff}
             />
             <label class='flex gap-0.5' htmlFor='light'>
@@ -104,7 +106,7 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
             <input
               type='checkbox'
               id='dark'
-              checked={scheme === 'dark'}
+              checked={scheme.value === 'dark'}
               onChange={setDarkModeOn}
             />
             <label class='flex gap-0.5' htmlFor='dark'>
@@ -116,7 +118,7 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
             <input
               type='checkbox'
               id='system'
-              checked={scheme === 'system'}
+              checked={scheme.value === 'system'}
               onChange={setDarkModeAuto}
             />
             <label class='flex gap-0.5' htmlFor='system'>
