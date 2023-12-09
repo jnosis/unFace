@@ -1,6 +1,6 @@
 import type { JSX } from 'preact/jsx-runtime';
-import { useState } from 'preact/hooks';
 import type { WorkData } from '~/types.ts';
+import { useState } from 'preact/hooks';
 import Techs from '~/islands/Techs.tsx';
 import Works from '~/islands/Works.tsx';
 

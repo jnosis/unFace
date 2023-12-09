@@ -1,6 +1,6 @@
 import type { Handlers, PageProps } from '$fresh/server.ts';
-import { asset, Head } from '$fresh/runtime.ts';
 import type { WorkMarkDown } from '~/types.ts';
+import { asset, Head } from '$fresh/runtime.ts';
 import {
   IconBrandGithub,
   IconExternalLink,

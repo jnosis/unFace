@@ -1,5 +1,5 @@
-import showdown from 'showdown';
 import type { WorkData } from '~/types.ts';
+import showdown from 'showdown';
 
 export function convertToRawContentUrl(url: string, branch: string): string {
   return `${url.replace('github.com', 'raw.githubusercontent.com')}/${branch}`;

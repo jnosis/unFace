@@ -1,6 +1,6 @@
 import type { Handlers, PageProps } from '$fresh/server.ts';
-import { Head } from '$fresh/runtime.ts';
 import type { WorkData } from '~/types.ts';
+import { Head } from '$fresh/runtime.ts';
 import Contact from '~/components/Contact.tsx';
 import WorksSection from '~/islands/WorksSection.tsx';
 import { handler as worksHandler } from '~/routes/api/works/index.ts';
