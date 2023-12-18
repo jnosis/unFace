@@ -1,9 +1,8 @@
-import type { AppProps } from '$fresh/server.ts';
-import { Head } from '$fresh/runtime.ts';
+import type { PageProps } from '$fresh/server.ts';
 import Header from '~/islands/Header.tsx';
 import { color } from '~/utils/style_utils.ts';
 
-export default function App({ Component }: AppProps) {
+export default function App({ Component }: PageProps) {
   const code = `function global_dark(change) {
     if (change === 'auto') delete localStorage.theme;
     else if (change === 'on') localStorage.theme = 'dark';
@@ -16,20 +15,22 @@ export default function App({ Component }: AppProps) {
   global_dark();`;
 
   return (
-    <body
-      class={`flex flex-col w-full h-full min-h-screen ${
-        color('bg-background text-on-background')
-      }`}
-    >
-      <Head>
+    <>
+      <head>
         <script
           dangerouslySetInnerHTML={{
             __html: code,
           }}
         />
-      </Head>
-      <Header menus={['home', 'works', 'contact']} />
-      <Component />
-    </body>
+      </head>
+      <body
+        class={`flex flex-col w-full h-full min-h-screen ${
+          color('bg-background text-on-background')
+        }`}
+      >
+        <Header menus={['home', 'works', 'contact']} />
+        <Component />
+      </body>
+    </>
   );
 }
