@@ -1,9 +1,9 @@
-import { IS_BROWSER } from '$fresh/runtime.ts';
 import type { JSX } from 'preact/jsx-runtime';
-import { useEffect, useState } from 'preact/hooks';
 import type { ThemeScheme } from '~/types.ts';
+import { IS_BROWSER } from '$fresh/runtime.ts';
+import { useSignal, useSignalEffect } from '@preact/signals';
 import { IconAdjustments, IconMoon, IconSun } from '~/components/Icons.tsx';
-import { color } from '~/utils/style_utils.ts';
+import Panel from '~/components/Panel.tsx';
 
 type ThemeTogglerProps = {
   prev: ThemeScheme;
@@ -29,29 +29,18 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches);
     document.documentElement.classList.toggle('dark', w.isDark);
-    setDarkMode(w.isDark);
+    darkMode.value = w.isDark;
   }
 
-  const [scheme, setScheme] = useState<ThemeScheme>(getScheme());
-  const [darkMode, setDarkMode] = useState<boolean>();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const scheme = useSignal<ThemeScheme>(getScheme());
+  const darkMode = useSignal<boolean>(false);
+  const panelOpened = useSignal<boolean>(false);
 
-  const setDarkModeAuto = () => {
-    delete localStorage.theme;
+  const setScheme = (value: ThemeScheme) => {
+    if (value === 'system') delete localStorage.theme;
+    else localStorage.theme = value;
     updateThemeMode();
-    setScheme('system');
-  };
-
-  const setDarkModeOn = () => {
-    localStorage.theme = 'dark';
-    updateThemeMode();
-    setScheme('dark');
-  };
-
-  const setDarkModeOff = () => {
-    localStorage.theme = 'light';
-    updateThemeMode();
-    setScheme('light');
+    scheme.value = value;
   };
 
   const handleToggle = () => {
@@ -59,21 +48,21 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
     w.isDark = localStorage.theme === 'dark' ||
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches);
-    w.isDark ? setDarkModeOff() : setDarkModeOn();
+    setScheme(w.isDark ? 'light' : 'dark');
   };
 
   const handleContextMenu = (e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    setIsOpen(true);
+    panelOpened.value = true;
   };
 
   const handleMouseLeave = () => {
-    setIsOpen(false);
+    panelOpened.value = false;
   };
 
-  useEffect(() => {
+  useSignalEffect(() => {
     updateThemeMode();
-  }, []);
+  });
 
   return (
     <div
@@ -81,50 +70,20 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
       onContextMenu={handleContextMenu}
       onMouseLeave={handleMouseLeave}
     >
-      <div onClick={handleToggle}>{darkMode ? <IconMoon /> : <IconSun />}</div>
-      {isOpen && (
-        <ul
-          class={`absolute flex flex-col justify-between w-36 h-28 mt-1 p-4 rounded-2xl bottom-8 sm:top-8 shadow ${
-            color('bg-surface-variant text-on-surface-variant')
-          }`}
-        >
-          <li class='flex gap-1'>
-            <input
-              type='checkbox'
-              id='light'
-              checked={scheme === 'light'}
-              onChange={setDarkModeOff}
-            />
-            <label class='flex gap-0.5' htmlFor='light'>
-              <IconSun />
-              <span>Light</span>
-            </label>
-          </li>
-          <li class='flex gap-1'>
-            <input
-              type='checkbox'
-              id='dark'
-              checked={scheme === 'dark'}
-              onChange={setDarkModeOn}
-            />
-            <label class='flex gap-0.5' htmlFor='dark'>
-              <IconMoon />
-              <span>Dark</span>
-            </label>
-          </li>
-          <li class='flex gap-1'>
-            <input
-              type='checkbox'
-              id='system'
-              checked={scheme === 'system'}
-              onChange={setDarkModeAuto}
-            />
-            <label class='flex gap-0.5' htmlFor='system'>
-              <IconAdjustments />
-              <span>System</span>
-            </label>
-          </li>
-        </ul>
+      <div class='cursor-pointer' onClick={handleToggle}>
+        {darkMode.value ? <IconMoon /> : <IconSun />}
+      </div>
+      {panelOpened.value && (
+        <Panel<ThemeScheme>
+          name='theme'
+          items={[
+            { id: 'light', Icon: IconSun },
+            { id: 'dark', Icon: IconMoon },
+            { id: 'system', Icon: IconAdjustments },
+          ]}
+          checked={scheme.value}
+          onChange={setScheme}
+        />
       )}
     </div>
   );
