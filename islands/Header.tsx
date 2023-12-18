@@ -1,6 +1,6 @@
 import type { JSX } from 'preact/jsx-runtime';
-import { useEffect, useState } from 'preact/hooks';
 import type { MenuItem } from '~/types.ts';
+import { useEffect, useState } from 'preact/hooks';
 import NavItem from '~/components/NavItem.tsx';
 import ThemeToggler from '~/islands/ThemeToggler.tsx';
 import { color } from '~/utils/style_utils.ts';
