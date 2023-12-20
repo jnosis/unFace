@@ -13,6 +13,16 @@ export async function fetchData() {
   });
 }
 
+export async function initData() {
+  let count = 0;
+  const entries = kv.list<WorkData>({ prefix: ['works'] });
+  for await (const { value } of entries) {
+    if (value) count++;
+  }
+
+  if (count === 0) await fetchData();
+}
+
 export async function deleteAllData() {
   const entries = kv.list<WorkData>({ prefix: ['works'] });
   for await (const entry of entries) {
@@ -49,5 +59,3 @@ function isEqual(value: WorkData, other: WorkData) {
     return prev && other.techs.includes(current);
   }, true);
 }
-
-fetchData();
