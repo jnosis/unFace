@@ -5,6 +5,13 @@ const kv = await Deno.openKv();
 
 export async function fetchData() {
   const works = await http.get<WorkData[]>('api/works');
+
+  const entries = kv.list<WorkData>({ prefix: ['works'] });
+  for await (const { key, value: { title } } of entries) {
+    const index = works.findIndex((work) => work.title === title);
+    if (index === -1) await kv.delete(key);
+  }
+
   works.forEach(async (work) => {
     const { value } = await kv.get<WorkData>(['works', work.title]);
     if (!value || !isEqual(work, value)) {
