@@ -6,11 +6,9 @@
 /// <reference lib="deno.unstable" />
 
 import { start } from '$fresh/server.ts';
-import manifest from '~/fresh.gen.ts';
-
-import freshwind from 'freshwind/plugin.ts';
 import { fetchData, initData } from '~/services/works.ts';
-import twindConfig, { configUrl } from '~/twind.config.ts';
+import manifest from '~/fresh.gen.ts';
+import config from '~/fresh.config.ts';
 
 await initData();
 
@@ -19,4 +17,4 @@ Deno.cron('Update works', '0 0 * * *', async () => {
   await fetchData();
 });
 
-await start(manifest, { plugins: [freshwind(twindConfig, configUrl)] });
+await start(manifest, config);
