@@ -28,7 +28,9 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
     w.isDark = localStorage.theme === 'dark' ||
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches);
-    document.documentElement.classList.toggle('dark', w.isDark);
+    w.isDark
+      ? document.documentElement.classList.add('dark')
+      : document.documentElement.classList.remove('dark');
     darkMode.value = w.isDark;
   }
 

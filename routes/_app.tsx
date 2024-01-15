@@ -10,7 +10,7 @@ export default function App({ Component }: PageProps) {
     window.isDark = localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.classList.toggle('dark', window.isDark);
+    document.documentElement.classList[window.isDark ? 'add' : 'remove']("dark");
   }
   global_dark();`;
 
