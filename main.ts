@@ -14,10 +14,9 @@ import twindConfig, { configUrl } from '~/twind.config.ts';
 
 await initData();
 
-Deno.cron(
-  'Update works',
-  { minute: { exact: 0 }, hour: { exact: 0 } },
-  fetchData,
-);
+Deno.cron('Update works', '0 0 * * *', async () => {
+  console.log('fetching data at 00:00 on every day', new Date());
+  await fetchData();
+});
 
 await start(manifest, { plugins: [freshwind(twindConfig, configUrl)] });
