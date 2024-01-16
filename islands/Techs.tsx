@@ -10,12 +10,12 @@ type TechsProps = {
 
 export default function Techs({ techs, selected, onClick }: TechsProps) {
   return (
-    <ul class='flex flex-wrap mt-3 gap-2' onClick={onClick}>
+    <ul class='flex flex-wrap gap-2' onClick={onClick}>
       {techs.map((tech, index) => (
         <Tech
           key={index}
           name={tech}
-          selected={selected === tech}
+          selected={selected === 'all' || selected === tech}
           clickable={!!onClick}
         />
       ))}

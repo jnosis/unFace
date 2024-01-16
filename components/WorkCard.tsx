@@ -24,9 +24,9 @@ export default function WorkCard({ work, filter }: WorkCardProps) {
         src={fileUrl || '/images/default.jpg'}
         alt='work thumbnail'
       />
-      <div class='pt-1 px-4 pb-4 mb-2'>
+      <div class='mb-2 pt-1 px-4 pb-4'>
         <h1 class='text-3xl font-bold'>{title}</h1>
-        <p class='pt-2 text-base'>{description}</p>
+        <p class='pt-2 mb-3 text-base'>{description}</p>
         <Techs techs={techs} selected={filter} />
       </div>
     </li>

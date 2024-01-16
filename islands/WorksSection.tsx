@@ -24,7 +24,7 @@ export default function WorksSection({ works }: WorksSectionProps) {
       class='w-full mt-10 scroll-mt-20 sm:mt-16 px-4 sm:px-10'
       id='works'
     >
-      <h1 class='text-4xl font-bold'>Works</h1>
+      <h1 class='mb-3 text-4xl font-bold'>Works</h1>
       <div class='px-0 sm:px-2'>
         <Techs
           techs={techs}
