@@ -25,6 +25,10 @@ jobs:
 
       - name: Build step
         run: "deno task build" # 📝 Update the build command(s) if necessary
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
+          USER_EMAIL: ${{secrets.USER_EMAIL}}
+          USER_GITHUB: ${{secrets.USER_GITHUB}}
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
