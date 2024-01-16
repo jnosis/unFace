@@ -1,5 +1,4 @@
 import type { JSX } from 'preact/jsx-runtime';
-import { color } from '~/utils/style_utils.ts';
 
 type Item<T extends string> = {
   id: T;
@@ -18,11 +17,7 @@ export default function Panel<T extends string>(
   { name, items, checked, onChange }: PanelProps<T>,
 ) {
   return (
-    <ul
-      class={`absolute flex flex-col justify-between w-36 h-28 mt-1 p-4 rounded-2xl bottom-8 sm:top-8 shadow ${
-        color('bg-surface-variant text-on-surface-variant')
-      }`}
-    >
+    <ul class='absolute flex flex-col justify-between w-36 h-28 mt-1 p-4 rounded-2xl bottom-8 sm:top-8 shadow bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
       {items.map((item) => (
         <li class='flex gap-1'>
           <input

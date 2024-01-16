@@ -7,7 +7,6 @@ import {
   IconX,
 } from '~/components/Icons.tsx';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';
-import { color } from '~/utils/style_utils.ts';
 
 export const handler: Handlers<WorkMarkDown> = {
   async GET(req, ctx) {
@@ -39,11 +38,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
           href={asset('/github-markdown.css')}
         />
       </head>
-      <main
-        class={`w-full min-h-screen pt-16 pb-24 sm:pb-16 px-0 md:px-20 lg:px-40 overflow-hidden ${
-          color('bg-surface-variant text-on-surface-variant')
-        }`}
-      >
+      <main class='w-full min-h-screen pt-16 pb-24 sm:pb-16 px-0 md:px-20 lg:px-40 overflow-hidden bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
         {markdown && (
           <section class='px-4 sm:px-10'>
             <header class='h-16 flex items-center px-4'>
@@ -63,7 +58,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
               </a>
             </header>
             <article
-              class={`mt-2 mb-8 p-6 rounded-2xl ${'markdown-body'}`}
+              class='mt-2 mb-8 p-6 rounded-2xl markdown-body'
               dangerouslySetInnerHTML={{ __html: markdown }}
             />
           </section>

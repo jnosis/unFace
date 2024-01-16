@@ -1,6 +1,5 @@
 import type { WorkData } from '~/types.ts';
 import Techs from '~/islands/Techs.tsx';
-import { color } from '~/utils/style_utils.ts';
 
 type WorkCardProps = {
   work: WorkData;
@@ -17,9 +16,7 @@ export default function WorkCard({ work, filter }: WorkCardProps) {
 
   return (
     <li
-      class={`relative w-full h-full min-h-[20rem] rounded-2xl overflow-hidden cursor-pointer hover:scale-105 duration-300 ${
-        color('bg-surface-variant text-on-surface-variant')
-      }`}
+      class='relative w-full h-full min-h-[20rem] rounded-2xl overflow-hidden cursor-pointer hover:scale-105 duration-300 bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'
       onClick={handleClick}
     >
       <img
