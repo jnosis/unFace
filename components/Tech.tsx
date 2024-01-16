@@ -1,5 +1,3 @@
-import { color } from '~/utils/style_utils.ts';
-
 type TechProps = {
   name: string;
   selected: boolean;
@@ -9,14 +7,12 @@ type TechProps = {
 export default function Tech({ name, selected, clickable }: TechProps) {
   return (
     <li
-      class={`h-6 px-4 rounded-lg font-bold text-xs leading-6 ${
-        color('text-on-surface-variant')
-      } ${
+      class={`h-6 px-4 rounded-lg font-bold text-xs leading-6 text-on-surface-variant dark:text-on-surface-variant-dark ${
         selected
           ? clickable
-            ? color('bg-secondary-container')
-            : color('bg-tertiary-container')
-          : `outline outline-1 ${color('outline-outline')}`
+            ? 'bg-secondary-container dark:bg-secondary-container-dark'
+            : 'bg-tertiary-container dark:bg-tertiary-container-dark'
+          : 'outline outline-1 outline-outline dark:outline-outline-dark'
       }${clickable ? ' cursor-pointer' : ''}`}
       data-tech={name}
     >

@@ -3,7 +3,6 @@ import type { MenuItem } from '~/types.ts';
 import { useSignal, useSignalEffect } from '@preact/signals';
 import NavItem from '~/components/NavItem.tsx';
 import ThemeToggler from '~/islands/ThemeToggler.tsx';
-import { color } from '~/utils/style_utils.ts';
 import { isMenuItem } from '~/utils/type_utils.ts';
 
 type HeaderProps = {
@@ -126,12 +125,10 @@ export default function Header({ menus }: HeaderProps) {
 
   return (
     <header
-      class={`fixed top-0 left-0 z-10 w-full h-16 p-4 flex justify-between items-center ${
-        color(
-          `${
-            tinted.value ? 'bg-bar' : 'bg-background'
-          } sm:bg-bar text-on-surface`,
-        )
+      class={`fixed top-0 left-0 z-10 w-full h-16 p-4 flex justify-between items-center sm:bg-bar text-on-surface dark:sm:bg-bar-dark dark:text-on-surface-dark ${
+        tinted.value
+          ? 'bg-bar dark:bg-bar-dark'
+          : 'bg-background dark:bg-background-dark'
       }`}
     >
       <h1 class='text-xl font-bold'>
@@ -139,9 +136,7 @@ export default function Header({ menus }: HeaderProps) {
       </h1>
       <nav>
         <ul
-          class={`flex gap-2 fixed sm:static bottom-0 left-0 w-full h-16 justify-center items-center ${
-            color('bg-bar')
-          }`}
+          class='flex gap-2 fixed sm:static bottom-0 left-0 w-full h-16 justify-center items-center bg-bar dark:bg-bar-dark'
           onClick={(e) => handleClick(e)}
         >
           <li>

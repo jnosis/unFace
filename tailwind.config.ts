@@ -1,9 +1,10 @@
+import { type Config } from 'tailwindcss';
 import { asset } from '$fresh/runtime.ts';
-import { defineConfig } from '@twind/core';
-import presetTailwind from '@twind/preset-tailwind';
 
-export default defineConfig({
-  presets: [presetTailwind()],
+export default {
+  content: [
+    '{routes,islands,components}/**/*.{ts,tsx}',
+  ],
   darkMode: 'class',
   theme: {
     colors: {
@@ -73,6 +74,4 @@ export default defineConfig({
       });`,
     },
   },
-});
-
-export const configUrl = import.meta.url;
+} satisfies Config;

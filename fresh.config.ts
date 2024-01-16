@@ -1,7 +1,6 @@
 import { defineConfig } from '$fresh/server.ts';
-import freshwind from 'freshwind/plugin.ts';
-import twindConfig, { configUrl } from '~/twind.config.ts';
+import tailwind from '$fresh/plugins/tailwind.ts';
 
 export default defineConfig({
-  plugins: [freshwind(twindConfig, configUrl)],
+  plugins: [tailwind()],
 });

@@ -1,6 +1,5 @@
 import type { PageProps } from '$fresh/server.ts';
 import Header from '~/islands/Header.tsx';
-import { color } from '~/utils/style_utils.ts';
 
 export default function App({ Component }: PageProps) {
   const code = `function global_dark(change) {
@@ -17,17 +16,14 @@ export default function App({ Component }: PageProps) {
   return (
     <>
       <head>
+        <link rel='stylesheet' href='/styles.css' />
         <script
           dangerouslySetInnerHTML={{
             __html: code,
           }}
         />
       </head>
-      <body
-        class={`flex flex-col w-full h-full min-h-screen ${
-          color('bg-background text-on-background')
-        }`}
-      >
+      <body class='flex flex-col w-full h-full min-h-screen bg-background text-on-background dark:bg-background-dark dark:text-on-background-dark'>
         <Header menus={['home', 'works', 'contact']} />
         <Component />
       </body>

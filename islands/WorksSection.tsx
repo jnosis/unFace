@@ -21,7 +21,7 @@ export default function WorksSection({ works }: WorksSectionProps) {
 
   return (
     <section
-      class={`w-full mt-10 ${'scroll-mt-20'} sm:mt-16 px-4 sm:px-10`}
+      class='w-full mt-10 scroll-mt-20 sm:mt-16 px-4 sm:px-10'
       id='works'
     >
       <h1 class='text-4xl font-bold'>Works</h1>
