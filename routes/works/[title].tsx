@@ -1,14 +1,15 @@
 import type { Handlers, PageProps } from '$fresh/server.ts';
-import type { WorkMarkDown } from '~/types.ts';
+import type { WorkDetail } from '~/types.ts';
 import { asset } from '$fresh/runtime.ts';
 import {
   IconBrandGithub,
   IconExternalLink,
   IconX,
 } from '~/components/Icons.tsx';
+import Techs from '~/islands/Techs.tsx';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';
 
-export const handler: Handlers<WorkMarkDown> = {
+export const handler: Handlers<WorkDetail> = {
   async GET(req, ctx) {
     try {
       const res = await workHandler.GET!(req, ctx);
@@ -24,8 +25,8 @@ export const handler: Handlers<WorkMarkDown> = {
   },
 };
 
-export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
-  const { title, repoUrl, projectUrl, markdown } = data;
+export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
+  const { title, repoUrl, projectUrl, techs, readme } = data;
 
   return (
     <>
@@ -39,7 +40,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
         />
       </head>
       <main class='w-full min-h-screen pt-16 pb-24 sm:pb-16 px-0 md:px-20 lg:px-40 overflow-hidden bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
-        {markdown && (
+        {readme && (
           <section class='px-4 sm:px-10'>
             <header class='h-16 flex items-center px-4'>
               <h2 class='font-bold'>{title}</h2>
@@ -57,10 +58,18 @@ export default function WorkDetailPage({ data }: PageProps<WorkMarkDown>) {
                 <IconX class='w-6 h-6' />
               </a>
             </header>
-            <article
-              class='mt-2 mb-8 p-6 rounded-2xl markdown-body'
-              dangerouslySetInnerHTML={{ __html: markdown }}
-            />
+            <div class='pt-3 rounded-2xl bg-primary-container dark:bg-primary-container'>
+              <div class='mb-3 pl-3'>
+                <Techs
+                  techs={techs}
+                  selected='all'
+                />
+              </div>
+              <article
+                class='mt-2 mb-8 p-6 rounded-2xl markdown-body'
+                dangerouslySetInnerHTML={{ __html: readme }}
+              />
+            </div>
           </section>
         )}
       </main>

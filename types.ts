@@ -24,11 +24,12 @@ export type WorkData = {
   thumbnail: FileData;
 };
 
-export type WorkMarkDown = {
+export type WorkDetail = {
   title: string;
   repoUrl: string;
   projectUrl: string;
-  markdown: string;
+  techs: Techs;
+  readme: string;
 };
 
 export type AuthorOptions = {

@@ -1,5 +1,5 @@
 import type { Handlers } from '$fresh/server.ts';
-import type { WorkMarkDown } from '~/types.ts';
+import type { WorkDetail } from '~/types.ts';
 import { getWorkByTitle } from '~/services/works.ts';
 import { convertMarkdownToHtml, convertUrls } from '~/utils/converter.ts';
 
@@ -21,9 +21,15 @@ export const handler: Handlers = {
       } = convertUrls(work);
 
       const raw = await fetch(`${contentUrl}/README.md`, { method: 'GET' });
-      const markdown = await raw.text();
-      const html = convertMarkdownToHtml(markdown, repoContentUrl, contentUrl);
-      const data: WorkMarkDown = { title, repoUrl, projectUrl, markdown: html };
+      const readme = await raw.text();
+      const html = convertMarkdownToHtml(readme, repoContentUrl, contentUrl);
+      const data: WorkDetail = {
+        title,
+        repoUrl,
+        projectUrl,
+        techs: [...work.techs],
+        readme: html,
+      };
 
       return new Response(JSON.stringify(data));
     } catch (error) {
