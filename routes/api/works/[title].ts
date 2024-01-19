@@ -10,7 +10,7 @@ export const handler: Handlers = {
       const work = await getWorkByTitle(title);
 
       if (work === null) {
-        return new Response(null, { status: 404 });
+        throw new Deno.errors.NotFound();
       }
 
       const {

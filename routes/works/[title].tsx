@@ -19,7 +19,6 @@ export const handler: Handlers<WorkDetail> = {
 
       return ctx.render(data);
     } catch (error) {
-      if (error.cause === 404) return ctx.renderNotFound();
       throw error;
     }
   },
