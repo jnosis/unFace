@@ -4,7 +4,7 @@ import Tech from '~/components/Tech.tsx';
 
 type TechsProps = {
   techs: Techs;
-  selected: string;
+  selected: 'all' | string[];
   onClick?(e: JSX.TargetedMouseEvent<HTMLUListElement>): void;
 };
 
@@ -15,7 +15,7 @@ export default function Techs({ techs, selected, onClick }: TechsProps) {
         <Tech
           key={index}
           name={tech}
-          selected={selected === 'all' || selected === tech}
+          selected={selected === 'all' || selected.includes(tech)}
           clickable={!!onClick}
         />
       ))}

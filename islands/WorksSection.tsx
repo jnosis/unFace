@@ -10,13 +10,14 @@ type WorksSectionProps = {
 
 export default function WorksSection({ works }: WorksSectionProps) {
   const techs = works && [...new Set(works.map((work) => work.techs).flat())];
-  const selected = useSignal<string>('');
+  const selected = useSignal<string[]>([]);
 
   const handleTechClick = (e: JSX.TargetedMouseEvent<HTMLUListElement>) => {
     const { dataset: { tech } } = e.target as HTMLElement;
     if (!tech) return;
-    if ((tech === selected.value)) selected.value = '';
-    else selected.value = tech;
+    if (selected.value.includes(tech)) {
+      selected.value = [...selected.value.filter((str) => str !== tech)];
+    } else selected.value = [...selected.value, tech];
   };
 
   return (
@@ -31,7 +32,7 @@ export default function WorksSection({ works }: WorksSectionProps) {
           selected={selected.value}
           onClick={handleTechClick}
         />
-        <Works works={works} filter={selected.value} />
+        <Works works={works} filters={selected.value} />
       </div>
     </section>
   );
