@@ -36,7 +36,7 @@
     "tailwindcss": "npm:tailwindcss@3.3.5",
     "tailwindcss/": "npm:/tailwindcss@3.3.5/",
     "tailwindcss/plugin": "npm:/tailwindcss@3.3.5/plugin.js",
-    "tabler_icons/": "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/",
+    "tabler_icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
     "showdown": "https://esm.sh/showdown@2.1.0"
   },
   "compilerOptions": {
