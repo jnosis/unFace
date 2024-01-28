@@ -5,9 +5,10 @@ import WorkCard from '~/components/WorkCard.tsx';
 type WorksProps = {
   works: WorkData[];
   filters: string[];
+  onClearClick: () => void;
 };
 
-export default function Works({ works, filters }: WorksProps) {
+export default function Works({ works, filters, onClearClick }: WorksProps) {
   const filtered = works.filter((work) =>
     filters.length === 0 ? true : filters.reduce(
       (prev, filter) => prev && work.techs.includes(filter),
@@ -21,7 +22,7 @@ export default function Works({ works, filters }: WorksProps) {
         ? filtered.map((work) => (
           <WorkCard key={work.id} work={work} filters={filters} />
         ))
-        : <NoItemsFound />}
+        : <NoItemsFound onClick={onClearClick} />}
     </ul>
   );
 }

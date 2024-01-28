@@ -20,6 +20,8 @@ export default function WorksSection({ works }: WorksSectionProps) {
     } else selected.value = [...selected.value, tech];
   };
 
+  const clearFilters = () => selected.value = [];
+
   return (
     <section
       class='w-full mt-10 scroll-mt-20 sm:mt-16 px-4 sm:px-10'
@@ -32,7 +34,11 @@ export default function WorksSection({ works }: WorksSectionProps) {
           selected={selected.value}
           onClick={handleTechClick}
         />
-        <Works works={works} filters={selected.value} />
+        <Works
+          works={works}
+          filters={selected.value}
+          onClearClick={clearFilters}
+        />
       </div>
     </section>
   );
