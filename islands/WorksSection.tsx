@@ -32,6 +32,7 @@ export default function WorksSection({ works }: WorksSectionProps) {
         <Techs
           techs={techs}
           selected={selected.value}
+          clearFilters={clearFilters}
           onClick={handleTechClick}
         />
         <Works
