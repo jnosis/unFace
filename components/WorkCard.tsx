@@ -3,10 +3,10 @@ import Techs from '~/islands/Techs.tsx';
 
 type WorkCardProps = {
   work: WorkData;
-  filter: string;
+  filters: string[];
 };
 
-export default function WorkCard({ work, filter }: WorkCardProps) {
+export default function WorkCard({ work, filters }: WorkCardProps) {
   const { thumbnail, title, description, techs } = work;
   const { fileUrl } = thumbnail;
 
@@ -27,7 +27,7 @@ export default function WorkCard({ work, filter }: WorkCardProps) {
       <div class='mb-2 pt-1 px-4 pb-4'>
         <h1 class='text-3xl font-bold'>{title}</h1>
         <p class='pt-2 mb-3 text-base'>{description}</p>
-        <Techs techs={techs} selected={filter} />
+        <Techs techs={techs} selected={filters} />
       </div>
     </li>
   );
