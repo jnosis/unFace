@@ -40,7 +40,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
       </head>
       <main class='w-full min-h-screen pt-16 pb-24 sm:pb-16 px-0 md:px-20 lg:px-40 overflow-hidden bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
         {readme && (
-          <section class='px-4 sm:px-10'>
+          <section class='px-4 sm:px-0 sm:max-w-3xl m-auto'>
             <header class='h-16 flex items-center px-4'>
               <h2 class='font-bold'>{title}</h2>
               <div class='flex-auto flex gap-1 ml-2'>

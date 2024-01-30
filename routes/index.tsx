@@ -21,7 +21,7 @@ export default function Home({ data: works }: PageProps<WorkData[]>) {
         <title>unFace</title>
         <meta name='description' content='Portfolio Site' />
       </head>
-      <main class='flex flex-col h-full pt-16 px-0 pb-16 sm:pb-0 md:px-20 lg:px-40'>
+      <main class='flex flex-col h-full m-auto pt-16 px-0 pb-16 sm:pb-0 md:px-4 md:max-w-4xl'>
         <section class='w-full px-4 mt-0 sm:mt-6'>
           <article
             class='scroll-mt-24 px-16 py-36 rounded-[4rem] bg-cover bg-no-repeat text-on-primary bg-profile'
