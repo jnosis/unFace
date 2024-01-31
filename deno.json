@@ -8,6 +8,7 @@
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
+    "build_preview": "deno task build && deno task preview",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "fmt": {
