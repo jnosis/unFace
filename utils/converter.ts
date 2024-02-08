@@ -1,5 +1,5 @@
 import type { WorkData } from '~/types.ts';
-import { render } from 'gfm';
+import { CSS, render } from 'gfm';
 
 export function convertToRawContentUrl(url: string, branch: string): string {
   return `${url.replace('github.com', 'raw.githubusercontent.com')}/${branch}`;
@@ -35,7 +35,8 @@ export function convertMarkdownToHtml(
   contentUrl: string,
 ) {
   const html = render(markdown);
-  return transformLinks(html, repoContentUrl, contentUrl);
+  return `<style>${CSS}</style>` +
+    transformLinks(html, repoContentUrl, contentUrl);
 }
 
 function transformLinks(
