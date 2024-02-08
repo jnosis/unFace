@@ -1,5 +1,5 @@
 import type { WorkData } from '~/types.ts';
-import showdown from 'showdown';
+import { render } from 'gfm';
 
 export function convertToRawContentUrl(url: string, branch: string): string {
   return `${url.replace('github.com', 'raw.githubusercontent.com')}/${branch}`;
@@ -29,15 +29,12 @@ export function convertUrls(work?: WorkData | null) {
   return { repoUrl, repoContentUrl, contentUrl, projectUrl };
 }
 
-const converter = new showdown.Converter();
-
 export function convertMarkdownToHtml(
   markdown: string,
   repoContentUrl: string,
   contentUrl: string,
 ) {
-  converter.setFlavor('github');
-  const html = converter.makeHtml(markdown);
+  const html = render(markdown);
   return transformLinks(html, repoContentUrl, contentUrl);
 }
 
