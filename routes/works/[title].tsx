@@ -32,6 +32,11 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
       <head>
         <title>{`${title} | unFace`}</title>
         <meta name='description' content={`${title} project's description`} />
+        <link
+          id='markdown-styles'
+          rel='stylesheet'
+          href={asset('/github-markdown.css')}
+        />
       </head>
       <main class='w-full min-h-screen pt-16 pb-24 sm:pb-16 px-0 md:px-20 lg:px-40 overflow-hidden bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
         {readme && (
@@ -60,6 +65,9 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
                 />
               </div>
               <article
+                data-color-mode='auto'
+                data-light-theme='light'
+                data-dark-theme='dark'
                 class='mt-2 mb-8 p-6 rounded-2xl markdown-body'
                 dangerouslySetInnerHTML={{ __html: readme }}
               />

@@ -35,7 +35,7 @@ export function convertMarkdownToHtml(
   contentUrl: string,
 ) {
   const html = render(markdown);
-  return `<style>${CSS}</style>` +
+  return `<style>${CSS.substring(CSS.indexOf('.markdown-body'))}</style>` +
     transformLinks(html, repoContentUrl, contentUrl);
 }
 
