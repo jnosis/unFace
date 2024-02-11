@@ -57,8 +57,8 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
                 <IconX class='w-6 h-6' />
               </a>
             </header>
-            <div class='pt-3 rounded-2xl bg-primary-container dark:bg-primary-container'>
-              <div class='mb-3 pl-3'>
+            <div class='mb-4 sm:mb-16 pt-3 rounded-2xl bg-primary-container dark:bg-primary-container'>
+              <div class='pb-3 pl-3'>
                 <Techs
                   techs={techs}
                   selected='all'
@@ -68,7 +68,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
                 data-color-mode='auto'
                 data-light-theme='light'
                 data-dark-theme='dark'
-                class='mt-2 mb-4 sm:mb-16 p-6 rounded-2xl markdown-body'
+                class='p-6 rounded-2xl markdown-body'
                 dangerouslySetInnerHTML={{ __html: readme }}
               />
             </div>
