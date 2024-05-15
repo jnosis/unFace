@@ -1,4 +1,4 @@
-import type { WorkData } from '~/types.ts';
+import type { FileData, PrevFileData, WorkData } from '~/types.ts';
 import http from '~/utils/http.ts';
 
 const kv = await Deno.openKv();
@@ -15,7 +15,15 @@ export async function fetchData() {
   works.forEach(async (work) => {
     const { value } = await kv.get<WorkData>(['works', work.title]);
     if (!value || !isEqual(work, value)) {
-      await kv.set(['works', work.title], work);
+      const { thumbnail, ...others } = work;
+      const saved: WorkData = {
+        ...others,
+        thumbnail: {
+          name: isFileData(thumbnail) ? thumbnail.name : thumbnail.fileName,
+          url: isFileData(thumbnail) ? thumbnail.url : thumbnail.fileUrl,
+        },
+      };
+      await kv.set(['works', work.title], saved);
     }
   });
 }
@@ -60,9 +68,34 @@ function isEqual(value: WorkData, other: WorkData) {
   if (value.repo.branch !== other.repo.branch) return false;
   if (value.repo.url !== other.repo.url) return false;
   if (value.techs.length !== other.techs.length) return false;
-  if (value.thumbnail.fileName !== other.thumbnail.fileName) return false;
-  if (value.thumbnail.fileUrl !== other.thumbnail.fileUrl) return false;
+  if (!compareFileData(value.thumbnail, other.thumbnail)) return false;
   return value.techs.reduce((prev, current) => {
     return prev && other.techs.includes(current);
   }, true);
+}
+
+type FileDataLike = FileData | PrevFileData;
+
+function compareFileData(value: FileDataLike, other: FileDataLike): boolean {
+  let name1 = '';
+  let url1 = '';
+  let name2 = '';
+  let url2 = '';
+  if (isFileData(value)) {
+    name1 = value.name;
+    url1 = value.url;
+    if (isFileData(other)) {
+      name2 = other.name;
+      url2 = other.url;
+    } else {
+      name2 = other.fileName;
+      url2 = other.fileUrl;
+    }
+  } else {
+    return false;
+  }
+  return name1 === name2 && url1 === url2;
+}
+function isFileData(value: FileDataLike): value is FileData {
+  return !!(value as FileData).name;
 }

@@ -10,6 +10,11 @@ export type Repo = {
 export type Techs = string[];
 
 export type FileData = {
+  name: string;
+  url: string;
+};
+
+export type PrevFileData = {
   fileName: string;
   fileUrl: string;
 };
@@ -21,7 +26,7 @@ export type WorkData = {
   techs: Techs;
   repo: Repo;
   projectUrl?: string;
-  thumbnail: FileData;
+  thumbnail: FileData | PrevFileData;
 };
 
 export type WorkDetail = {
