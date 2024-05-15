@@ -81,15 +81,15 @@ function compareFileData(value: FileDataLike, other: FileDataLike): boolean {
   let url1 = '';
   let name2 = '';
   let url2 = '';
-  if (isFileData(value)) {
-    name1 = value.name;
-    url1 = value.url;
-    if (isFileData(other)) {
-      name2 = other.name;
-      url2 = other.url;
+  if (isFileData(other)) {
+    name1 = other.name;
+    url1 = other.url;
+    if (isFileData(value)) {
+      name2 = value.name;
+      url2 = value.url;
     } else {
-      name2 = other.fileName;
-      url2 = other.fileUrl;
+      name2 = value.fileName;
+      url2 = value.fileUrl;
     }
   } else {
     return false;
