@@ -19,6 +19,8 @@ export type PrevFileData = {
   fileUrl: string;
 };
 
+export type FileDataLike = FileData | PrevFileData;
+
 export type WorkData = {
   id: string;
   title: string;

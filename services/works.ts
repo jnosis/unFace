@@ -1,5 +1,6 @@
-import type { FileData, PrevFileData, WorkData } from '~/types.ts';
+import type { FileDataLike, WorkData } from '~/types.ts';
 import http from '~/utils/http.ts';
+import { isFileData } from '~/utils/type_utils.ts';
 
 const kv = await Deno.openKv();
 
@@ -14,6 +15,7 @@ export async function fetchData() {
 
   works.forEach(async (work) => {
     const { value } = await kv.get<WorkData>(['works', work.title]);
+    console.log(value);
     if (!value || !isEqual(work, value)) {
       const { thumbnail, ...others } = work;
       const saved: WorkData = {
@@ -74,8 +76,6 @@ function isEqual(value: WorkData, other: WorkData) {
   }, true);
 }
 
-type FileDataLike = FileData | PrevFileData;
-
 function compareFileData(value: FileDataLike, other: FileDataLike): boolean {
   let name1 = '';
   let url1 = '';
@@ -95,7 +95,4 @@ function compareFileData(value: FileDataLike, other: FileDataLike): boolean {
     return false;
   }
   return name1 === name2 && url1 === url2;
-}
-function isFileData(value: FileDataLike): value is FileData {
-  return !!(value as FileData).name;
 }

@@ -1,5 +1,6 @@
 import type { WorkData } from '~/types.ts';
 import Techs from '~/islands/Techs.tsx';
+import { isFileData } from '~/utils/type_utils.ts';
 
 type WorkCardProps = {
   work: WorkData;
@@ -8,7 +9,7 @@ type WorkCardProps = {
 
 export default function WorkCard({ work, filters }: WorkCardProps) {
   const { thumbnail, title, description, techs } = work;
-  const { fileUrl } = thumbnail;
+  const fileUrl = isFileData(thumbnail) ? thumbnail.url : thumbnail.fileUrl;
 
   const handleClick = () => {
     location.assign(`/works/${title}`);
