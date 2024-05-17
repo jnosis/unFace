@@ -11,12 +11,12 @@ export type Techs = string[];
 
 export type FileData = {
   name: string;
-  url: string;
+  path: string;
 };
 
 export type PrevFileData = {
-  fileName: string;
-  fileUrl: string;
+  name: string;
+  url: string;
 };
 
 export type FileDataLike = FileData | PrevFileData;

@@ -5,5 +5,5 @@ export function isMenuItem(menu: unknown): menu is MenuItem {
 }
 
 export function isFileData(value: FileDataLike): value is FileData {
-  return !!(value as FileData).name;
+  return !!(value as FileData).path;
 }

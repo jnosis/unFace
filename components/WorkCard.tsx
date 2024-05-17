@@ -9,7 +9,7 @@ type WorkCardProps = {
 
 export default function WorkCard({ work, filters }: WorkCardProps) {
   const { thumbnail, title, description, techs } = work;
-  const fileUrl = isFileData(thumbnail) ? thumbnail.url : thumbnail.fileUrl;
+  const fileUrl = isFileData(thumbnail) ? thumbnail.path : thumbnail.url;
 
   const handleClick = () => {
     location.assign(`/works/${title}`);

@@ -21,8 +21,8 @@ export async function fetchData() {
       const saved: WorkData = {
         ...others,
         thumbnail: {
-          name: isFileData(thumbnail) ? thumbnail.name : thumbnail.fileName,
-          url: isFileData(thumbnail) ? thumbnail.url : thumbnail.fileUrl,
+          name: thumbnail.name,
+          url: isFileData(thumbnail) ? thumbnail.path : thumbnail.url,
         },
       };
       await kv.set(['works', work.title], saved);
@@ -83,13 +83,13 @@ function compareFileData(value: FileDataLike, other: FileDataLike): boolean {
   let url2 = '';
   if (isFileData(other)) {
     name1 = other.name;
-    url1 = other.url;
+    url1 = other.path;
     if (isFileData(value)) {
       name2 = value.name;
-      url2 = value.url;
+      url2 = value.path;
     } else {
-      name2 = value.fileName;
-      url2 = value.fileUrl;
+      name2 = value.name;
+      url2 = value.url;
     }
   } else {
     return false;
