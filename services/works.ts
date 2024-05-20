@@ -15,14 +15,13 @@ export async function fetchData() {
 
   works.forEach(async (work) => {
     const { value } = await kv.get<WorkData>(['works', work.title]);
-    console.log(value);
     if (!value || !isEqual(work, value)) {
       const { thumbnail, ...others } = work;
       const saved: WorkData = {
         ...others,
         thumbnail: {
           name: thumbnail.name,
-          url: isFileData(thumbnail) ? thumbnail.path : thumbnail.url,
+          path: isFileData(thumbnail) ? thumbnail.path : thumbnail.url,
         },
       };
       await kv.set(['works', work.title], saved);
