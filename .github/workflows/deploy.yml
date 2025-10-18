@@ -24,7 +24,7 @@ jobs:
           deno-version: v1.x
 
       - name: Build step
-        run: "deno task build" # 📝 Update the build command(s) if necessary
+        run: 'deno task build' # 📝 Update the build command(s) if necessary
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
           USER_EMAIL: ${{secrets.USER_EMAIL}}
@@ -33,5 +33,5 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "unface" # 📝 Update the deploy project name if necessary
-          entrypoint: "./main.ts" # 📝 Update the entrypoint if necessary
+          project: 'unface' # 📝 Update the deploy project name if necessary
+          entrypoint: './main.ts' # 📝 Update the entrypoint if necessary

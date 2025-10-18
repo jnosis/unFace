@@ -1,12 +1,14 @@
-import type { Handlers, PageProps } from '$fresh/server.ts';
+import type { PageProps } from 'fresh';
 import type { WorkData } from '~/types.ts';
 import Contact from '~/components/Contact.tsx';
 import WorksSection from '~/islands/WorksSection.tsx';
 import { handler as worksHandler } from '~/routes/api/works/index.ts';
 import config from '~/config.ts';
+import { Handlers } from 'fresh/compat';
 
 export const handler: Handlers<WorkData[]> = {
-  async GET(req, ctx) {
+  async GET(ctx) {
+    const req = ctx.req;
     const res = await worksHandler.GET!(req, ctx);
     const data = await res.json();
 

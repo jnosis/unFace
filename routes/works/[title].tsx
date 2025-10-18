@@ -1,6 +1,6 @@
-import type { Handlers, PageProps } from '$fresh/server.ts';
+import type { PageProps } from 'fresh';
 import type { WorkDetail } from '~/types.ts';
-import { asset } from '$fresh/runtime.ts';
+import { asset } from 'fresh/runtime';
 import {
   IconBrandGithub,
   IconExternalLink,
@@ -8,9 +8,12 @@ import {
 } from '~/components/Icons.tsx';
 import Techs from '~/islands/Techs.tsx';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';
+import { Handlers } from 'fresh/compat';
 
 export const handler: Handlers<WorkDetail> = {
-  async GET(req, ctx) {
+  async GET(ctx) {
+    const req = ctx.req;
+
     try {
       const res = await workHandler.GET!(req, ctx);
       const data = await res.json();

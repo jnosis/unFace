@@ -1,6 +1,6 @@
 import type { JSX } from 'preact/jsx-runtime';
 import type { ThemeScheme } from '~/types.ts';
-import { IS_BROWSER } from '$fresh/runtime.ts';
+import { IS_BROWSER } from 'fresh/runtime';
 import { useSignal, useSignalEffect } from '@preact/signals';
 import { IconAdjustments, IconMoon, IconSun } from '~/components/Icons.tsx';
 import Panel from '~/components/Panel.tsx';
