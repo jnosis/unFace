@@ -1,5 +1,6 @@
 import type { PageProps } from 'fresh';
 import type { WorkData } from '~/types.ts';
+import { Head } from 'fresh/runtime';
 import Contact from '~/components/Contact.tsx';
 import WorksSection from '~/islands/WorksSection.tsx';
 import { handler as worksHandler } from '~/routes/api/works/index.ts';
@@ -22,7 +23,7 @@ export default function Home({ data: works }: PageProps<WorkData[]>) {
       <head>
         <title>unFace</title>
         <meta name='description' content='Portfolio Site' />
-      </head>
+      </Head>
       <main class='flex flex-col h-full m-auto pt-16 px-0 pb-16 sm:pb-0 md:px-4 md:max-w-4xl'>
         <section class='w-full px-4 mt-0 sm:mt-6'>
           <article

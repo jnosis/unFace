@@ -1,6 +1,7 @@
 import type { PageProps } from 'fresh';
 import type { WorkDetail } from '~/types.ts';
-import { asset } from 'fresh/runtime';
+import { HttpError } from 'fresh';
+import { asset, Head } from 'fresh/runtime';
 import {
   IconBrandGithub,
   IconExternalLink,
@@ -32,7 +33,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
 
   return (
     <>
-      <head>
+      <Head>
         <title>{`${title} | unFace`}</title>
         <meta name='description' content={`${title} project's description`} />
         <link
@@ -40,7 +41,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
           rel='stylesheet'
           href={asset('/github-markdown.css')}
         />
-      </head>
+      </Head>
       <main class='w-full min-h-screen py-16 sm:pb-0 px-0 md:px-20 lg:px-40 overflow-hidden bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
         {readme && (
           <section class='px-4 sm:px-0 sm:max-w-3xl m-auto'>
