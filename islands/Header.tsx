@@ -1,5 +1,6 @@
 import type { TargetedMouseEvent } from 'preact';
 import type { MenuItem } from '~/types.ts';
+import { useEffect } from 'preact/hooks';
 import { useSignal, useSignalEffect } from '@preact/signals';
 import NavItem from '~/components/NavItem.tsx';
 import ThemeToggler from '~/islands/ThemeToggler.tsx';
@@ -30,71 +31,30 @@ export default function Header({ menus }: HeaderProps) {
   };
 
   useSignalEffect(() => {
-    globalThis.addEventListener('scroll', () => {
-      if (globalThis.scrollY > 0) {
-        scrolled.value = true;
-      } else {
-        scrolled.value = false;
-      }
-    });
-  });
-
-  useSignalEffect(() => {
     const { pathname } = location;
-    activated.value = menus.find((menu) => pathname.includes(menu)) ||
-      activated.value;
+    const activeMenu = menus.find((menu) => pathname.includes(menu));
+    if (activeMenu) {
+      activated.value = activeMenu;
+    }
   });
 
   useSignalEffect(() => {
-    if (location.pathname !== '/') tinted.value = true;
+    tinted.value = location.pathname !== '/' || scrolled.value;
   });
 
-  useSignalEffect(() => {
-    if (location.pathname === '/') tinted.value = scrolled.value;
-  });
+  useEffect(() => {
+    const handleScroll = () => {
+      scrolled.value = globalThis.scrollY > 0;
 
-  useSignalEffect(() => {
-    globalThis.addEventListener('scroll', () => {
-      const { pathname } = location;
-      const isBottom = Math.ceil(globalThis.scrollY + globalThis.innerHeight) >=
-        document.body.clientHeight;
-      const isTop = Math.ceil(globalThis.scrollY) === 0;
-
-      if (pathname === '/' && isBottom) {
-        activated.value = 'contact';
-      } else if (pathname === '/' && isTop) {
-        activated.value = 'home';
-      }
-    });
-  });
-
-  useSignalEffect(() => {
-    const switchActiveWhenScrolled = (menu: MenuItem, isUp: boolean) => {
-      switch (menu) {
-        case 'home':
-          if (isUp) {
-            activated.value = 'home';
-          } else {
-            activated.value = 'works';
-          }
-          break;
-        case 'works':
-          if (isUp) {
-            activated.value = 'home';
-          } else {
-            activated.value = 'contact';
-          }
-          break;
-        case 'contact':
-          if (isUp) {
-            activated.value = 'works';
-          } else {
-            activated.value = 'contact';
-          }
-          break;
-
-        default:
-          throw new Error(`MenuItem(${menu}) is undefined`);
+      if (location.pathname === '/') {
+        const isBottom =
+          Math.ceil(globalThis.scrollY + globalThis.innerHeight) >=
+            document.body.clientHeight;
+        if (isBottom) {
+          activated.value = 'contact';
+        } else if (globalThis.scrollY === 0) {
+          activated.value = 'home';
+        }
       }
     };
 
@@ -106,22 +66,38 @@ export default function Header({ menus }: HeaderProps) {
 
     const observer = new IntersectionObserver((entries, _observer) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting && entry.intersectionRatio > 0) {
+        if (
+          location.pathname === '/' &&
+          !entry.isIntersecting &&
+          entry.intersectionRatio > 0
+        ) {
           const menu = entry.target.id;
           if (!isMenuItem(menu)) return;
+
+          const menuIndex = menus.indexOf(menu);
           if (entry.boundingClientRect.y < 0) {
-            switchActiveWhenScrolled(menu, false);
-          } else {
-            switchActiveWhenScrolled(menu, true);
+            if (menuIndex < menus.length - 1) {
+              activated.value = menus[menuIndex + 1];
+            }
+          } else if (menuIndex > 0) {
+            activated.value = menus[menuIndex - 1];
           }
         }
       });
     }, observerOption);
 
-    menus
+    const sections = menus
       .map((menu) => document.getElementById(menu))
-      .forEach((section) => section && observer.observe(section));
-  });
+      .filter((section) => section !== null);
+
+    sections.forEach((section) => observer.observe(section));
+    globalThis.addEventListener('scroll', handleScroll);
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+      globalThis.removeEventListener('scroll', handleScroll);
+    };
+  }, [menus]);
 
   return (
     <header
