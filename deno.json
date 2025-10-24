@@ -2,8 +2,8 @@
   "unstable": ["cron", "kv"],
   "tasks": {
     "check": "deno fmt --check && deno lint && deno check",
-    "start": "deno run -A --watch=static/,routes/ dev.ts",
-    "build": "deno run -A dev.ts build",
+    "start": "deno run -A --env --watch=static/,routes/ dev.ts",
+    "build": "deno run -A --env dev.ts build",
     "preview": "deno serve -A _fresh/server.js",
     "build_preview": "deno task build && deno task preview",
     "update": "deno run -A -r jsr:@fresh/update ."
@@ -25,7 +25,6 @@
   "nodeModulesDir": "auto",
   "imports": {
     "~/": "./",
-    "$std/": "https://deno.land/std@0.211.0/",
     "fresh": "jsr:@fresh/core@^2.1.3",
     "preact": "npm:preact@^10.27.2",
     "@preact/signals": "npm:@preact/signals@^2.3.2",
