@@ -1,3 +1,4 @@
+// deno-lint-ignore-file react-no-danger
 import type { PageProps } from 'fresh';
 import Header from '~/islands/Header.tsx';
 
