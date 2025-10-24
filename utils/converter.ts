@@ -1,5 +1,5 @@
 import type { WorkData } from '~/types.ts';
-import { CSS, render } from 'gfm';
+import { CSS, render } from '@deno/gfm';
 
 export function convertToRawContentUrl(url: string, branch: string): string {
   return `${url.replace('github.com', 'raw.githubusercontent.com')}/${branch}`;
