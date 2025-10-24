@@ -12,7 +12,7 @@ export default function Tech({ name, selected, clickable }: TechProps) {
           ? clickable
             ? 'bg-secondary-container dark:bg-secondary-container-dark text-on-secondary-container dark:text-on-secondary-container-dark'
             : 'bg-tertiary-container dark:bg-tertiary-container-dark text-on-tertiary-container dark:text-on-tertiary-container-dark'
-          : 'outline outline-1 outline-outline dark:outline-outline-dark text-on-surface-variant dark:text-on-surface-variant-dark'
+          : 'outline outline-outline dark:outline-outline-dark text-on-surface-variant dark:text-on-surface-variant-dark'
       }${clickable ? ' cursor-pointer' : ''}`}
       data-tech={name}
     >

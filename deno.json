@@ -29,9 +29,9 @@
     "fresh": "jsr:@fresh/core@^2.1.2",
     "preact": "npm:preact@^10.27.2",
     "@preact/signals": "npm:@preact/signals@^2.3.2",
-    "tailwindcss": "npm:tailwindcss@4.1.14",
-    "tailwindcss/": "npm:/tailwindcss@4.1.14/",
-    "tailwindcss/plugin": "npm:/tailwindcss@4.1.14/plugin.js",
+    "tailwindcss": "npm:tailwindcss@4.1.16",
+    "tailwindcss/": "npm:/tailwindcss@4.1.16/",
+    "tailwindcss/plugin": "npm:/tailwindcss@4.1.16/plugin.js",
     "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^1.0.0",
     "tabler_icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
     "gfm": "https://deno.land/x/gfm@0.6.0/mod.ts"

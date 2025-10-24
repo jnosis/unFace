@@ -7,7 +7,7 @@ type ContactProps = {
 
 export default function Contact({ email, github }: ContactProps) {
   return (
-    <article class='py-12 rounded-[2rem] bg-secondary text-on-secondary dark:bg-secondary-dark dark:text-on-secondary-dark'>
+    <article class='py-12 rounded-4xl bg-secondary text-on-secondary dark:bg-secondary-dark dark:text-on-secondary-dark'>
       <h1 class='text-4xl font-bold'>Contact</h1>
       <ul class='w-24 h-12 flex justify-between items-center mt-8 mx-auto mb-4'>
         <li>
