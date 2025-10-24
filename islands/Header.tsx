@@ -1,4 +1,4 @@
-import type { JSX } from 'preact/jsx-runtime';
+import type { TargetedMouseEvent } from 'preact';
 import type { MenuItem } from '~/types.ts';
 import { useSignal, useSignalEffect } from '@preact/signals';
 import NavItem from '~/components/NavItem.tsx';
@@ -14,7 +14,7 @@ export default function Header({ menus }: HeaderProps) {
   const tinted = useSignal<boolean>(false);
   const activated = useSignal<MenuItem>('home');
 
-  const handleClick = (e: JSX.TargetedMouseEvent<HTMLUListElement>) => {
+  const handleClick = (e: TargetedMouseEvent<HTMLUListElement>) => {
     const { dataset: { name } } = e.target as HTMLElement;
     if (isMenuItem(name)) {
       activated.value = name;

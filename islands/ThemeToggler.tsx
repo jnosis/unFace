@@ -1,4 +1,4 @@
-import type { JSX } from 'preact/jsx-runtime';
+import type { TargetedMouseEvent } from 'preact';
 import type { ThemeScheme } from '~/types.ts';
 import { IS_BROWSER } from 'fresh/runtime';
 import { useSignal, useSignalEffect } from '@preact/signals';
@@ -53,7 +53,7 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
     setScheme(w.isDark ? 'light' : 'dark');
   };
 
-  const handleContextMenu = (e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
+  const handleContextMenu = (e: TargetedMouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     panelOpened.value = true;
   };

@@ -1,4 +1,4 @@
-import type { JSX } from 'preact/jsx-runtime';
+import type { TargetedMouseEvent } from 'preact';
 import type { WorkData } from '~/types.ts';
 import { useSignal } from '@preact/signals';
 import Techs from '~/islands/Techs.tsx';
@@ -12,7 +12,7 @@ export default function WorksSection({ works }: WorksSectionProps) {
   const techs = works && [...new Set(works.map((work) => work.techs).flat())];
   const selected = useSignal<string[]>([]);
 
-  const handleTechClick = (e: JSX.TargetedMouseEvent<HTMLUListElement>) => {
+  const handleTechClick = (e: TargetedMouseEvent<HTMLUListElement>) => {
     const { dataset: { tech } } = e.target as HTMLElement;
     if (!tech) return;
     if (selected.value.includes(tech)) {

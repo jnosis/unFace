@@ -1,8 +1,8 @@
-import type { JSX } from 'preact/jsx-runtime';
+import type { TargetedMouseEvent } from 'preact';
 import { IconClearAll } from '~/components/Icons.tsx';
 
 type ClearAllProps = {
-  onClick?(e: JSX.TargetedMouseEvent<HTMLLIElement>): void;
+  onClick?(e: TargetedMouseEvent<HTMLLIElement>): void;
 };
 
 export default function ClearAll({ onClick }: ClearAllProps) {

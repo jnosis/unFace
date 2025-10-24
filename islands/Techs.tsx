@@ -1,4 +1,4 @@
-import type { JSX } from 'preact/jsx-runtime';
+import type { TargetedMouseEvent } from 'preact';
 import type { Techs } from '~/types.ts';
 import Tech from '~/components/Tech.tsx';
 import ClearAll from '~/components/ClearAll.tsx';
@@ -6,8 +6,8 @@ import ClearAll from '~/components/ClearAll.tsx';
 type TechsProps = {
   techs: Techs;
   selected: 'all' | string[];
-  clearFilters?(e: JSX.TargetedMouseEvent<HTMLLIElement>): void;
-  onClick?(e: JSX.TargetedMouseEvent<HTMLUListElement>): void;
+  clearFilters?(e: TargetedMouseEvent<HTMLLIElement>): void;
+  onClick?(e: TargetedMouseEvent<HTMLUListElement>): void;
 };
 
 export default function Techs(
