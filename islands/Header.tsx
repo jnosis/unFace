@@ -11,6 +11,7 @@ type HeaderProps = {
 };
 
 export default function Header({ menus }: HeaderProps) {
+  const atHome = useSignal<boolean>(false);
   const scrolled = useSignal<boolean>(false);
   const tinted = useSignal<boolean>(false);
   const activated = useSignal<MenuItem>('home');
@@ -18,15 +19,9 @@ export default function Header({ menus }: HeaderProps) {
   const handleClick = (e: TargetedMouseEvent<HTMLUListElement>) => {
     const { dataset: { name } } = e.target as HTMLElement;
     if (isMenuItem(name)) {
-      activated.value = name;
-      if (location.pathname === '/') {
-        document.getElementById(name)?.scrollIntoView({
-          behavior: 'smooth',
-          inline: 'start',
-        });
-      } else {
-        location.assign(`/#${name}`);
-      }
+      document.getElementById(name)?.scrollIntoView({
+        behavior: 'smooth',
+      });
     }
   };
 
@@ -39,20 +34,23 @@ export default function Header({ menus }: HeaderProps) {
   });
 
   useSignalEffect(() => {
-    tinted.value = location.pathname !== '/' || scrolled.value;
+    atHome.value = location.pathname === '/';
+  });
+
+  useSignalEffect(() => {
+    tinted.value = !atHome.value || scrolled.value;
   });
 
   useEffect(() => {
     const handleScroll = () => {
       scrolled.value = globalThis.scrollY > 0;
-
-      if (location.pathname === '/') {
+      if (atHome.value) {
         const isBottom =
           Math.ceil(globalThis.scrollY + globalThis.innerHeight) >=
             document.body.clientHeight;
         if (isBottom) {
           activated.value = 'contact';
-        } else if (globalThis.scrollY === 0) {
+        } else if (globalThis.scrollY < 100) {
           activated.value = 'home';
         }
       }
@@ -67,9 +65,7 @@ export default function Header({ menus }: HeaderProps) {
     const observer = new IntersectionObserver((entries, _observer) => {
       entries.forEach((entry) => {
         if (
-          location.pathname === '/' &&
-          !entry.isIntersecting &&
-          entry.intersectionRatio > 0
+          atHome.value && !entry.isIntersecting && entry.intersectionRatio > 0
         ) {
           const menu = entry.target.id;
           if (!isMenuItem(menu)) return;
@@ -97,7 +93,7 @@ export default function Header({ menus }: HeaderProps) {
       sections.forEach((section) => observer.unobserve(section));
       globalThis.removeEventListener('scroll', handleScroll);
     };
-  }, [menus]);
+  }, [menus, atHome]);
 
   return (
     <header
@@ -123,6 +119,7 @@ export default function Header({ menus }: HeaderProps) {
               key={index}
               name={menu}
               activated={menu === activated.value}
+              atHome={atHome.value}
             />
           ))}
         </ul>
