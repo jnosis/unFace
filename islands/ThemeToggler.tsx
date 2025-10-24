@@ -27,7 +27,7 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
     const w = window as unknown as { isDark: boolean };
     w.isDark = localStorage.theme === 'dark' ||
       (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
+        globalThis.matchMedia('(prefers-color-scheme: dark)').matches);
     w.isDark
       ? document.documentElement.classList.add('dark')
       : document.documentElement.classList.remove('dark');
@@ -49,7 +49,7 @@ export default function ThemeToggler({ prev }: ThemeTogglerProps) {
     const w = window as unknown as { isDark: boolean };
     w.isDark = localStorage.theme === 'dark' ||
       (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
+        globalThis.matchMedia('(prefers-color-scheme: dark)').matches);
     setScheme(w.isDark ? 'light' : 'dark');
   };
 

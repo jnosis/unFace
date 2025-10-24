@@ -31,7 +31,7 @@ export default function Header({ menus }: HeaderProps) {
 
   useSignalEffect(() => {
     globalThis.addEventListener('scroll', () => {
-      if (window.scrollY > 0) {
+      if (globalThis.scrollY > 0) {
         scrolled.value = true;
       } else {
         scrolled.value = false;
@@ -56,9 +56,9 @@ export default function Header({ menus }: HeaderProps) {
   useSignalEffect(() => {
     globalThis.addEventListener('scroll', () => {
       const { pathname } = location;
-      const isBottom = Math.ceil(window.scrollY + window.innerHeight) >=
+      const isBottom = Math.ceil(globalThis.scrollY + globalThis.innerHeight) >=
         document.body.clientHeight;
-      const isTop = Math.ceil(window.scrollY) === 0;
+      const isTop = Math.ceil(globalThis.scrollY) === 0;
 
       if (pathname === '/' && isBottom) {
         activated.value = 'contact';
@@ -104,7 +104,7 @@ export default function Header({ menus }: HeaderProps) {
       threshold: 0.4,
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries, _observer) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting && entry.intersectionRatio > 0) {
           const menu = entry.target.id;
