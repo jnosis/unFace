@@ -9,7 +9,7 @@ type PanelProps<T extends string> = {
   name: string;
   items: Item<T>[];
   checked: string;
-  onChange: (value: T) => void;
+  onChange(value: T): void;
 };
 
 export default function Panel<T extends string>(
