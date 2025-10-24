@@ -1,4 +1,5 @@
-import type { PageProps } from 'fresh';
+// deno-lint-ignore-file react-no-danger
+import type { PageProps, RouteHandler } from 'fresh';
 import type { WorkDetail } from '~/types.ts';
 import { HttpError } from 'fresh';
 import { asset, Head } from 'fresh/runtime';
@@ -9,19 +10,16 @@ import {
 } from '~/components/Icons.tsx';
 import Techs from '~/islands/Techs.tsx';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';
-import { Handlers } from 'fresh/compat';
 
-export const handler: Handlers<WorkDetail> = {
+export const handler: RouteHandler<WorkDetail, undefined> = {
   async GET(ctx) {
-    const req = ctx.req;
-
     try {
-      const res = await workHandler.GET!(req, ctx);
-      const data = await res.json();
+      const res = await workHandler.GET!(ctx);
+      const data = await (res as Response).json();
 
-      if (!data) return ctx.renderNotFound();
+      if (!data) throw new HttpError(404);
 
-      return ctx.render(data);
+      return { data };
     } catch (error) {
       throw error;
     }

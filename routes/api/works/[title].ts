@@ -1,9 +1,9 @@
+import type { HandlerByMethod } from 'fresh';
 import type { WorkDetail } from '~/types.ts';
 import { getWorkByTitle } from '~/services/works.ts';
 import { convertMarkdownToHtml, convertUrls } from '~/utils/converter.ts';
-import { Handlers } from 'fresh/compat';
 
-export const handler: Handlers = {
+export const handler: HandlerByMethod<WorkDetail, undefined> = {
   async GET(ctx) {
     const { title } = ctx.params;
     try {
