@@ -1,9 +1,8 @@
-import type { JSX } from 'preact/jsx-runtime';
+import type { ComponentType } from 'preact';
 
 type Item<T extends string> = {
   id: T;
-  // deno-lint-ignore no-explicit-any
-  Icon: (props: any) => JSX.Element;
+  Icon: ComponentType;
 };
 
 type PanelProps<T extends string> = {
@@ -19,7 +18,7 @@ export default function Panel<T extends string>(
   return (
     <ul class='absolute flex flex-col justify-between w-36 h-28 mt-1 p-4 rounded-2xl bottom-8 sm:top-8 shadow bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
       {items.map((item) => (
-        <li class='flex gap-1'>
+        <li key={item.id} class='flex gap-1'>
           <input
             class='cursor-pointer'
             type='radio'
