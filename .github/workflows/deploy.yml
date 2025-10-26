@@ -34,4 +34,4 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: 'unface' # 📝 Update the deploy project name if necessary
-          entrypoint: './main.ts' # 📝 Update the entrypoint if necessary
+          entrypoint: 'server.js'
