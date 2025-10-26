@@ -35,3 +35,4 @@ jobs:
         with:
           project: 'unface' # 📝 Update the deploy project name if necessary
           entrypoint: 'server.js'
+          root: "./_fresh/"
