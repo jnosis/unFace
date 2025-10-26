@@ -7,7 +7,7 @@ const builder = new Builder();
 tailwind(builder);
 
 if (Deno.args.includes('build')) {
-  builder.build();
+  builder.build({ mode: 'production' });
 } else {
   builder.listen(() => import('./main.ts'));
 }
