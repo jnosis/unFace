@@ -2,10 +2,9 @@
   "unstable": ["cron", "kv"],
   "tasks": {
     "check": "deno fmt --check && deno lint && deno check",
-    "start": "deno run -A --env --watch=static/,routes/ dev.ts",
-    "build": "deno run -A --env dev.ts build",
-    "preview": "deno serve -A _fresh/server.js",
-    "build_preview": "deno task build && deno task preview",
+    "dev": "vite",
+    "build": "vite build",
+    "start": "deno serve -A --env _fresh/server.js",
     "update": "deno run -A -r jsr:@fresh/update ."
   },
   "fmt": {
@@ -28,15 +27,40 @@
     "fresh": "jsr:@fresh/core@^2.1.4",
     "preact": "npm:preact@^10.27.2",
     "@preact/signals": "npm:@preact/signals@^2.4.0",
-    "tailwindcss": "npm:tailwindcss@4.1.16",
-    "tailwindcss/": "npm:/tailwindcss@4.1.16/",
-    "tailwindcss/plugin": "npm:/tailwindcss@4.1.16/plugin.js",
-    "@fresh/plugin-tailwind": "jsr:@fresh/plugin-tailwind@^1.0.0",
+    "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.7",
+    "vite": "npm:vite@^7.2.2",
+    "tailwindcss": "npm:/tailwindcss@4.1.16",
+    "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.17",
     "tabler_icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
     "@deno/gfm": "jsr:@deno/gfm@^0.11.0"
   },
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
+    "lib": [
+      "dom",
+      "dom.asynciterable",
+      "dom.iterable",
+      "deno.ns"
+    ],
+    "jsx": "precompile",
+    "jsxImportSource": "preact",
+    "jsxPrecompileSkipElements": [
+      "a",
+      "img",
+      "source",
+      "body",
+      "html",
+      "head",
+      "title",
+      "meta",
+      "script",
+      "link",
+      "style",
+      "base",
+      "noscript",
+      "template"
+    ],
+    "types": [
+      "vite/client"
+    ]
   }
 }
