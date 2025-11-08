@@ -1,4 +1,3 @@
-import '$std/dotenv/load.ts';
 import type { AuthorOptions, Config, DatabaseOptions } from '~/types.ts';
 
 const isTest = Deno.args.includes('test');

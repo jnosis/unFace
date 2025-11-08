@@ -1,10 +1,10 @@
-import type { Handlers } from '$fresh/server.ts';
+import type { HandlerByMethod } from 'fresh';
 import type { WorkDetail } from '~/types.ts';
 import { getWorkByTitle } from '~/services/works.ts';
 import { convertMarkdownToHtml, convertUrls } from '~/utils/converter.ts';
 
-export const handler: Handlers = {
-  async GET(_, ctx) {
+export const handler: HandlerByMethod<WorkDetail, undefined> = {
+  async GET(ctx) {
     const { title } = ctx.params;
     try {
       const work = await getWorkByTitle(title);

@@ -1,5 +1,6 @@
-import type { JSX } from 'preact/jsx-runtime';
+import type { TargetedMouseEvent } from 'preact';
 import type { MenuItem } from '~/types.ts';
+import { useEffect } from 'preact/hooks';
 import { useSignal, useSignalEffect } from '@preact/signals';
 import NavItem from '~/components/NavItem.tsx';
 import ThemeToggler from '~/islands/ThemeToggler.tsx';
@@ -10,91 +11,48 @@ type HeaderProps = {
 };
 
 export default function Header({ menus }: HeaderProps) {
+  const atHome = useSignal<boolean>(false);
   const scrolled = useSignal<boolean>(false);
   const tinted = useSignal<boolean>(false);
   const activated = useSignal<MenuItem>('home');
 
-  const handleClick = (e: JSX.TargetedMouseEvent<HTMLUListElement>) => {
+  const handleClick = (e: TargetedMouseEvent<HTMLUListElement>) => {
     const { dataset: { name } } = e.target as HTMLElement;
     if (isMenuItem(name)) {
-      activated.value = name;
-      if (location.pathname === '/') {
-        document.getElementById(name)?.scrollIntoView({
-          behavior: 'smooth',
-          inline: 'start',
-        });
-      } else {
-        location.assign(`/#${name}`);
-      }
+      document.getElementById(name)?.scrollIntoView({
+        behavior: 'smooth',
+      });
     }
   };
 
   useSignalEffect(() => {
-    globalThis.addEventListener('scroll', () => {
-      if (window.scrollY > 0) {
-        scrolled.value = true;
-      } else {
-        scrolled.value = false;
-      }
-    });
-  });
-
-  useSignalEffect(() => {
     const { pathname } = location;
-    activated.value = menus.find((menu) => pathname.includes(menu)) ||
-      activated.value;
+    const activeMenu = menus.find((menu) => pathname.includes(menu));
+    if (activeMenu) {
+      activated.value = activeMenu;
+    }
   });
 
   useSignalEffect(() => {
-    if (location.pathname !== '/') tinted.value = true;
+    atHome.value = location.pathname === '/';
   });
 
   useSignalEffect(() => {
-    if (location.pathname === '/') tinted.value = scrolled.value;
+    tinted.value = !atHome.value || scrolled.value;
   });
 
-  useSignalEffect(() => {
-    globalThis.addEventListener('scroll', () => {
-      const { pathname } = location;
-      const isBottom = Math.ceil(window.scrollY + window.innerHeight) >=
-        document.body.clientHeight;
-      const isTop = Math.ceil(window.scrollY) === 0;
-
-      if (pathname === '/' && isBottom) {
-        activated.value = 'contact';
-      } else if (pathname === '/' && isTop) {
-        activated.value = 'home';
-      }
-    });
-  });
-
-  useSignalEffect(() => {
-    const switchActiveWhenScrolled = (menu: MenuItem, isUp: boolean) => {
-      switch (menu) {
-        case 'home':
-          if (isUp) {
-            activated.value = 'home';
-          } else {
-            activated.value = 'works';
-          }
-          break;
-        case 'works':
-          if (isUp) {
-            activated.value = 'home';
-          } else {
-            activated.value = 'contact';
-          }
-          break;
-        case 'contact':
-          if (isUp) {
-            activated.value = 'works';
-          } else {
-            activated.value = 'contact';
-          }
-          break;
-
-        default:
-          throw new Error(`MenuItem(${menu}) is undefined`);
+  useEffect(() => {
+    const handleScroll = () => {
+      scrolled.value = globalThis.scrollY > 0;
+      if (atHome.value) {
+        const isBottom =
+          Math.ceil(globalThis.scrollY + globalThis.innerHeight) >=
+            document.body.clientHeight;
+        if (isBottom) {
+          activated.value = 'contact';
+        } else if (globalThis.scrollY < 100) {
+          activated.value = 'home';
+        }
       }
     };
 
@@ -104,24 +62,38 @@ export default function Header({ menus }: HeaderProps) {
       threshold: 0.4,
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries, _observer) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting && entry.intersectionRatio > 0) {
+        if (
+          atHome.value && !entry.isIntersecting && entry.intersectionRatio > 0
+        ) {
           const menu = entry.target.id;
           if (!isMenuItem(menu)) return;
+
+          const menuIndex = menus.indexOf(menu);
           if (entry.boundingClientRect.y < 0) {
-            switchActiveWhenScrolled(menu, false);
-          } else {
-            switchActiveWhenScrolled(menu, true);
+            if (menuIndex < menus.length - 1) {
+              activated.value = menus[menuIndex + 1];
+            }
+          } else if (menuIndex > 0) {
+            activated.value = menus[menuIndex - 1];
           }
         }
       });
     }, observerOption);
 
-    menus
+    const sections = menus
       .map((menu) => document.getElementById(menu))
-      .forEach((section) => section && observer.observe(section));
-  });
+      .filter((section) => section !== null);
+
+    sections.forEach((section) => observer.observe(section));
+    globalThis.addEventListener('scroll', handleScroll);
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+      globalThis.removeEventListener('scroll', handleScroll);
+    };
+  }, [menus, atHome]);
 
   return (
     <header
@@ -147,6 +119,7 @@ export default function Header({ menus }: HeaderProps) {
               key={index}
               name={menu}
               activated={menu === activated.value}
+              atHome={atHome.value}
             />
           ))}
         </ul>

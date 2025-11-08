@@ -1,5 +1,5 @@
 import { type Config } from 'tailwindcss';
-import { asset } from '$fresh/runtime.ts';
+import { asset } from 'fresh/runtime';
 
 export default {
   content: [

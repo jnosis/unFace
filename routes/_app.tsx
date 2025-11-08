@@ -1,4 +1,5 @@
-import type { PageProps } from '$fresh/server.ts';
+// deno-lint-ignore-file react-no-danger
+import type { PageProps } from 'fresh';
 import Header from '~/islands/Header.tsx';
 
 export default function App({ Component }: PageProps) {
@@ -14,9 +15,10 @@ export default function App({ Component }: PageProps) {
   global_dark();`;
 
   return (
-    <>
+    <html>
       <head>
-        <link rel='stylesheet' href='/styles.css' />
+        <meta charset='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <script
           dangerouslySetInnerHTML={{
             __html: code,
@@ -27,6 +29,6 @@ export default function App({ Component }: PageProps) {
         <Header menus={['home', 'works', 'contact']} />
         <Component />
       </body>
-    </>
+    </html>
   );
 }

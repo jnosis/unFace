@@ -14,7 +14,7 @@ async function f<Data>(url: string, options?: RequestInit): Promise<Data> {
   try {
     if (res.status !== 204) data = await res.json();
   } catch (error) {
-    throw new Error(error.message, { cause: res.status });
+    throw new Error((error as Error).message, { cause: res.status });
   }
 
   if (res.status > 299 || res.status < 200) {

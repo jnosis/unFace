@@ -1,26 +1,27 @@
-import type { Handlers, PageProps } from '$fresh/server.ts';
+import type { PageProps, RouteHandler } from 'fresh';
 import type { WorkData } from '~/types.ts';
+import { Head } from 'fresh/runtime';
 import Contact from '~/components/Contact.tsx';
 import WorksSection from '~/islands/WorksSection.tsx';
 import { handler as worksHandler } from '~/routes/api/works/index.ts';
 import config from '~/config.ts';
 
-export const handler: Handlers<WorkData[]> = {
-  async GET(req, ctx) {
-    const res = await worksHandler.GET!(req, ctx);
-    const data = await res.json();
+export const handler: RouteHandler<WorkData[], undefined> = {
+  async GET(ctx) {
+    const res = await worksHandler.GET!(ctx);
+    const data = await (res as Response).json();
 
-    return ctx.render(data ? data : []);
+    return { data: (data ? data : []) };
   },
 };
 
 export default function Home({ data: works }: PageProps<WorkData[]>) {
   return (
     <>
-      <head>
+      <Head>
         <title>unFace</title>
         <meta name='description' content='Portfolio Site' />
-      </head>
+      </Head>
       <main class='flex flex-col h-full m-auto pt-16 px-0 pb-16 sm:pb-0 md:px-4 md:max-w-4xl'>
         <section class='w-full px-4 mt-0 sm:mt-6'>
           <article

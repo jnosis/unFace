@@ -1,6 +1,8 @@
-import type { Handlers, PageProps } from '$fresh/server.ts';
+// deno-lint-ignore-file react-no-danger
+import type { PageProps, RouteHandler } from 'fresh';
 import type { WorkDetail } from '~/types.ts';
-import { asset } from '$fresh/runtime.ts';
+import { HttpError } from 'fresh';
+import { asset, Head } from 'fresh/runtime';
 import {
   IconBrandGithub,
   IconExternalLink,
@@ -9,15 +11,15 @@ import {
 import Techs from '~/islands/Techs.tsx';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';
 
-export const handler: Handlers<WorkDetail> = {
-  async GET(req, ctx) {
+export const handler: RouteHandler<WorkDetail, undefined> = {
+  async GET(ctx) {
     try {
-      const res = await workHandler.GET!(req, ctx);
-      const data = await res.json();
+      const res = await workHandler.GET!(ctx);
+      const data = await (res as Response).json();
 
-      if (!data) return ctx.renderNotFound();
+      if (!data) throw new HttpError(404);
 
-      return ctx.render(data);
+      return { data };
     } catch (error) {
       throw error;
     }
@@ -29,7 +31,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
 
   return (
     <>
-      <head>
+      <Head>
         <title>{`${title} | unFace`}</title>
         <meta name='description' content={`${title} project's description`} />
         <link
@@ -37,7 +39,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
           rel='stylesheet'
           href={asset('/github-markdown.css')}
         />
-      </head>
+      </Head>
       <main class='w-full min-h-screen py-16 sm:pb-0 px-0 md:px-20 lg:px-40 overflow-hidden bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
         {readme && (
           <section class='px-4 sm:px-0 sm:max-w-3xl m-auto'>
