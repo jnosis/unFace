@@ -15,10 +15,10 @@ export default function App({ Component }: PageProps) {
   global_dark();`;
 
   return (
-    <>
+    <html>
       <head>
+        <meta charset='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        <link rel='stylesheet' href='/styles.css' />
         <script
           dangerouslySetInnerHTML={{
             __html: code,
@@ -29,6 +29,6 @@ export default function App({ Component }: PageProps) {
         <Header menus={['home', 'works', 'contact']} />
         <Component />
       </body>
-    </>
+    </html>
   );
 }
