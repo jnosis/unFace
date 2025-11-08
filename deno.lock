@@ -3,29 +3,29 @@
   "specifiers": {
     "jsr:@deno/esbuild-plugin@^1.2.0": "1.2.0",
     "jsr:@deno/gfm@0.11": "0.11.0",
-    "jsr:@deno/loader@~0.3.3": "0.3.8",
+    "jsr:@deno/loader@~0.3.3": "0.3.9",
     "jsr:@denosaurs/emoji@~0.3.1": "0.3.1",
     "jsr:@fresh/build-id@1": "1.0.1",
-    "jsr:@fresh/core@^2.1.3": "2.1.3",
+    "jsr:@fresh/core@^2.1.4": "2.1.4",
     "jsr:@fresh/plugin-tailwind@1": "1.0.0",
     "jsr:@std/bytes@^1.0.6": "1.0.6",
-    "jsr:@std/encoding@1": "1.0.10",
     "jsr:@std/encoding@^1.0.10": "1.0.10",
     "jsr:@std/fmt@^1.0.8": "1.0.8",
-    "jsr:@std/fs@1": "1.0.19",
-    "jsr:@std/html@1": "1.0.5",
-    "jsr:@std/http@^1.0.15": "1.0.21",
+    "jsr:@std/fs@^1.0.19": "1.0.19",
+    "jsr:@std/html@^1.0.5": "1.0.5",
+    "jsr:@std/http@^1.0.21": "1.0.21",
     "jsr:@std/internal@^1.0.10": "1.0.12",
-    "jsr:@std/jsonc@1": "1.0.2",
-    "jsr:@std/media-types@1": "1.1.0",
-    "jsr:@std/path@1": "1.1.2",
+    "jsr:@std/jsonc@^1.0.2": "1.0.2",
+    "jsr:@std/media-types@^1.1.0": "1.1.0",
     "jsr:@std/path@^1.1.1": "1.1.2",
-    "jsr:@std/semver@1": "1.0.6",
-    "jsr:@std/uuid@^1.0.7": "1.0.9",
+    "jsr:@std/path@^1.1.2": "1.1.2",
+    "jsr:@std/semver@^1.0.6": "1.0.6",
+    "jsr:@std/uuid@^1.0.9": "1.0.9",
     "npm:@opentelemetry/api@^1.9.0": "1.9.0",
-    "npm:@preact/signals@^2.3.2": "2.3.2_preact@10.27.2",
+    "npm:@preact/signals@^2.2.1": "2.4.0_preact@10.27.2",
+    "npm:@preact/signals@^2.4.0": "2.4.0_preact@10.27.2",
     "npm:@tailwindcss/postcss@^4.1.10": "4.1.16",
-    "npm:esbuild-wasm@0.25.7": "0.25.7",
+    "npm:esbuild-wasm@~0.25.11": "0.25.12",
     "npm:esbuild@0.25.7": "0.25.7",
     "npm:github-slugger@2": "2.0.0",
     "npm:he@^1.2.0": "1.2.0",
@@ -35,7 +35,7 @@
     "npm:marked-gfm-heading-id@^3.1.0": "3.2.0_marked@12.0.2",
     "npm:marked@12": "12.0.2",
     "npm:postcss@8.5.6": "8.5.6",
-    "npm:preact-render-to-string@^6.5.11": "6.6.3_preact@10.27.2",
+    "npm:preact-render-to-string@^6.6.3": "6.6.3_preact@10.27.2",
     "npm:preact@^10.27.0": "10.27.2",
     "npm:preact@^10.27.2": "10.27.2",
     "npm:prismjs@^1.29.0": "1.30.0",
@@ -65,8 +65,8 @@
         "npm:sanitize-html"
       ]
     },
-    "@deno/loader@0.3.8": {
-      "integrity": "4a8611c3f6ee32e2e969ec1deb18aa0576d4b7c16b65b50d97a64f03e592fb0a"
+    "@deno/loader@0.3.9": {
+      "integrity": "703d44656f7da0fa4a4a7f8a5105b5b41320821286508c2967b4252a00a2506f"
     },
     "@denosaurs/emoji@0.3.1": {
       "integrity": "b0aed5f55dec99e83da7c9637fe0a36d1d6252b7c99deaaa3fc5dea3fcf3da8b"
@@ -74,29 +74,31 @@
     "@fresh/build-id@1.0.1": {
       "integrity": "12a2ec25fd52ae9ec68c26848a5696cd1c9b537f7c983c7e56e4fb1e7e816c20",
       "dependencies": [
-        "jsr:@std/encoding@^1.0.10"
+        "jsr:@std/encoding"
       ]
     },
-    "@fresh/core@2.1.3": {
-      "integrity": "5656afa01607af5ca4693abdec3da9cfb41618f52daac11c00846de0994fd7e7",
+    "@fresh/core@2.1.4": {
+      "integrity": "ce6321efe9ec5de38631a52a79f1691e37805c11df8b96472c788805e5e3a214",
       "dependencies": [
         "jsr:@deno/esbuild-plugin",
         "jsr:@fresh/build-id",
-        "jsr:@std/encoding@1",
+        "jsr:@std/encoding",
         "jsr:@std/fmt",
         "jsr:@std/fs",
         "jsr:@std/html",
         "jsr:@std/http",
         "jsr:@std/jsonc",
         "jsr:@std/media-types",
-        "jsr:@std/path@1",
+        "jsr:@std/path@^1.1.2",
         "jsr:@std/semver",
         "jsr:@std/uuid",
         "npm:@opentelemetry/api",
+        "npm:@preact/signals@^2.2.1",
         "npm:esbuild",
         "npm:esbuild-wasm",
         "npm:preact-render-to-string",
-        "npm:preact@^10.27.0"
+        "npm:preact@^10.27.0",
+        "npm:preact@^10.27.2"
       ]
     },
     "@fresh/plugin-tailwind@1.0.0": {
@@ -127,7 +129,7 @@
     "@std/http@1.0.21": {
       "integrity": "abb5c747651ee6e3ea6139858fd9b1810d2c97f53a5e6722f3b6d27a6d263edc",
       "dependencies": [
-        "jsr:@std/encoding@^1.0.10"
+        "jsr:@std/encoding"
       ]
     },
     "@std/internal@1.0.12": {
@@ -322,8 +324,8 @@
     "@preact/signals-core@1.12.1": {
       "integrity": "sha512-BwbTXpj+9QutoZLQvbttRg5x3l5468qaV2kufh+51yha1c53ep5dY4kTuZR35+3pAZxpfQerGJiQqg34ZNZ6uA=="
     },
-    "@preact/signals@2.3.2_preact@10.27.2": {
-      "integrity": "sha512-Q22avIn4z0BQnmFeo6Y5HCnJTo8VufN84zN51OtqeNgZOVCYgdwEOcJKVX1x/IrjRVxUnOy6Ubn7H5aVFujXaQ==",
+    "@preact/signals@2.4.0_preact@10.27.2": {
+      "integrity": "sha512-kVEih9Ty55O+6OKJ85beQJ0gaV++Xci2N2kaQc3LjSUtHKQqB47oMaW6OfwHwzWLRbYsms/326s2ITGiHL7paw==",
       "dependencies": [
         "@preact/signals-core",
         "preact"
@@ -471,8 +473,8 @@
     "entities@4.5.0": {
       "integrity": "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="
     },
-    "esbuild-wasm@0.25.7": {
-      "integrity": "sha512-x3t1BlU59YOMtpwzayHxF4LPVujOvNKqm7y6jPvFKC13J8FmJRCdHPJwHq86er7ik+f7uwGcMbe+6KVzLGmsGw==",
+    "esbuild-wasm@0.25.12": {
+      "integrity": "sha512-rZqkjL3Y6FwLpSHzLnaEy8Ps6veCNo1kZa9EOfJvmWtBq5dJH4iVjfmOO6Mlkv9B0tt9WFPFmb/VxlgJOnueNg==",
       "bin": true
     },
     "esbuild@0.25.7": {
@@ -711,9 +713,9 @@
   "workspace": {
     "dependencies": [
       "jsr:@deno/gfm@0.11",
-      "jsr:@fresh/core@^2.1.3",
+      "jsr:@fresh/core@^2.1.4",
       "jsr:@fresh/plugin-tailwind@1",
-      "npm:@preact/signals@^2.3.2",
+      "npm:@preact/signals@^2.4.0",
       "npm:preact@^10.27.2",
       "npm:tailwindcss@4.1.16"
     ]

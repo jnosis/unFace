@@ -24,7 +24,7 @@ jobs:
           deno-version: v2.x
 
       - name: Run install step
-        run: "deno install"
+        run: 'deno install'
 
       - name: Build step
         run: 'deno task build' # 📝 Update the build command(s) if necessary
@@ -38,4 +38,4 @@ jobs:
         with:
           project: 'unface' # 📝 Update the deploy project name if necessary
           entrypoint: 'server.js'
-          root: "./_fresh/"
+          root: './_fresh/'
