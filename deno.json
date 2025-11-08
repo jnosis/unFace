@@ -29,7 +29,7 @@
     "@preact/signals": "npm:@preact/signals@^2.4.0",
     "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.7",
     "vite": "npm:vite@^7.2.2",
-    "tailwindcss": "npm:/tailwindcss@4.1.16",
+    "tailwindcss": "npm:/tailwindcss@4.1.17",
     "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.17",
     "tabler_icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
     "@deno/gfm": "jsr:@deno/gfm@^0.11.0"
