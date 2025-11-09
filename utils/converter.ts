@@ -48,9 +48,10 @@ function transformLinks(
 ) {
   return html
     .replaceAll(/href="(?!http)/g, `href="${repoContentUrl}/`)
-    .replaceAll('img src="./', `img src="${contentUrl}/`)
-    .replaceAll('img src="/', `img src="${contentUrl}/`)
-    .replaceAll('img src="image/', `img src="${contentUrl}/image/`)
+    .replaceAll(
+      /(<img)( alt| alt="[\w\/\.\s-_]+" | )src="(\.\/)?(?!http)/g,
+      `$1$2src="${contentUrl}/`,
+    )
     .replaceAll(
       'img align="center" src="./',
       `img align="center" src="${contentUrl}/`,
