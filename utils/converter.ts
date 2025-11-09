@@ -1,5 +1,6 @@
 import type { WorkData } from '~/types.ts';
-import { CSS, render } from '@deno/gfm';
+import * as md from '@lambdaurora/libmd';
+import { CSS } from '@deno/gfm/style';
 
 export function convertToRawContentUrl(url: string, branch: string): string {
   return `${url.replace('github.com', 'raw.githubusercontent.com')}/${branch}`;
@@ -34,7 +35,8 @@ export function convertMarkdownToHtml(
   repoContentUrl: string,
   contentUrl: string,
 ) {
-  const html = render(markdown);
+  const doc = md.parser.parse(markdown);
+  const html = md.render_to_html(doc).html();
   return `<style>${CSS.substring(CSS.indexOf('.markdown-body'))}</style>` +
     transformLinks(html, repoContentUrl, contentUrl);
 }
@@ -46,9 +48,10 @@ function transformLinks(
 ) {
   return html
     .replaceAll(/href="(?!http)/g, `href="${repoContentUrl}/`)
-    .replaceAll('img src="./', `img src="${contentUrl}/`)
-    .replaceAll('img src="/', `img src="${contentUrl}/`)
-    .replaceAll('img src="image/', `img src="${contentUrl}/image/`)
+    .replaceAll(
+      /(<img)( alt| alt="[\w\/\.\s-_]+" | )src="(\.\/)?(?!http)/g,
+      `$1$2src="${contentUrl}/`,
+    )
     .replaceAll(
       'img align="center" src="./',
       `img align="center" src="${contentUrl}/`,
