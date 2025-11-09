@@ -1,5 +1,6 @@
 import type { WorkData } from '~/types.ts';
-import { CSS, render } from '@deno/gfm';
+import * as md from '@lambdaurora/libmd';
+import { CSS } from '@deno/gfm/style';
 
 export function convertToRawContentUrl(url: string, branch: string): string {
   return `${url.replace('github.com', 'raw.githubusercontent.com')}/${branch}`;
@@ -34,7 +35,8 @@ export function convertMarkdownToHtml(
   repoContentUrl: string,
   contentUrl: string,
 ) {
-  const html = render(markdown);
+  const doc = md.parser.parse(markdown);
+  const html = md.render_to_html(doc).html();
   return `<style>${CSS.substring(CSS.indexOf('.markdown-body'))}</style>` +
     transformLinks(html, repoContentUrl, contentUrl);
 }

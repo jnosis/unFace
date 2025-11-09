@@ -32,7 +32,8 @@
     "tailwindcss": "npm:/tailwindcss@4.1.17",
     "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.17",
     "tabler_icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
-    "@deno/gfm": "jsr:@deno/gfm@^0.11.0"
+    "@lambdaurora/libmd": "jsr:@lambdaurora/libmd@^2.3.1",
+    "@deno/gfm/style": "https://raw.githubusercontent.com/denoland/deno-gfm/eb1841c72f480eb126b87a62e2ca27e9addd53aa/style.ts"
   },
   "compilerOptions": {
     "lib": [
