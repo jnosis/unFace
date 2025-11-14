@@ -4,7 +4,6 @@ import { define } from '~/utils/define.ts';
 export default define.page(function ErrorPage(props) {
   let message = 'Oh no...';
   const error = props.error;
-  console.error(error);
 
   if (error instanceof HttpError) {
     const status = error.status;

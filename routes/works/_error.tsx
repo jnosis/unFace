@@ -3,7 +3,6 @@ import { define } from '~/utils/define.ts';
 export default define.layout(function ErrorPage(props) {
   let message = 'Oh no...';
   const error = props.error;
-  console.error(error);
 
   if (error instanceof Error) {
     const name = error.name;

@@ -6,6 +6,7 @@
 /// <reference lib="deno.unstable" />
 import type { State } from '~/types.ts';
 import { App, staticFiles } from 'fresh';
+import { logger } from '~/middlewares/logger.ts';
 import { fetchData, initData } from '~/services/works.ts';
 
 await initData();
@@ -17,4 +18,5 @@ Deno.cron('Update works', '0 0 * * *', async () => {
 
 export const app = new App<State>()
   .use(staticFiles())
+  .use(logger)
   .fsRoutes();
