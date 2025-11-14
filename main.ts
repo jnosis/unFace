@@ -4,7 +4,7 @@
 /// <reference lib="dom.asynciterable" />
 /// <reference lib="deno.ns" />
 /// <reference lib="deno.unstable" />
-
+import type { State } from '~/types.ts';
 import { App, staticFiles } from 'fresh';
 import { fetchData, initData } from '~/services/works.ts';
 
@@ -15,6 +15,6 @@ Deno.cron('Update works', '0 0 * * *', async () => {
   await fetchData();
 });
 
-export const app = new App()
+export const app = new App<State>()
   .use(staticFiles())
   .fsRoutes();

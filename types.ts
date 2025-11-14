@@ -52,3 +52,7 @@ export type Config = {
   author: AuthorOptions;
   database: DatabaseOptions;
 };
+
+export type State = {
+  msg: string;
+};

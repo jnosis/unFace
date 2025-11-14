@@ -1,16 +1,17 @@
 import type { PageProps, RouteHandler } from 'fresh';
-import type { WorkData } from '~/types.ts';
+import type { State, WorkData } from '~/types.ts';
 import { Head } from 'fresh/runtime';
 import Contact from '~/components/Contact.tsx';
 import WorksSection from '~/islands/WorksSection.tsx';
 import { handler as worksHandler } from '~/routes/api/works/index.ts';
 import config from '~/config.ts';
 
-export const handler: RouteHandler<WorkData[], undefined> = {
+export const handler: RouteHandler<WorkData[], State> = {
   async GET(ctx) {
     const res = await worksHandler.GET!(ctx);
     const data = await (res as Response).json();
 
+    ctx.state.msg = 'Load home';
     return { data: (data ? data : []) };
   },
 };
