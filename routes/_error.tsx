@@ -1,7 +1,7 @@
-import type { PageProps } from 'fresh';
 import { HttpError } from 'fresh';
+import { define } from '~/utils/define.ts';
 
-export default function ErrorPage(props: PageProps) {
+export default define.page(function ErrorPage(props) {
   let message = 'Oh no...';
   const error = props.error;
   console.error(error);
@@ -19,4 +19,4 @@ export default function ErrorPage(props: PageProps) {
       <a href='/'>Go To Home</a>
     </section>
   );
-}
+});
