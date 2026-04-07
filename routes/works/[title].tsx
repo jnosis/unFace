@@ -1,7 +1,7 @@
 // deno-lint-ignore-file react-no-danger
 import type { WorkDetail } from '~/types.ts';
 import { HttpError } from 'fresh';
-import { asset, Head } from 'fresh/runtime';
+import { asset } from 'fresh/runtime';
 import {
   IconBrandGithub,
   IconExternalLink,
@@ -32,7 +32,7 @@ export default define.page<typeof handler>(function WorkDetailPage({ data }) {
 
   return (
     <>
-      <Head>
+      <head>
         <title>{`${title} | unFace`}</title>
         <meta name='description' content={`${title} project's description`} />
         <link
@@ -40,7 +40,7 @@ export default define.page<typeof handler>(function WorkDetailPage({ data }) {
           rel='stylesheet'
           href={asset('/github-markdown.css')}
         />
-      </Head>
+      </head>
       <main class='w-full min-h-screen py-16 sm:pb-0 px-0 md:px-20 lg:px-40 overflow-hidden bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
         {readme && (
           <section class='px-4 sm:px-0 sm:max-w-3xl m-auto'>
