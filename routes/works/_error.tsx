@@ -1,16 +1,13 @@
-import type { PageProps } from 'fresh';
+import { define } from '~/utils/define.ts';
 
-export default function ErrorPage(props: PageProps) {
+export default define.layout(function ErrorPage(props) {
   let message = 'Oh no...';
   const error = props.error;
-  console.error(error);
 
   if (error instanceof Error) {
-    const name = error.name;
-    if (name === 'NotFound') {
-      message = 'Not Found';
-    }
+    message = error.message;
   }
+  props.state.msg = message;
 
   return (
     <section class='flex flex-col justify-center items-center w-full h-full mt-16 pt-8'>
@@ -18,4 +15,4 @@ export default function ErrorPage(props: PageProps) {
       <a href='/'>Go To Home</a>
     </section>
   );
-}
+});

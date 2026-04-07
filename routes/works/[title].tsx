@@ -1,8 +1,7 @@
 // deno-lint-ignore-file react-no-danger
-import type { PageProps, RouteHandler } from 'fresh';
 import type { WorkDetail } from '~/types.ts';
 import { HttpError } from 'fresh';
-import { asset, Head } from 'fresh/runtime';
+import { asset } from 'fresh/runtime';
 import {
   IconBrandGithub,
   IconExternalLink,
@@ -10,8 +9,9 @@ import {
 } from '~/components/Icons.tsx';
 import Techs from '~/islands/Techs.tsx';
 import { handler as workHandler } from '~/routes/api/works/[title].ts';
+import { define } from '~/utils/define.ts';
 
-export const handler: RouteHandler<WorkDetail, undefined> = {
+export const handler = define.handlers<WorkDetail>({
   async GET(ctx) {
     try {
       const res = await workHandler.GET!(ctx);
@@ -19,19 +19,20 @@ export const handler: RouteHandler<WorkDetail, undefined> = {
 
       if (!data) throw new HttpError(404);
 
+      ctx.state.msg = `Load ${data.title}`;
       return { data };
     } catch (error) {
       throw error;
     }
   },
-};
+});
 
-export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
+export default define.page<typeof handler>(function WorkDetailPage({ data }) {
   const { title, repoUrl, projectUrl, techs, readme } = data;
 
   return (
     <>
-      <Head>
+      <head>
         <title>{`${title} | unFace`}</title>
         <meta name='description' content={`${title} project's description`} />
         <link
@@ -39,7 +40,7 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
           rel='stylesheet'
           href={asset('/github-markdown.css')}
         />
-      </Head>
+      </head>
       <main class='w-full min-h-screen py-16 sm:pb-0 px-0 md:px-20 lg:px-40 overflow-hidden bg-surface-variant text-on-surface-variant dark:bg-surface-variant-dark dark:text-on-surface-variant-dark'>
         {readme && (
           <section class='px-4 sm:px-0 sm:max-w-3xl m-auto'>
@@ -79,4 +80,4 @@ export default function WorkDetailPage({ data }: PageProps<WorkDetail>) {
       </main>
     </>
   );
-}
+});

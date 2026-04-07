@@ -4,7 +4,8 @@ import { isFileData } from '~/utils/type_utils.ts';
 
 const kv = await Deno.openKv();
 
-export async function fetchData() {
+export async function fetchData(): Promise<Deno.KvCommitResult[]> {
+  let commitResults: Deno.KvCommitResult[] = [];
   const works = await http.get<WorkData[]>('api/works');
 
   const entries = kv.list<WorkData>({ prefix: ['works'] });
@@ -24,9 +25,11 @@ export async function fetchData() {
           path: isFileData(thumbnail) ? thumbnail.path : thumbnail.url,
         },
       };
-      await kv.set(['works', work.title], saved);
+      const result = await kv.set(['works', work.title], saved);
+      commitResults = [...commitResults, result];
     }
   });
+  return commitResults;
 }
 
 export async function initData() {

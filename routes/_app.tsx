@@ -1,8 +1,8 @@
 // deno-lint-ignore-file react-no-danger
-import type { PageProps } from 'fresh';
 import Header from '~/islands/Header.tsx';
+import { define } from '~/utils/define.ts';
 
-export default function App({ Component }: PageProps) {
+export default define.page(function App({ Component }) {
   const code = `function global_dark(change) {
     if (change === 'auto') delete localStorage.theme;
     else if (change === 'on') localStorage.theme = 'dark';
@@ -31,4 +31,4 @@ export default function App({ Component }: PageProps) {
       </body>
     </html>
   );
-}
+});
