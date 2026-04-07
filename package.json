@@ -33,7 +33,7 @@
     "babel-loader": "^9.1.0",
     "core-js": "^3.26.1",
     "css-loader": "^6.7.2",
-    "css-minimizer-webpack-plugin": "^4.2.2",
+    "css-minimizer-webpack-plugin": "^8.0.0",
     "html-webpack-plugin": "^5.5.0",
     "loader-utils": "^3.2.1",
     "mini-css-extract-plugin": "^2.7.0",
