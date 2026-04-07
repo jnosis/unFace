@@ -16,9 +16,14 @@ export default define.page(function ErrorPage(props) {
   }
 
   return (
-    <section class='flex flex-col justify-center items-center w-full h-full mt-16 pt-8'>
-      <h1 class='text-3xl font-bold'>{message}</h1>
-      <a href='/'>Go To Home</a>
-    </section>
+    <>
+      <head>
+        <title>{message}</title>
+      </head>
+      <section class='flex flex-col justify-center items-center w-full h-full mt-16 pt-8'>
+        <h1 class='text-3xl font-bold'>{message}</h1>
+        <a href='/'>Go To Home</a>
+      </section>
+    </>
   );
 });
