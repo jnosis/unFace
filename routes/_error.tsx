@@ -5,11 +5,14 @@ export default define.page(function ErrorPage(props) {
   let message = 'Oh no...';
   const error = props.error;
 
-  if (error instanceof HttpError) {
-    const status = error.status;
-    if (status === 404) {
-      message = 'Not Found';
+  if (error instanceof Error) {
+    if (error instanceof HttpError) {
+      const status = error.status;
+      if (status === 404) {
+        message = 'Not Found';
+      }
     }
+    props.state.msg = error.message;
   }
 
   return (
